@@ -1,7 +1,9 @@
 /**
  * 
  */
-package isfpp;
+package com.deimon.isfpp;
+
+import com.deimon.ciudad.Ciudad;
 
 /**
  * @author deimon
@@ -13,7 +15,7 @@ public class Principal {
 	 */
 	public static void main(String[] args) {
 		/* Crear las ciudades */
-		Ciudad puertoMadryn = new Ciudad("Puerto Madryn",100000);
+		Ciudad madryn = new Ciudad("Puerto Madryn",100000);
 		//Ciudad trelew = new Ciudad("Trelew",250000);
 		//Ciudad comodoro = new Ciudad("Comodoro",400000);
 
@@ -21,8 +23,8 @@ public class Principal {
 		
 		
 		/* Test */
-		System.out.println(puertoMadryn.getNombre());
-		System.out.println(puertoMadryn.getHabitantes());
+		System.out.println(madryn.getNombre());
+		System.out.println(madryn.getHabitantes());
 	}
 
 }
