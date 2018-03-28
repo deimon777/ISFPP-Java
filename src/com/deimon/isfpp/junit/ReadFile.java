@@ -1,4 +1,4 @@
-package com.deimon.isfpp.test;
+package com.deimon.isfpp.junit;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package com.deimon.isfpp.test;
+package com.deimon.isfpp.junit;
 
 import com.deimon.ciudad.Ciudad;
 import com.deimon.camino.*;
