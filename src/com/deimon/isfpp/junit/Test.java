@@ -1,6 +1,7 @@
 package com.deimon.isfpp.junit;
 
 import com.deimon.ciudad.Ciudad;
+import com.deimon.isfpp.configuracion.UtilProperties;
 import com.deimon.camino.*;
 
 import grafo.grafo.Edge;
@@ -14,6 +15,10 @@ import grafo.utils.ProbeHashMap;
 public class Test {
 
 	public static void main(String[] args) {
+		UtilProperties app = new UtilProperties();
+		app.setDBProperties("db.properties","isfpp","isfpp","isfpp");
+		app.getDBProperties("db.properties","database","dbuser","dbpassword");
+		
 		/* tipo camino */
 //		TipoCamino asfalto = new TipoCamino("Asfalto");
 //		TipoCamino ripio = new TipoCamino("Ripo");
@@ -73,6 +78,6 @@ public class Test {
 			System.out.println(result.getElement() + "  -->  "+ mapa.get(result)+"km");
 		
 		
-		
+
 	}
 }
