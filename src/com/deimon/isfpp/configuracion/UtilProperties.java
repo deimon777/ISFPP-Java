@@ -39,7 +39,7 @@ public class UtilProperties {
 		}
 	}
 
-	public void getDBProperties(String nombre, String db, String dbuser, String dbpassword) {
+	public String getDBProperties(String nombre, String valor) {
 		Properties prop = new Properties();
 		InputStream input = null;
 
@@ -48,11 +48,6 @@ public class UtilProperties {
 			
 			//load a properties file from class path, inside static method
 			prop.load(input);
-
-			//get the property value and print it out
-			System.out.println(db+": "+prop.getProperty(db));
-			System.out.println(dbuser+": "+prop.getProperty(dbuser));
-			System.out.println(dbpassword+": "+prop.getProperty(dbpassword));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -65,6 +60,7 @@ public class UtilProperties {
 				}
 			}
 		}
+		return prop.getProperty(valor);
 
 	}
 }

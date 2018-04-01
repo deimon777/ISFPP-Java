@@ -17,8 +17,11 @@ public class Test {
 	public static void main(String[] args) {
 		UtilProperties app = new UtilProperties();
 		app.setDBProperties("db.properties","isfpp","isfpp","isfpp");
-		app.getDBProperties("db.properties","database","dbuser","dbpassword");
-		
+		System.out.println("Properties");
+		System.out.println(app.getDBProperties("db.properties","database"));
+		System.out.println(app.getDBProperties("db.properties","dbuser"));
+		System.out.println(app.getDBProperties("db.properties","dbpassword"));
+		System.out.println("------------");
 		/* tipo camino */
 //		TipoCamino asfalto = new TipoCamino("Asfalto");
 //		TipoCamino ripio = new TipoCamino("Ripo");
@@ -56,7 +59,7 @@ public class Test {
 
 		System.out.println("La cantidad de ciudades son: "+grafo.numVertices());
 		System.out.println("La cantidad de caminos son: "+grafo.numEdges());
-		System.out.println("------");
+		System.out.println("------------");
 
 		String ciudad = madryn.getNombre();
 		System.out.println("Partiendo de \""+ciudad+"\" la distancia maxima es:");
