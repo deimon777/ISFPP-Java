@@ -14,17 +14,12 @@ public class Principal {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		/* Crear las ciudades */
-		Ciudad madryn = new Ciudad("Puerto Madryn",100000);
-		//Ciudad trelew = new Ciudad("Trelew",250000);
-		//Ciudad comodoro = new Ciudad("Comodoro",400000);
-
-		/* Crear las rutas y relaciones */
+//		DB_Entidades entidades = new DB_Entidades();
+//		entidades.borrarTodasLasTablas();
+//		entidades.crearTodasLasTablas();
 		
+		/*Cargar la DB*/
 		
-		/* Test */
-		System.out.println(madryn.getNombre());
-		System.out.println(madryn.getHabitantes());
 	}
 
 }

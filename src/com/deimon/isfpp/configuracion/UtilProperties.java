@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
+import com.deimon.isfpp.configuracion.Constantes;
+
 public class UtilProperties {
 
 	public static void main(String[] args) {
@@ -19,9 +21,9 @@ public class UtilProperties {
 		try {
 			output = new FileOutputStream(nombre);
 			// set the properties value
-			prop.setProperty("database", db);
-			prop.setProperty("dbuser", dbuser);
-			prop.setProperty("dbpassword", dbpassword);
+			prop.setProperty(Constantes.DB_KEY, db);
+			prop.setProperty(Constantes.DB_KEY_USER, dbuser);
+			prop.setProperty(Constantes.DB_KEY_PASS, dbpassword);
 
 			// save properties to project root folder
 			prop.store(output, null);
