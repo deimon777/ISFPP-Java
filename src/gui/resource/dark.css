@@ -1,0 +1,12 @@
+.tab-pane > .tab-header-area > .headers-region {
+    -fx-border-color: red;
+    -fx-border-width: 3;
+
+    -fx-alignment: center;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-border-color: blue;
+    -fx-border-width: 3;
+    -fx-alignment: center;
+}
