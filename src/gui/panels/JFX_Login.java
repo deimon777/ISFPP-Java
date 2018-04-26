@@ -5,9 +5,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class JFX_Login {	
-	
-	public JFX_Login(HBox hbox) {
+	HBox hbox = new HBox();
+
+	public JFX_Login() {
 		hbox.setAlignment(Pos.CENTER);
-		hbox.getChildren().add(new Label("Tab1 in"));
+		hbox.getChildren().add(new Label("LOGIN!!!!!"));
+	}
+
+	public HBox getPanel() {
+		return this.hbox;
 	}
 }

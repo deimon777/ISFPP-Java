@@ -1,15 +1,19 @@
 package gui.panels;
 
-import javafx.scene.control.Button;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class JFX_Ciudad_Crear extends Pane{
+	HBox hbox = new HBox();
 
-	public JFX_Ciudad_Crear(HBox hbox) {
-		Button btn = new Button();
-		btn.setText("mi boton admin");
-		//agregar la accion del boton
-		hbox.getChildren().add(btn);
+	public JFX_Ciudad_Crear() {
+		hbox.setAlignment(Pos.CENTER);
+		hbox.getChildren().add(new Label("CIUDAD!!!!!"));
+	}
+
+	public HBox getPanel() {
+		return this.hbox;
 	}
 }

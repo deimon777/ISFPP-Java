@@ -29,7 +29,7 @@ public class JFX_Publico{
 		contenedor.getChildren().add(hbox2);
 	}
 
-	public VBox getPublico() {
+	public VBox getPanel() {
 		return this.contenedor;
 	}
 }
