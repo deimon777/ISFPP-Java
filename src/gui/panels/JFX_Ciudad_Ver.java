@@ -5,12 +5,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
-public class JFX_Ciudad_Crear extends Pane{
+public class JFX_Ciudad_Ver extends Pane{
 	HBox hbox = new HBox();
 
-	public JFX_Ciudad_Crear() {
+	public JFX_Ciudad_Ver() {
 		hbox.setAlignment(Pos.CENTER);
-		hbox.getChildren().add(new Label("Ciudad crear!!!!!"));
+		hbox.getChildren().add(new Label("Ciudad ver!!!!!"));
 	}
 
 	public HBox getPanel() {
