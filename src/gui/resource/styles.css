@@ -1,0 +1,73 @@
+.root{
+	/* VARIABLES */
+	/*BG_: #2f4f4f;	
+	-fx-background-color: BG;*/
+	
+	
+    -fx-font: 14px "Serif";
+}
+
+#contenedor-titulo {
+    -fx-background-insets: 0;
+    -fx-min-height: 100px;
+    -fx-max-height: 100px;
+}
+
+#contenedor-texto{    
+    -fx-min-height: 500px;
+    -fx-max-height: 500px;
+}
+
+
+
+
+
+/* PUBLICO */
+.josm{
+	-fx-background-color: #AAAAAA;
+	-fx-background-images:  url("/ISFPP-Java/src/gui/resource/josm.png");
+    -fx-background-position: center center;    
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 1000 400;
+    
+	-fx-border-style: solid inside;
+    -fx-border-width: 10;
+	-fx-border-color: #333;
+    /*-fx-border-insets: 0;
+    -fx-border-radius: 0;
+	-fx-padding: 0;*/
+}
+
+/* ADMIN */
+
+
+
+/* ******* */
+/* SIMPLES */
+/* ******* */
+
+.background-ppal{ -fx-background-color: #555555; }
+.background-title{ -fx-background-color: #2f4f4f; }
+.background-texto{ -fx-background-color: #d0f0f0; }
+
+.padding-chico{ -fx-padding: 5px;  /* T , R , B,  L */  }
+.padding-medio{ -fx-padding: 15px;}
+.padding-grande{ -fx-padding: 30px; }
+
+.spacing-chico{ -fx-spacing: 5px;}
+.spacing-medio{ -fx-spacing: 10px;}
+.spacing-grande{ -fx-spacing: 20px; }
+
+/* TEXTO */
+.texto-chico{ -fx-font: 12px "Serif"; }
+.texto-mediano{ -fx-font: 17px "Serif"; }
+.texto-grande{ -fx-font: 30px "Serif"; }
+
+.texto-izquierdo{-fx-text-alignment: left; }
+.texto-centrado{-fx-text-alignment: center; }
+.texto-derecho{-fx-text-alignment: right; }
+.texto-justificado{-fx-text-alignment: justify; }
+
+.texto-blanco{ -fx-text-fill: #fff }
+.texto-negro{ -fx-text-fill: #000 }
+
