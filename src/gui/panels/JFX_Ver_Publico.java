@@ -8,14 +8,15 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
-public class JFX_Publico{
-	VBox contenedor = new VBox();
+public class JFX_Ver_Publico{
+	VBox panel = new VBox();
 
-	public JFX_Publico() {
+	public JFX_Ver_Publico() {
 		/*
 		 * Mapa de los caminos
 		 */
@@ -54,22 +55,30 @@ public class JFX_Publico{
 		busqueda.getChildren().addAll(ruta_inicio, ruta_fin, btn_ruta_buscar);
 
 		// Derecha
-		VBox funciones_extras = new VBox();
+		GridPane funciones_extras = new GridPane();
+//		funciones_extras.setGridLinesVisible(true);
 		funciones_extras.setPrefWidth(Constantes.ANCHO/2);
 		funciones_extras.getStyleClass().add("padding-medio");
 		funciones_extras.getStyleClass().add("spacing-medio");
+		funciones_extras.setAlignment(Pos.TOP_CENTER);
+		funciones_extras.setHgap(10);
+		funciones_extras.setVgap(10);
 
 		Button camino_corto = new Button("Camino mas corto");
 		Button camino_mejor = new Button("Camino mejor");
 		Button camino_rapido = new Button("Camino mas rapido");
 
-		funciones_extras.getChildren().addAll(camino_corto,camino_rapido);
+		funciones_extras.add(camino_corto, 1, 0);
+		funciones_extras.add(camino_mejor, 2, 0);
+		funciones_extras.add(camino_rapido, 3, 0);
 
 		buscar_ruta.getChildren().addAll(busqueda, funciones_extras);
-		contenedor.getChildren().addAll(josm,buscar_ruta);
+
+		panel.getStyleClass().add("spacing-medio");
+		panel.getChildren().addAll(josm,buscar_ruta);
 	}
 
 	public VBox getPanel() {
-		return this.contenedor;
+		return this.panel;
 	}
 }

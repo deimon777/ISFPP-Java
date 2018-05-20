@@ -3,13 +3,14 @@ package gui.panels;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
-public class JFX_Camino_Ver {
+public class JFX_Ver_Ciudad extends Pane{
 	HBox hbox = new HBox();
 
-	public JFX_Camino_Ver() {
+	public JFX_Ver_Ciudad() {
 		hbox.setAlignment(Pos.CENTER);
-		hbox.getChildren().add(new Label("Camino ver!!!!!"));
+		hbox.getChildren().add(new Label("Ciudad ver!!!!!"));
 	}
 
 	public HBox getPanel() {

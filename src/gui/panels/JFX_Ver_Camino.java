@@ -4,12 +4,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-public class JFX_Recurso_Ver {
+public class JFX_Ver_Camino {
 	HBox hbox = new HBox();
 
-	public JFX_Recurso_Ver() {
+	public JFX_Ver_Camino() {
 		hbox.setAlignment(Pos.CENTER);
-		hbox.getChildren().add(new Label("Recursos ver!!!!!"));
+		hbox.getChildren().add(new Label("Camino ver!!!!!"));
 	}
 
 	public HBox getPanel() {
