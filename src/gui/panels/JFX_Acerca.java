@@ -2,7 +2,6 @@ package gui.panels;
 
 import com.deimon.isfpp.configuracion.Constantes;
 
-import gui.MainGUI;
 import gui.utils.TextoGUI;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
@@ -36,6 +35,7 @@ public class JFX_Acerca {
 		
 		scroll.setContent(texto);		
 
+		panel.getStyleClass().add("spacing-medio");
 		panel.getChildren().addAll(hbox_titulo,scroll);
 	}
 
