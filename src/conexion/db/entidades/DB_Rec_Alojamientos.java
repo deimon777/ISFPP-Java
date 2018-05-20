@@ -8,8 +8,8 @@ import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
 
-public class DB_Alojamientos extends Entidades{
-	private String table_name = "alojamientos";
+public class DB_Rec_Alojamientos extends Entidades{
+	private String table_name = TablesName.ALOJAMIENTOS;
 
 	public void crearTablaAlojamientos() {		
 		String sql = "id INT NOT NULL AUTO_INCREMENT," 

@@ -1,7 +1,7 @@
 package conexion.db.entidades;
 
 public class DB_Ciudades_Caminos extends Entidades{
-	private String table_name = "ciudades_caminos";
+	private String table_name = TablesName.CIUDADES_CAMINOS;
 
 	public void crearTablaCiudadesCaminos() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT,"

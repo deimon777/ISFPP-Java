@@ -23,24 +23,26 @@ public class JFX_Menu_admin {
 		Menu archivo = new Menu(TextoGUI.MENU_ARCHIVO); // el _ hace que se pueda abrir con alt+LETRA		
 		MenuItem archivoSesion = new MenuItem(TextoGUI.MENU_ARCHIVO_SESION);
 		MenuItem archivoSalir = new MenuItem(TextoGUI.MENU_ARCHIVO_SALIR);
-
-		Menu publico = new Menu(TextoGUI.MENU_PUBLICO);
-		MenuItem verPublico = new MenuItem(TextoGUI.MENU_PUBLICO_VER);
-
-		Menu ciudades = new Menu(TextoGUI.MENU_CIUDAD);
-		MenuItem verCiudades = new MenuItem(TextoGUI.MENU_CIUDAD_VER);
-		MenuItem crearCiudad = new MenuItem(TextoGUI.MENU_CIUDAD_CREAR);
-
-		Menu caminos = new Menu(TextoGUI.MENU_CAMINO);
-		MenuItem verCaminos = new MenuItem(TextoGUI.MENU_CAMINO_VER);
-		MenuItem crearCamino = new MenuItem(TextoGUI.MENU_CAMINO_CREAR);
-
-		Menu recursos= new Menu(TextoGUI.MENU_RECURSO);
-		MenuItem verRecursos = new MenuItem(TextoGUI.MENU_RECURSO_VER);
-		MenuItem crearRecursos = new MenuItem(TextoGUI.MENU_RECURSO_CREAR);
-
-		Menu sistema = new Menu(TextoGUI.MENU_SISTEMA);
-		MenuItem sistemaTema = new MenuItem(TextoGUI.MENU_SISTEMA_TEMA);
+		
+		Menu ver = new Menu(TextoGUI.MENU_VER);
+		MenuItem verPublico = new MenuItem(TextoGUI.MENU_PUBLICO);
+		MenuItem verCiudades = new MenuItem(TextoGUI.MENU_VER_CIUDAD);
+		MenuItem verCaminos = new MenuItem(TextoGUI.MENU_VER_CAMINO);
+		MenuItem verRecursos = new MenuItem(TextoGUI.MENU_VER_RECURSO);
+		
+		Menu crear = new Menu(TextoGUI.MENU_CREAR);
+		MenuItem crearCiudad = new MenuItem(TextoGUI.MENU_CREAR_CIUDAD);
+		MenuItem crearCamino = new MenuItem(TextoGUI.MENU_CREAR_CAMINO);		
+		Menu crearRecursos = new Menu(TextoGUI.MENU_CREAR_RECURSO);
+		MenuItem crearRecursoAlojamiento = new MenuItem(TextoGUI.MENU_CREAR_RECURSO_ALOJAMIENTO);
+		MenuItem crearRecursoTrafico = new MenuItem(TextoGUI.MENU_CREAR_RECURSO_TRAFICO);
+		MenuItem crearRecursoSitioTuristico = new MenuItem(TextoGUI.MENU_CREAR_RECURSO_SITIO_TURISTICO);
+		MenuItem crearRecursoTipoCamino = new MenuItem(TextoGUI.MENU_CREAR_RECURSO_TIPO_CAMINO);
+		MenuItem crearRecursoEstadoCamino = new MenuItem(TextoGUI.MENU_CREAR_RECURSO_ESTADO_CAMINO);
+		
+		
+//		Menu sistema = new Menu(TextoGUI.MENU_SISTEMA);
+//		MenuItem sistemaTema = new MenuItem(TextoGUI.MENU_SISTEMA_TEMA);
 
 		Menu ayuda = new Menu(TextoGUI.MENU_AYUDA);
 		MenuItem ayudaAcerca = new MenuItem(TextoGUI.MENU_AYUDA_ACERCA);
@@ -50,11 +52,10 @@ public class JFX_Menu_admin {
 		 * Creando los Submenus
 		 */
 		archivo.getItems().addAll(archivoSesion,archivoSalir);
-		publico.getItems().addAll(verPublico);
-		ciudades.getItems().addAll(verCiudades,crearCiudad);
-		caminos.getItems().addAll(verCaminos,crearCamino);
-		recursos.getItems().addAll(verRecursos,crearRecursos);
-		sistema.getItems().addAll(sistemaTema);
+		ver.getItems().addAll(verPublico, verCiudades, verCaminos, verRecursos);
+		crearRecursos.getItems().addAll(crearRecursoAlojamiento, crearRecursoTrafico, crearRecursoSitioTuristico, crearRecursoEstadoCamino, crearRecursoTipoCamino);
+		crear.getItems().addAll(crearCiudad, crearCamino, crearRecursos);
+//		sistema.getItems().addAll(sistemaTema);
 		ayuda.getItems().addAll(ayudaAcerca,ayudaAyuda);
 
 		/*
@@ -62,14 +63,15 @@ public class JFX_Menu_admin {
 		 */
 		archivoSalir.setAccelerator(new KeyCodeCombination(KeyCode.Q,KeyCombination.SHORTCUT_DOWN));
 		archivoSesion.setAccelerator(new KeyCodeCombination(KeyCode.N,KeyCombination.SHORTCUT_DOWN));
+		
 		verPublico.setAccelerator(new KeyCodeCombination(KeyCode.P,KeyCombination.SHORTCUT_DOWN));
 
 		ayudaAyuda.setAccelerator(new KeyCodeCombination(KeyCode.F1));
+		
 		/*
 		 * Agregando los menus
 		 */
-		// menu.getMenus().addAll(archivo,ver,sistema,ayuda);
-		menu.getMenus().addAll(archivo,publico,ciudades,caminos,recursos,ayuda);
+		 menu.getMenus().addAll(archivo,ver,crear,ayuda);
 
 		/*
 		 * Agregando las acciones
@@ -84,8 +86,12 @@ public class JFX_Menu_admin {
 
 		crearCiudad.setOnAction(action);
 		crearCamino.setOnAction(action);
-		crearRecursos.setOnAction(action);
-
+		crearRecursoAlojamiento.setOnAction(action);
+		crearRecursoTrafico.setOnAction(action);
+		crearRecursoSitioTuristico.setOnAction(action);
+		crearRecursoTipoCamino.setOnAction(action);
+		crearRecursoEstadoCamino.setOnAction(action);
+		
 		ayudaAcerca.setOnAction(action);
 		ayudaAyuda.setOnAction(action);
 	}

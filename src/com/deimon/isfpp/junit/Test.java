@@ -23,33 +23,33 @@ public class Test {
 
 	public static void main(String[] args) {
 		/*Propeties*/
-		String name_properties = "db.properties";
-		UtilProperties app = new UtilProperties();
-		app.setDBProperties(name_properties,"isfpp","isfpp","isfpp");
+//		String name_properties = "db.properties";
+//		UtilProperties app = new UtilProperties();
+//		app.setDBProperties(name_properties,"isfpp","isfpp","isfpp");
 //		System.out.println("Properties");
 //		System.out.println(app.getDBProperties(name_properties,Constantes.DB_KEY));
 //		System.out.println(app.getDBProperties(name_properties,Constantes.DB_KEY_USER));
 //		System.out.println(app.getDBProperties(name_properties,Constantes.DB_KEY_PASS));
 //		System.out.println("------------");
-		ConstantesPropierties constantes = new ConstantesPropierties();
-		constantes.setDB_URL(app.getDBProperties(name_properties,Constantes.DB_KEY));
-		constantes.setDB_USER(app.getDBProperties(name_properties,Constantes.DB_KEY_USER));
-		constantes.setDB_PASS(app.getDBProperties(name_properties,Constantes.DB_KEY_PASS));
+//		ConstantesPropierties constantes = new ConstantesPropierties();
+//		constantes.setDB_URL(app.getDBProperties(name_properties,Constantes.DB_KEY));
+//		constantes.setDB_USER(app.getDBProperties(name_properties,Constantes.DB_KEY_USER));
+//		constantes.setDB_PASS(app.getDBProperties(name_properties,Constantes.DB_KEY_PASS));
 
 
 		/*DB*/			
 		DB_Entidades entidades = new DB_Entidades();
-		entidades.borrarTodasLasTablas();
+//		entidades.borrarTodasLasTablas();
 		entidades.crearTodasLasTablas();
-		DB_Ciudades db_ciudad = new DB_Ciudades();
+//		DB_Ciudades db_ciudad = new DB_Ciudades();
 //		db_ciudad.insertItem("Madryn", 100000, "", 0.0, 0.0, 1);
-		db_ciudad.insertItem("Madryn", 100000);
+//		db_ciudad.insertItem("Madryn", 100000);
 //		db_ciudad.deleteItemByNAME("Madryn");
-		db_ciudad.desactivarCiudad(1);
-		db_ciudad.activarCiudad(1);
+//		db_ciudad.desactivarCiudad(1);
+//		db_ciudad.activarCiudad(1);
 		
 //		db_ciudad.updateItemBy("nombre", "comodoro",1);
-		db_ciudad.updateItemBy("historia", "algo de info",1);
+//		db_ciudad.updateItemBy("historia", "algo de info",1);
 //		DB_Alojamientos db_alojamiento = new DB_Alojamientos();
 //		db_alojamiento.insertItem("Rayentray", 1, 1);
 //		db_alojamiento.deleteItemByID(1);

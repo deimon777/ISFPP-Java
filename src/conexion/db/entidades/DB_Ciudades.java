@@ -9,7 +9,7 @@ import com.deimon.isfpp.configuracion.ConstantesPropierties;
 import conexion.db.DB_Connection;
 
 public class DB_Ciudades extends Entidades{
-	private static String table_name = "ciudades";
+	private static String table_name = TablesName.CUIDADES;
 
 	public void crearTablaCiudad() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT,"

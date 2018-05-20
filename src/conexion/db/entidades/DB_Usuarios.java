@@ -1,7 +1,7 @@
 package conexion.db.entidades;
 
 public class DB_Usuarios extends Entidades{
-	private String table_name = "usuarios";
+	private String table_name = TablesName.USUARIOS;
 
 	public void crearTablaUsuario() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT,"
@@ -31,8 +31,9 @@ public class DB_Usuarios extends Entidades{
 	public void deleteItemByNAME(String nombre) {
 		Entidades.deleteItemByNAME(table_name, nombre);
 	}
+	
 	/*
-	 * ACTUALIZAR
+	 * MODIFICAR
 	 */
 	
 	/*

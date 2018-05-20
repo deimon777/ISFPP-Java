@@ -1,9 +1,9 @@
 package conexion.db.entidades;
 
-public class DB_TipoCamino extends Entidades{
-	private String table_name = "tipo_camino";
+public class DB_Rec_EstadoCamino extends Entidades{
+	private String table_name = TablesName.ESTADO_CAMINO;
 
-	public void crearTablaTipoCamino() {
+	public void crearTablaEstadoCamino() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT,"
 				+ "nombre VARCHAR(50) NOT NULL,"
 				+ "activo BIT(1) DEFAULT TRUE,"
@@ -11,7 +11,7 @@ public class DB_TipoCamino extends Entidades{
 		Entidades.creatTable(table_name, sql);
 	}
 
-	public void borrarTablaTipoCamino() {
+	public void borrarTablaEstadoCamino() {
 		Entidades.deleteTable(table_name);		
 	}
 

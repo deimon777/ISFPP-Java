@@ -1,9 +1,7 @@
 .root{
 	/* VARIABLES */
 	/*BG_: #2f4f4f;	
-	-fx-background-color: BG;*/
-	
-	
+	-fx-background-color: BG;*/	
     -fx-font: 14px "Serif";
 }
 
@@ -70,4 +68,5 @@
 
 .texto-blanco{ -fx-text-fill: #fff }
 .texto-negro{ -fx-text-fill: #000 }
+.texto-rojo{ -fx-text-fill: #f00 }
 

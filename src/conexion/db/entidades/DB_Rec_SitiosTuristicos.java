@@ -1,7 +1,7 @@
 package conexion.db.entidades;
 
-public class DB_SitiosTuristicos extends Entidades{
-	private String table_name = "sitios_turisticos";
+public class DB_Rec_SitiosTuristicos extends Entidades{
+	private String table_name = TablesName.SITIOS_TURISTICOS;
 
 	public void crearTablaSitiosTuristicos() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT," 

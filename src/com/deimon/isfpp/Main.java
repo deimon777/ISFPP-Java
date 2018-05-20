@@ -1,4 +1,4 @@
-package gui;
+package com.deimon.isfpp;
 
 import java.net.URL;
 
@@ -6,7 +6,7 @@ import com.deimon.isfpp.configuracion.Constantes;
 
 import gui.menu.JFX_Menu_admin;
 import gui.menu.JFX_Menu_public;
-import gui.panels.JFX_Publico;
+import gui.panels.JFX_Ver_Publico;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,7 +15,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
-public class MainGUI<T> extends Application{
+public class Main<T> extends Application{
 
 	private static BorderPane root = new BorderPane();
 
@@ -27,7 +27,7 @@ public class MainGUI<T> extends Application{
 	}
 
 	public void cambiarVista(T n) {
-		MainGUI.getRoot().setCenter((Node) n);
+		Main.getRoot().setCenter((Node) n);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class MainGUI<T> extends Application{
 //		JFX_Menu_public jfx_m = new JFX_Menu_public();
 		MenuBar menu = jfx_m.getMenu();
 		
-		JFX_Publico jfx_p= new JFX_Publico();
+		JFX_Ver_Publico jfx_p= new JFX_Ver_Publico();
 		T publico = (T)jfx_p.getPanel();
 
 		root.setTop(menu);
@@ -47,12 +47,13 @@ public class MainGUI<T> extends Application{
 
 		Scene scene = new Scene(root,Constantes.ANCHO,Constantes.ALTO);
 		
-		URL url = this.getClass().getResource("./resource/styles.css");
-		URL dark = this.getClass().getResource("./resource/dark.css");
+		URL url = this.getClass().getResource("../../../gui/resource/styles.css");
+		URL dark = this.getClass().getResource("../../../gui/resource/dark.css");
 		//poner un mensaje con el error del estilo
 	    String css = url.toExternalForm();
 	    String css_dark = dark.toExternalForm();
 		scene.getStylesheets().clear(); 
+//	    scene.getStylesheets().addAll(css);
 	    scene.getStylesheets().addAll(css_dark,css);
 
 		root.getStyleClass().add("background-ppal");
