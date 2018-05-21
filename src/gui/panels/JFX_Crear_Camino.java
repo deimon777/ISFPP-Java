@@ -1,5 +1,8 @@
 package gui.panels;
 
+import conexion.db.entidades.Rec_EstadoCamino;
+import conexion.db.entidades.Rec_TipoCamino;
+import conexion.db.entidades.Rec_Trafico;
 import gui.utils.NumberTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,18 +51,15 @@ public class JFX_Crear_Camino {
 		cb.setSelected(true);
 		Label tipo_camino = new Label("Tipo Camino:");
 		ComboBox<String> lista_tipo_camino = new ComboBox<String>();
-	    ObservableList<String> data_tipo_camino = FXCollections.observableArrayList(
-	            "Ripio", "Asfalto", "AU.");
+	    ObservableList<String> data_tipo_camino = FXCollections.observableArrayList(new Rec_TipoCamino().getTipoCamino());
 	    lista_tipo_camino.setItems(data_tipo_camino);
-		Label estado_camino = new Label("Tipo Camino:");
+		Label estado_camino = new Label("Estado Camino:");
 		ComboBox<String> lista_estado_camino = new ComboBox<String>();
-	    ObservableList<String> data_estado_camino = FXCollections.observableArrayList(
-	            "Bueno", "Regular", "Malo");
+	    ObservableList<String> data_estado_camino = FXCollections.observableArrayList(new Rec_EstadoCamino().getEstadoCamino());
 	    lista_estado_camino.setItems(data_estado_camino);
-		Label trafico = new Label("Tipo Camino:");
+		Label trafico = new Label("Trafico:");
 		ComboBox<String> lista_trafico = new ComboBox<String>();
-	    ObservableList<String> data_trafico = FXCollections.observableArrayList(
-	            "Poco", "Moderado", "Mucho");
+	    ObservableList<String> data_trafico = FXCollections.observableArrayList(new Rec_Trafico().getTrafico());
 	    lista_trafico.setItems(data_trafico);
 		
 		GridPane.setHalignment(nombre, HPos.RIGHT);

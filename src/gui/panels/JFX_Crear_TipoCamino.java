@@ -13,10 +13,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
-import conexion.db.entidades.DB_Rec_TipoCamino;
+import conexion.db.entidades.Rec_TipoCamino;
 
 public class JFX_Crear_TipoCamino extends Pane{
 	VBox panel = new VBox();
@@ -35,17 +34,17 @@ public class JFX_Crear_TipoCamino extends Pane{
 		gp.setHgap(10);
 		gp.setVgap(10);
 
-		Label name = new Label("Nombre:");
-		TextField nameTextField = new TextField();
+		Label nombre = new Label("Nombre:");
+		TextField nombreTextField = new TextField();
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();
 		cb.setSelected(true);
 
-		GridPane.setHalignment(name, HPos.RIGHT);
+		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(activo, HPos.RIGHT);   
 
-		gp.add(name, 0, 0);
-		gp.add(nameTextField, 1, 0);
+		gp.add(nombre, 0, 0);
+		gp.add(nombreTextField, 1, 0);
 		gp.add(activo, 0, 1);
 		gp.add(cb, 1, 1);
 
@@ -57,7 +56,7 @@ public class JFX_Crear_TipoCamino extends Pane{
 
 		gp.add(hbBtn, 1, 2);
 
-		Label output = new Label("Salida");
+		Label output = new Label("");
 		output.setOpacity(0);
 		gp.add(output, 1, 3);
 
@@ -66,14 +65,15 @@ public class JFX_Crear_TipoCamino extends Pane{
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {				
-				String n = nameTextField.getText();
+				String n = nombreTextField.getText();
 				Boolean a = cb.selectedProperty().getValue();
-				if (nameTextField.getText() == null || nameTextField.getText().trim().isEmpty()) {
+				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
 					output.setTextFill(Color.RED);
 					output.setText("Nombre Vacio");
 				}else {
-					DB_Rec_TipoCamino tc = new DB_Rec_TipoCamino();
-					tc.insertar(n, a);
+					Rec_TipoCamino record = new Rec_TipoCamino();
+					record.insertar(n, a);
+					nombreTextField.setText("");
 					output.setText("Tipo Camino Creado");
 				}
 				output.setOpacity(1);

@@ -1,5 +1,6 @@
 package gui.panels;
 
+import conexion.db.entidades.Ciudades;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,25 +35,22 @@ public class JFX_Crear_Alojamiento extends Pane{
 		gp.setHgap(10);
 		gp.setVgap(10);
 		
-		Label name = new Label("Nombre del Alojamiento:");
-		TextField nameTextField = new TextField();
+		Label nombre = new Label("Nombre del Alojamiento:");
+		TextField nombreTextField = new TextField();
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
 		Label city = new Label("Ciudad:");
 		ComboBox<String> list = new ComboBox<String>();
-	    ObservableList<String> data = FXCollections.observableArrayList(
-	            "chocolate", "salmon", "gold", "coral", "darkorchid",
-	            "darkgoldenrod", "lightsalmon", "black", "rosybrown", "blue",
-	            "blueviolet", "brown");
+	    ObservableList<String> data = FXCollections.observableArrayList(new Ciudades().getCiudades());
 	    list.setItems(data);
 
-		GridPane.setHalignment(name, HPos.RIGHT);
+		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(activo, HPos.RIGHT);
 		GridPane.setHalignment(city, HPos.RIGHT);	    
 	    
-		gp.add(name, 0, 0);
-		gp.add(nameTextField, 1, 0);
+		gp.add(nombre, 0, 0);
+		gp.add(nombreTextField, 1, 0);
 		gp.add(activo, 0, 1);
 		gp.add(cb, 1, 1);
 		gp.add(city, 0, 2);

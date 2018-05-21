@@ -29,17 +29,17 @@ public class JFX_Login {
 		gp.setHgap(10);
 		gp.setVgap(10);
 
-		Label userName = new Label("Nombre de Usuario:"); //Pasar a txt
+		Label usuario = new Label("Nombre de Usuario:"); //Pasar a txt
 		TextField userTextField = new TextField();
-		Label pw = new Label("Contraseña:");
+		Label password = new Label("Contraseña:");
 		PasswordField pwBox = new PasswordField();
 
-		GridPane.setHalignment(userName, HPos.RIGHT);
-		GridPane.setHalignment(pw, HPos.RIGHT);
+		GridPane.setHalignment(usuario, HPos.RIGHT);
+		GridPane.setHalignment(password, HPos.RIGHT);
 		
-		gp.add(userName, 0, 0);
+		gp.add(usuario, 0, 0);
 		gp.add(userTextField, 1, 0);
-		gp.add(pw, 0, 1);
+		gp.add(password, 0, 1);
 		gp.add(pwBox, 1, 1);
 		
 		Button btn = new Button("Ingresar");

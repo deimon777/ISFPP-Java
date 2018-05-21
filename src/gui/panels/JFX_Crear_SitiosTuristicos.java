@@ -34,8 +34,8 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 		gp.setHgap(10);
 		gp.setVgap(10);
 		
-		Label name = new Label("Nombre del Sitio:");
-		TextField nameTextField = new TextField();
+		Label nombre = new Label("Nombre del Sitio:");
+		TextField nombreTextField = new TextField();
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
@@ -47,12 +47,12 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 	            "blueviolet", "brown");
 	    list.setItems(data);
 
-		GridPane.setHalignment(name, HPos.RIGHT);
+		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(activo, HPos.RIGHT);
 		GridPane.setHalignment(city, HPos.RIGHT);	    
 	    
-		gp.add(name, 0, 0);
-		gp.add(nameTextField, 1, 0);
+		gp.add(nombre, 0, 0);
+		gp.add(nombreTextField, 1, 0);
 		gp.add(activo, 0, 1);
 		gp.add(cb, 1, 1);
 		gp.add(city, 0, 2);
