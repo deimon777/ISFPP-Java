@@ -1,4 +1,4 @@
-package conexion.db.entidades;
+package conexion.db.tablas;
 
 public class TablesName {
 
