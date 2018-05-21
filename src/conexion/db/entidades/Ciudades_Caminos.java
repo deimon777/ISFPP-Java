@@ -1,6 +1,9 @@
 package conexion.db.entidades;
 
-public class DB_Ciudades_Caminos extends Entidades{
+import conexion.db.tablas.TablasUtiles;
+import conexion.db.tablas.TablesName;
+
+public class Ciudades_Caminos extends EntidadesUtils{
 	private String table_name = TablesName.CIUDADES_CAMINOS;
 
 	public void crearTablaCiudadesCaminos() {
@@ -12,23 +15,26 @@ public class DB_Ciudades_Caminos extends Entidades{
 				+ "CONSTRAINT fk_caminos FOREIGN KEY (caminos_id)"
 				+ " REFERENCES caminos (id) ON DELETE CASCADE ON UPDATE CASCADE,"
 				+ "PRIMARY KEY (id , ciudades_id , caminos_id)";
-		Entidades.creatTable(table_name, sql);
+		TablasUtiles.creatTable(table_name, sql);
 	}
-
 	public void borrarTablaCiudadesCaminos() {
-		Entidades.deleteTable(table_name);		
+		TablasUtiles.deleteTable(table_name);		
+	}	
+	public void vaciarTablaCiudadesCaminos() {
+		TablasUtiles.emptyTable(table_name);
 	}
 
 	/*
 	 * BORRAR
 	 */
 	public void deleteItemByID(int id) {
-		Entidades.deleteItemByID(table_name, id);
+		EntidadesUtils.deleteItemByID(table_name, id);
 	}
 	
 	public void deleteItemByNAME(String nombre) {
-		Entidades.deleteItemByNAME(table_name, nombre);
-	}
+		EntidadesUtils.deleteItemByNAME(table_name, nombre);
+	}	
+	
 	/*
 	 * ACTUALIZAR
 	 */

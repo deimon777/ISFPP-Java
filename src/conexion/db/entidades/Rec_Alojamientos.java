@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
+import conexion.db.tablas.TablasUtiles;
+import conexion.db.tablas.TablesName;
 
-public class DB_Rec_Alojamientos extends Entidades{
+public class Rec_Alojamientos extends EntidadesUtils{
 	private String table_name = TablesName.ALOJAMIENTOS;
 
 	public void crearTablaAlojamientos() {		
@@ -19,22 +21,24 @@ public class DB_Rec_Alojamientos extends Entidades{
 				+ "ciudades_id INT NOT NULL," 
 				+ "CONSTRAINT fk_alojamientos FOREIGN KEY (ciudades_id)" 
 				+ " REFERENCES ciudades (id) ON DELETE CASCADE ON UPDATE CASCADE";
-		Entidades.creatTable(table_name, sql);
+		TablasUtiles.creatTable(table_name, sql);
 	}
-
 	public void borrarTablaAlojamientos() {
-		Entidades.deleteTable(table_name);		
+		TablasUtiles.deleteTable(table_name);		
+	}
+	public void vaciarTablaAlojamientos() {
+		TablasUtiles.emptyTable(table_name);		
 	}
 
 	/*
 	 * BORRAR
 	 */
 	public void deleteItemByID(int id) {
-		Entidades.deleteItemByID(table_name, id);
+		EntidadesUtils.deleteItemByID(table_name, id);
 	}
 	
 	public void deleteItemByNAME(String nombre) {
-		Entidades.deleteItemByNAME(table_name, nombre);
+		EntidadesUtils.deleteItemByNAME(table_name, nombre);
 	}
 	/*
 	 * ACTUALIZAR
@@ -43,23 +47,23 @@ public class DB_Rec_Alojamientos extends Entidades{
 	/*
 	 * INSERTAR
 	 */
-	public void insertItem(String nombre, int activo, int ciudad_id) {
-		String sql = "INSERT INTO "+table_name+" (id, nombre, activo, ciudad_id) "
-				+ "VALUES (NULL, ?,?,?)";
+	public void insertar(String nombre, int activo, int ciudad_id) {
+		String sql = "INSERT INTO "+table_name+" (id, nombre, activo, ciudad_id) VALUES (NULL, ?,?,?)";
 		DB_Connection c = null;
 		Connection myConect = null;
-		PreparedStatement myPreStmt = null;
+		PreparedStatement myPrepStmt = null;
 		try {
 			c = new DB_Connection();
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.setString(1, nombre);
-			myPreStmt.setInt(2, activo);
-			myPreStmt.setInt(3, ciudad_id);
-			myPreStmt.executeUpdate();
-			System.out.println("Ciudad Creada!");
+			myPrepStmt = myConect.prepareStatement(sql);
+			myPrepStmt.setString(1, nombre);
+			myPrepStmt.setInt(2, activo);
+			myPrepStmt.setInt(3, ciudad_id);
+			myPrepStmt.executeUpdate();
+			
+			System.out.println("ALojamiento Creada!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

@@ -3,12 +3,15 @@ package conexion.db.entidades;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
+import conexion.db.tablas.TablasUtiles;
+import conexion.db.tablas.TablesName;
 
-public class DB_Ciudades extends Entidades{
+public class Ciudades extends EntidadesUtils{
 	private static String table_name = TablesName.CUIDADES;
 
 	public void crearTablaCiudad() {
@@ -20,54 +23,63 @@ public class DB_Ciudades extends Entidades{
 				+ "longitud DOUBLE(10,6),"
 				+ "activo BIT(1) DEFAULT TRUE,"
 				+ "PRIMARY KEY (id)";
-		Entidades.creatTable(table_name, sql);
+		TablasUtiles.creatTable(table_name, sql);
 	}
-
 	public void borrarTablaCiudad() {
-		Entidades.deleteTable(table_name);		
+		TablasUtiles.deleteTable(table_name);		
+	}
+	public void vaciarTablaCiudad() {
+		TablasUtiles.emptyTable(table_name);
 	}
 
+	
+	
 	/*
 	 * BORRAR
 	 */
 	public void deleteItemByID(int id) {
-		Entidades.deleteItemByID(table_name, id);
+		EntidadesUtils.deleteItemByID(table_name, id);
 	}
 
 	public void deleteItemByNAME(String nombre) {
-		Entidades.deleteItemByNAME(table_name, nombre);
+		EntidadesUtils.deleteItemByNAME(table_name, nombre);
 	}
 	/*
 	 * ACTUALIZAR
 	 */
 	public void updateItemBy(String donde, String que,int id) {
-		Entidades.updateItem(table_name, donde, que,id);
+		EntidadesUtils.updateItem(table_name, donde, que,id);
+	}
+
+	public void modificarActivo(Boolean activo) {
+		System.out.println("Modificar activo");	
 	}
 	public void activarCiudad(int id) {
-		Entidades.activarItem(table_name,id);
+		EntidadesUtils.activarItem(table_name,id);
 	}
+
 	public void desactivarCiudad(int id) {
-		Entidades.desactivarItem(table_name,id);
+		EntidadesUtils.desactivarItem(table_name,id);
 	}
 
 	/*
 	 * INSERTAR
 	 */
-	public void insertItem(String nombre, int habitantes) {
-		String sql = "INSERT INTO "+table_name+" (id, nombre, habitantes) "
-				+ "VALUES (NULL,?,?)";
+	public void insertar(String nombre) {
+		String sql = "INSERT INTO "+table_name+" (id, nombre) VALUES (NULL,?)";
+
 		DB_Connection c = null;
 		Connection myConect = null;
-		PreparedStatement myPreStmt = null;
+		PreparedStatement myPrepStmt = null;
 		try {
 			c = new DB_Connection();
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.setString(1, nombre);
-			myPreStmt.setInt(2, habitantes);
-			myPreStmt.executeUpdate();
+			myPrepStmt = myConect.prepareStatement(sql);
+			myPrepStmt.setString(1, nombre);
+			myPrepStmt.executeUpdate();
+
 			System.out.println("Ciudad Creada!");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,31 +88,40 @@ public class DB_Ciudades extends Entidades{
 		}
 	}
 
-	public void insertItem(String nombre, int habitantes, String historia, double latitud, double longitud, int activo) {
+	public void insertar(String nombre, int habitantes, String historia, double latitud, double longitud, Boolean activo) {
 		String sql = "INSERT INTO "+table_name+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
 				+ "VALUES (NULL, ?,?,?,?,?,?)";
 
 		DB_Connection c = null;
 		Connection myConect = null;
-		PreparedStatement myPreStmt = null;
+		PreparedStatement myPrepStmt = null;
 		try {
 			c = new DB_Connection();
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.setString(1, nombre);
-			myPreStmt.setInt(2, habitantes);
-			myPreStmt.setString(3, historia);
-			myPreStmt.setDouble(4, latitud);
-			myPreStmt.setDouble(5, longitud);
-			myPreStmt.setInt(6, activo);
-			myPreStmt.executeUpdate();
+			myPrepStmt = myConect.prepareStatement(sql);
+			myPrepStmt.setString(1, nombre);
+			myPrepStmt.setInt(2, habitantes);
+			myPrepStmt.setString(3, historia);
+			myPrepStmt.setDouble(4, latitud);
+			myPrepStmt.setDouble(5, longitud);
+			myPrepStmt.setBoolean(6, activo);
+			myPrepStmt.executeUpdate();
+
 			System.out.println("Ciudad Creada!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
+			c.closeStatement(myPrepStmt);
 			c.closeConnect(myConect);
 		}
+	}
+
+	/*
+	 * BUSCAR
+	 */
+	public ArrayList<String> getCiudades() {
+		return EntidadesUtils.getListaByNAME(table_name);
 	}
 }

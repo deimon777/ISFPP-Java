@@ -1,6 +1,9 @@
 package conexion.db.entidades;
 
-public class DB_TipoUsuarios extends Entidades{
+import conexion.db.tablas.TablasUtiles;
+import conexion.db.tablas.TablesName;
+
+public class TipoUsuarios extends EntidadesUtils{
 	private String table_name = TablesName.TIPO_USUARIO;
 
 	public void crearTablaTipoUsuario() {
@@ -8,22 +11,24 @@ public class DB_TipoUsuarios extends Entidades{
 				+ "nombre VARCHAR(50) NOT NULL,"
 				+ "activo BIT(1) DEFAULT TRUE,"
 				+ "PRIMARY KEY (id)";
-		Entidades.creatTable(table_name, sql);
+		TablasUtiles.creatTable(table_name, sql);
 	}
-
 	public void borrarTablaTipoUsuario() {
-		Entidades.deleteTable(table_name);		
+		TablasUtiles.deleteTable(table_name);		
+	}
+	public void vaciarTablaTipoUsuario() {
+		TablasUtiles.emptyTable(table_name);		
 	}
 
 	/*
 	 * BORRAR
 	 */
 	public void deleteItemByID(int id) {
-		Entidades.deleteItemByID(table_name, id);
+		EntidadesUtils.deleteItemByID(table_name, id);
 	}
 	
 	public void deleteItemByNAME(String nombre) {
-		Entidades.deleteItemByNAME(table_name, nombre);
+		EntidadesUtils.deleteItemByNAME(table_name, nombre);
 	}
 	
 	/*

@@ -2,81 +2,21 @@ package conexion.db.entidades;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
 
-public class Entidades {
-
-	public static void creatTable(String table, String param) {
-		DB_Connection c = null;
-		Connection myConect = null;
-		Statement myStmt = null;
-		try {
-			c = new DB_Connection();
-			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-					ConstantesPropierties.DB_NAME_USER,
-					ConstantesPropierties.DB_NAME_PASS);
-			myStmt = c.getStatement(myConect);			
-
-			myStmt.execute("CREATE TABLE IF NOT EXISTS " + table + "(" + param + ")ENGINE=INNODB");
-			System.out.println("Tabla "+table+" creada");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			c.closeStatement(myStmt);
-			c.closeConnect(myConect);
-		}
-	}
-
-	public static void deleteTable(String table) {
-		DB_Connection c = null;
-		Connection myConect = null;
-		Statement myStmt = null;
-		try {
-			c = new DB_Connection();
-			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-					ConstantesPropierties.DB_NAME_USER,
-					ConstantesPropierties.DB_NAME_PASS);
-			myStmt = c.getStatement(myConect);	
-
-			myStmt.execute("DROP TABLE " + table);
-			System.out.println("Tabla "+table+" borrada");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			c.closeStatement(myStmt);
-			c.closeConnect(myConect);
-		}
-	}
-
-	public static void executeSQL(String sql) {
-		DB_Connection c = null;
-		Connection myConect = null;
-		PreparedStatement myPreStmt = null;
-		try {
-			c = new DB_Connection();
-			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-					ConstantesPropierties.DB_NAME_USER,
-					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.executeQuery();
-			System.out.println("Ejecutada la QUERY!");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			c.closeConnect(myConect);
-		}
-	}
-
+public class EntidadesUtils {
 	/*
 	 * BORRAR
 	 */
-	public static void deleteItemByID(String table_name, int id) {
-		String sql = "DELETE FROM "+table_name+" WHERE id = ?";
+	public static void deleteItemByID(String table, int id) {
+		String sql = "DELETE FROM "+table+" WHERE id = ?";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPreStmt = null;
@@ -96,8 +36,8 @@ public class Entidades {
 		}
 	}
 
-	public static void deleteItemByNAME(String table_name, String nombre) {
-		String sql = "DELETE FROM "+table_name+" WHERE id = ?";
+	public static void deleteItemByNAME(String table, String nombre) {
+		String sql = "DELETE FROM "+table+" WHERE id = ?";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPreStmt = null;
@@ -116,12 +56,12 @@ public class Entidades {
 			c.closeConnect(myConect);
 		}
 	}
-
+	
 	/*
 	 * ACTUALIZAR
 	 */
-	public static void updateItem(String table_name, String where, String what, int id) {
-		String sql = "UPDATE "+table_name+" SET "+where+" = ? WHERE id = ?";
+	public static void updateItem(String table, String where, String what, int id) {
+		String sql = "UPDATE "+table+" SET "+where+" = ? WHERE id = ?";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPreStmt = null;
@@ -143,20 +83,21 @@ public class Entidades {
 		}		
 	}
 
-	public static void activarItem(String table_name, int id) {
-		activar(table_name,"activo",1,id);
+	public static void activarItem(String table, int id) {
+		activar(table,"activo",1,id);
 		System.out.println("Item Activado!");
 	}
-	public static void desactivarItem(String table_name, int id) {
-		activar(table_name,"activo",0,id);
+	
+	public static void desactivarItem(String table, int id) {
+		activar(table,"activo",0,id);
 		System.out.println("Item Desactivado!");
 	}
 
 	/*
 	 * Propias de la clase
 	 */
-	private static void activar(String table_name, String where, int what, int id) {
-		String sql = "UPDATE "+table_name+" SET "+where+" = ? WHERE id = ?";
+	private static void activar(String table, String where, int what, int id) {
+		String sql = "UPDATE "+table+" SET "+where+" = ? WHERE id = ?";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPreStmt = null;
@@ -176,5 +117,36 @@ public class Entidades {
 		}finally {
 			c.closeConnect(myConect);
 		}
+	}
+	
+	/*
+	 * BUSCAR
+	 */
+	public static ArrayList<String> getListaByNAME(String table) {
+		String sql = "SELECT nombre from "+table;
+
+		DB_Connection c = null;
+		Connection myConect = null;
+		Statement myStmt = null;
+		ResultSet rs = null;
+		ArrayList<String> myList = new ArrayList<String>();
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			myStmt = c.getStatement(myConect);
+			rs = myStmt.executeQuery(sql);
+			while (rs.next()) {
+				myList.add(rs.getString("nombre"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			c.closeStatement(myStmt);
+			c.closeConnect(myConect);
+		}
+		return myList;
 	}
 }

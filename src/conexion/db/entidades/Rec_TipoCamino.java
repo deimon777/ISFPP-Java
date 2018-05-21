@@ -2,14 +2,17 @@ package conexion.db.entidades;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.sql.PreparedStatement;
+//import com.mysql.jdbc.PreparedStatement;
 
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
-import com.mysql.jdbc.PreparedStatement;
 
 import conexion.db.DB_Connection;
+import conexion.db.tablas.TablasUtiles;
+import conexion.db.tablas.TablesName;
 
-public class DB_Rec_TipoCamino extends Entidades{
+public class Rec_TipoCamino extends EntidadesUtils{
 	private String table_name = TablesName.TIPO_CAMINO;
 
 	public void crearTablaTipoCamino() {
@@ -17,39 +20,42 @@ public class DB_Rec_TipoCamino extends Entidades{
 				+ "nombre VARCHAR(50) NOT NULL,"
 				+ "activo BIT(1) DEFAULT TRUE,"
 				+ "PRIMARY KEY (id)";
-		Entidades.creatTable(table_name, sql);
+		TablasUtiles.creatTable(table_name, sql);
 	}
-
 	public void borrarTablaTipoCamino() {
-		Entidades.deleteTable(table_name);		
+		TablasUtiles.deleteTable(table_name);		
+	}
+	public void vaciarTablaTipoCamino() {
+		TablasUtiles.emptyTable(table_name);
 	}
 
 	/*
 	 * BORRAR
 	 */
 	public void deleteItemByID(int id) {
-		Entidades.deleteItemByID(table_name, id);
+		EntidadesUtils.deleteItemByID(table_name, id);
 	}
 	
 	public void deleteItemByNAME(String nombre) {
-		Entidades.deleteItemByNAME(table_name, nombre);
+		EntidadesUtils.deleteItemByNAME(table_name, nombre);
 	}
 	
 	/*
 	 * MODIFICAR
 	 */
+	public void modificarMombre(String nombre) {
+		System.out.println("Modificar nombre");	
+	}
+
+	public void modificarActivo(Boolean activo) {
+		System.out.println("Modificar activo");	
+	}
 	
 	/*
 	 * INSERTAR
 	 */
 	public void insertar(String nombre, Boolean activo) {
-
-		System.out.println("Nombre: "+nombre);
-		System.out.println("Activo: "+activo);
-		
-		int act = 1;
-		if(!activo)
-			act = 0;
+		String sql = "INSERT INTO " + table_name + "(`id`, `nombre`, `activo`) VALUES (NULL, ?, ?)";
 		
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -59,12 +65,10 @@ public class DB_Rec_TipoCamino extends Entidades{
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-//			myStmt = c.getStatement(myConect);	
-			myPrepStmt = (PreparedStatement) myConect.prepareStatement("INSERT INTO " + table_name + "(`id`, `nombre`, `activo`) VALUES (NULL, ?, ?)");
+			myPrepStmt = myConect.prepareStatement(sql);
 			myPrepStmt.setString(1, nombre);
-			myPrepStmt.setInt(2, act);
-			myPrepStmt.executeUpdate(); 
-			
+			myPrepStmt.setBoolean(2, activo);
+			myPrepStmt.executeUpdate(); 			
 			
 			System.out.println("Tipo Camino creado");
 		} catch (SQLException e) {
@@ -73,7 +77,12 @@ public class DB_Rec_TipoCamino extends Entidades{
 			c.closeStatement(myPrepStmt);
 			c.closeConnect(myConect);
 		}
-		
-		//INSERT INTO `tipo_camino` (`id`, `nombre`, `activo`) VALUES (NULL, 'Ripio', b'1');
+	}
+	
+	/*
+	 * BUSCAR
+	 */
+	public ArrayList<String> getTipoCamino() {
+		return EntidadesUtils.getListaByNAME(table_name);
 	}
 }

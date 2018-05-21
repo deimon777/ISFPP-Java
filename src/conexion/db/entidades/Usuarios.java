@@ -1,6 +1,9 @@
 package conexion.db.entidades;
 
-public class DB_Usuarios extends Entidades{
+import conexion.db.tablas.TablasUtiles;
+import conexion.db.tablas.TablesName;
+
+public class Usuarios extends EntidadesUtils{
 	private String table_name = TablesName.USUARIOS;
 
 	public void crearTablaUsuario() {
@@ -14,22 +17,24 @@ public class DB_Usuarios extends Entidades{
 				+ "tipo_usuario_id INT NOT NULL," 
 				+ "CONSTRAINT fk_usuarios FOREIGN KEY (tipo_usuario_id) "
 				+ " REFERENCES tipo_usuario (id) ON DELETE CASCADE ON UPDATE CASCADE";
-		Entidades.creatTable(table_name, sql);
+		TablasUtiles.creatTable(table_name, sql);
 	}
-
 	public void borrarTablaUsuario() {
-		Entidades.deleteTable(table_name);		
+		TablasUtiles.deleteTable(table_name);		
+	}
+	public void vaciarTablaUsuario() {
+		TablasUtiles.emptyTable(table_name);		
 	}
 
 	/*
 	 * BORRAR
 	 */
 	public void deleteItemByID(int id) {
-		Entidades.deleteItemByID(table_name, id);
+		EntidadesUtils.deleteItemByID(table_name, id);
 	}
 	
 	public void deleteItemByNAME(String nombre) {
-		Entidades.deleteItemByNAME(table_name, nombre);
+		EntidadesUtils.deleteItemByNAME(table_name, nombre);
 	}
 	
 	/*
