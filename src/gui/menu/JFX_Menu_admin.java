@@ -41,8 +41,9 @@ public class JFX_Menu_admin {
 		MenuItem crearRecursoEstadoCamino = new MenuItem(TextoGUI.MENU_CREAR_RECURSO_ESTADO_CAMINO);
 		
 		
-//		Menu sistema = new Menu(TextoGUI.MENU_SISTEMA);
+		Menu sistema = new Menu(TextoGUI.MENU_SISTEMA);
 //		MenuItem sistemaTema = new MenuItem(TextoGUI.MENU_SISTEMA_TEMA);
+		MenuItem sistemaDB= new MenuItem(TextoGUI.MENU_SISTEMA_BASE_DE_DATOS);
 
 		Menu ayuda = new Menu(TextoGUI.MENU_AYUDA);
 		MenuItem ayudaAcerca = new MenuItem(TextoGUI.MENU_AYUDA_ACERCA);
@@ -55,7 +56,7 @@ public class JFX_Menu_admin {
 		ver.getItems().addAll(verPublico, verCiudades, verCaminos, verRecursos);
 		crearRecursos.getItems().addAll(crearRecursoAlojamiento, crearRecursoTrafico, crearRecursoSitioTuristico, crearRecursoEstadoCamino, crearRecursoTipoCamino);
 		crear.getItems().addAll(crearCiudad, crearCamino, crearRecursos);
-//		sistema.getItems().addAll(sistemaTema);
+		sistema.getItems().addAll(sistemaDB);
 		ayuda.getItems().addAll(ayudaAcerca,ayudaAyuda);
 
 		/*
@@ -71,7 +72,7 @@ public class JFX_Menu_admin {
 		/*
 		 * Agregando los menus
 		 */
-		 menu.getMenus().addAll(archivo,ver,crear,ayuda);
+		 menu.getMenus().addAll(archivo,ver,crear,sistema,ayuda);
 
 		/*
 		 * Agregando las acciones
@@ -91,6 +92,8 @@ public class JFX_Menu_admin {
 		crearRecursoSitioTuristico.setOnAction(action);
 		crearRecursoTipoCamino.setOnAction(action);
 		crearRecursoEstadoCamino.setOnAction(action);
+
+		sistemaDB.setOnAction(action);
 		
 		ayudaAcerca.setOnAction(action);
 		ayudaAyuda.setOnAction(action);

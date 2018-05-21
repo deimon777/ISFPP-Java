@@ -86,6 +86,10 @@ public class Menu_Utils {
 					break;
 
 					//SISTEMA
+				case TextoGUI.MENU_SISTEMA_BASE_DE_DATOS:
+					System.out.println("Base de datos"); //LOG
+					vista = (T)new JFX_Sistema_DB().getPanel();
+					break;
 
 					//AYUDA
 				case TextoGUI.MENU_AYUDA_ACERCA:

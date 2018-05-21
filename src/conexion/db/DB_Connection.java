@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DB_Connection {
-	
+	Connection myConect = null;
+	Statement myStmt = null;
 	/* --------------------------------------------------------------------------------------------- */
 	public Connection getConection(String url, String user, String password) {
 		String urlBase = "jdbc:mysql://localhost:3306/";
-		Connection myConect = null;
 		try { 
 			//			Class.forName("com.mysql.jdbc.Driver");
 			myConect = DriverManager.getConnection(urlBase+url, user, password);
@@ -46,7 +46,6 @@ public class DB_Connection {
 	
 	/* --------------------------------------------------------------------------------------------- */
 	public Statement getStatement(Connection conex) {
-		Statement myStmt = null;
 		try {
 			myStmt = conex.createStatement();
 			if(myStmt != null) {
