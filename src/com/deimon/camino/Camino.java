@@ -1,29 +1,28 @@
 package com.deimon.camino;
 
+import com.deimon.ciudad.Ciudad;
+
 public class Camino {
 
 	private String nombre;
 	private int distancia;
-	private TipoCamino tipo;
-	private EstadoCamino estado;
-
-
+	private TipoCamino tipo = null;
+	private EstadoCamino estado = null;
+	private Ciudad inicio = null;
+	private Ciudad fin = null;
 
 	public Camino(String nombre, int distancia) {
-		super();
 		this.nombre = nombre;
 		this.distancia = distancia;
 	}
 
 	public Camino(String nombre, int distancia, TipoCamino tipo) {
-		super();
 		this.nombre = nombre;
 		this.distancia = distancia;
 		this.tipo = tipo;
 	}
 
 	public Camino(String nombre, int distancia, TipoCamino tipo, EstadoCamino estado) {
-		super();
 		this.nombre = nombre;
 		this.distancia = distancia;
 		this.tipo = tipo;
