@@ -43,14 +43,12 @@ public class Test {
 //		DB_Entidades entidades = new DB_Entidades();
 //		entidades.borrarTodasLasTablas();
 //		entidades.crearTodasLasTablas();
-		Ciudades db_ciudad = new Ciudades();
+//		Ciudades db_ciudad = new Ciudades();
 //		db_ciudad.insertItem("Madryn", 100000, "", 0.0, 0.0, 1);
 //		db_ciudad.insertItem("Madryn", 100000);
 //		db_ciudad.deleteItemByNAME("Madryn");
 //		db_ciudad.desactivarCiudad(1);
 //		db_ciudad.activarCiudad(1);
-		ArrayList<String> r = db_ciudad.getCiudades();
-		System.out.println("R: " + r);
 		
 //		db_ciudad.updateItemBy("nombre", "comodoro",1);
 //		db_ciudad.updateItemBy("historia", "algo de info",1);
