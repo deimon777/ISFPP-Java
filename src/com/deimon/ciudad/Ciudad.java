@@ -10,12 +10,20 @@ package com.deimon.ciudad;
 public class Ciudad {
 	private String nombre = "Falto el nombre";
 	private int habitantes = 0;
-    //private String reseña_histórica;
+    private String historia;
+    private double latitud;
+    private double longitud;
+    private boolean activo;
+
 	//private int alojamientos; //falta el tipo (lista)
 	//private String sitios_turisticos; //falta el tipo (lista)
-	private Ciudad ciudadAnt = null;
-	private Ciudad ciudadSig = null;
+    
+//	private Ciudad ciudadAnt = null;
+//	private Ciudad ciudadSig = null;
 	
+	public Ciudad() {
+		
+	}
 	
 	public Ciudad(String nombre) {
 		//super();
@@ -30,47 +38,43 @@ public class Ciudad {
 		//this.ciudadSig = null;
 	}
 	
-	public Ciudad(String nombre, int habitantes, Ciudad anterior, Ciudad siguiente) {
-		//super();
-		this.nombre = nombre;
-		this.habitantes = habitantes;
-		this.ciudadSig = anterior;
-		this.ciudadAnt = siguiente;
-	}
-	
 	/*
 	 * Getter y Setter
 	 */
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 	public int getHabitantes() {
 		return habitantes;
 	}
-
 	public void setHabitantes(int habitantes) {
 		this.habitantes = habitantes;
+	}	    
+	public String getHistoria() {
+		return historia;
 	}
-	
-	public Ciudad getCiudadAnterior() {
-		return ciudadAnt;
+	public void setHistoria(String historia) {
+		this.historia = historia;
 	}
-
-	public void setCiudadAnterior(Ciudad anterior) {
-		this.ciudadAnt = anterior;
+	public double getLatitud() {
+		return latitud;
 	}
-
-	public Ciudad getCiudadSiguiente() {
-		return ciudadSig;
+	public void setLatitud(double latitud) {
+		this.latitud = latitud;
 	}
-
-	public void setCiudadSiguiente(Ciudad siguiente) {
-		this.ciudadSig = siguiente;
+	public double getLongitud() {
+		return longitud;
 	}
-	
+	public void setLongitud(double longitud) {
+		this.longitud = longitud;
+	}	
+	public boolean isActivo() {
+		return activo;
+	}
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}	
 }
