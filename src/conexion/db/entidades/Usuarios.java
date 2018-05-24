@@ -7,10 +7,11 @@ public class Usuarios extends EntidadesUtils{
 	private String table_name = TablesName.USUARIOS;
 
 	public void crearTablaUsuario() {
-		String sql = "id INT NOT NULL AUTO_INCREMENT,"
+		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL," 
 				+ "apellido VARCHAR(50) NOT NULL," 
-				+ "email VARCHAR(20)," 
+				+ "nombre_usuario VARCHAR(50) NOT NULL UNIQUE," 
+				+ "email VARCHAR(20) UNIQUE," 
 				+ "clave VARCHAR(20)," 
 				+ "activo BIT(1) DEFAULT FALSE," 
 				+ "PRIMARY KEY (id)," 

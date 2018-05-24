@@ -2,21 +2,25 @@ package conexion.db.entidades;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Statement;
 
+import com.deimon.ciudad.Ciudad;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
 import conexion.db.tablas.TablasUtiles;
 import conexion.db.tablas.TablesName;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Ciudades extends EntidadesUtils{
 	private static String table_name = TablesName.CUIDADES;
 
 	public void crearTablaCiudad() {
-		String sql = "id INT NOT NULL AUTO_INCREMENT,"
-				+ "nombre VARCHAR(50) NOT NULL,"
+		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
+				+ "nombre VARCHAR(50) NOT NULL UNIQUE,"
 				+ "habitantes INT(10),"
 				+ "historia VARCHAR(300),"
 				+ "latitud DOUBLE(10,6),"
@@ -32,8 +36,8 @@ public class Ciudades extends EntidadesUtils{
 		TablasUtiles.emptyTable(table_name);
 	}
 
-	
-	
+
+
 	/*
 	 * BORRAR
 	 */
@@ -76,19 +80,28 @@ public class Ciudades extends EntidadesUtils{
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPrepStmt = myConect.prepareStatement(sql);
-			myPrepStmt.setString(1, nombre);
-			myPrepStmt.executeUpdate();
-
-			System.out.println("Ciudad Creada!");
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.setString(1, nombre);
+				myPrepStmt.executeUpdate();
+				System.out.println("Ciudad Creada!");
+			}
 		} catch (SQLException e) {
+			//revisar posibles errores, salir de una manera elegante, o poner ventana de error!! 
+			//EJ: entrada duplicada
+			//    error en la conec
+
+			// com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+			// com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry 'Madryn' for key 'nombre
+			System.out.println("oh oh, entrada duplcada");
 			e.printStackTrace();
 		}finally {
 			c.closeConnect(myConect);
 		}
 	}
 
-	public void insertar(String nombre, int habitantes, String historia, double latitud, double longitud, Boolean activo) {
+	public void insertar(String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
 		String sql = "INSERT INTO "+table_name+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
 				+ "VALUES (NULL, ?,?,?,?,?,?)";
 
@@ -100,17 +113,37 @@ public class Ciudades extends EntidadesUtils{
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPrepStmt = myConect.prepareStatement(sql);
-			myPrepStmt.setString(1, nombre);
-			myPrepStmt.setInt(2, habitantes);
-			myPrepStmt.setString(3, historia);
-			myPrepStmt.setDouble(4, latitud);
-			myPrepStmt.setDouble(5, longitud);
-			myPrepStmt.setBoolean(6, activo);
-			myPrepStmt.executeUpdate();
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.setString(1, nombre);
+				if (habitantes == null) {
+					myPrepStmt.setNull(2, java.sql.Types.INTEGER);				
+				}
+				else {
+					myPrepStmt.setInt(2, habitantes);
+				}
+				myPrepStmt.setString(3, historia);
 
-			System.out.println("Ciudad Creada!");
+				if (latitud == null) {
+					myPrepStmt.setNull(4, java.sql.Types.DOUBLE);				
+				}
+				else {
+					myPrepStmt.setDouble(4, latitud);
+				}
+
+				if (longitud == null) {
+					myPrepStmt.setNull(5, java.sql.Types.DOUBLE);				
+				}
+				else {
+					myPrepStmt.setDouble(5, longitud);
+				}
+
+				myPrepStmt.setBoolean(6, activo);
+				myPrepStmt.executeUpdate();
+				System.out.println("Ciudad Creada!");
+			}
 		} catch (SQLException e) {
+			//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Out of range value for column 'latitud' at row 1
 			e.printStackTrace();
 		}finally {
 			c.closeStatement(myPrepStmt);
@@ -121,7 +154,43 @@ public class Ciudades extends EntidadesUtils{
 	/*
 	 * BUSCAR
 	 */
-	public ArrayList<String> getCiudades() {
-		return EntidadesUtils.getListaByNAME(table_name);
+	public ObservableList<String> getCiudadesNombre() {
+		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
+	}
+
+	public ObservableList<Ciudad> getCiudades() {
+		String sql = "SELECT * from "+table_name;
+
+		DB_Connection conec = null;
+		Connection myConect = null;
+		Statement myStmt = null;
+		ResultSet rs = null;
+		ObservableList<Ciudad> lista = FXCollections.observableArrayList();
+		try {
+			conec = new DB_Connection();
+			myConect = conec.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			myStmt = conec.getStatement(myConect);
+			rs = myStmt.executeQuery(sql);
+
+			while (rs.next()) {
+				Ciudad ciudad = new Ciudad();
+				ciudad.setNombre(rs.getString("nombre"));
+				ciudad.setHabitantes(rs.getInt("habitantes"));
+				ciudad.setHistoria(rs.getString("historia"));
+				ciudad.setLatitud(rs.getDouble("latitud"));
+				ciudad.setLongitud(rs.getDouble("longitud"));
+				ciudad.setActivo(rs.getBoolean("activo"));
+				lista.add(ciudad);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conec.closeStatement(myStmt);
+			conec.closeConnect(myConect);
+		}
+		return lista;
 	}
 }

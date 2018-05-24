@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class EntidadesUtils {
 	/*
@@ -25,10 +26,12 @@ public class EntidadesUtils {
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.setInt(1, id);
-			myPreStmt.executeUpdate();
-			System.out.println("Item Borrado!");
+			if(myConect!=null) {
+				myPreStmt = myConect.prepareStatement(sql);
+				myPreStmt.setInt(1, id);
+				myPreStmt.executeUpdate();
+				System.out.println("Item Borrado!");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -46,17 +49,19 @@ public class EntidadesUtils {
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.setString(1, nombre);
-			myPreStmt.executeUpdate();
-			System.out.println("Item Borrado!");
+			if(myConect!=null) {
+				myPreStmt = myConect.prepareStatement(sql);
+				myPreStmt.setString(1, nombre);
+				myPreStmt.executeUpdate();
+				System.out.println("Item Borrado!");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			c.closeConnect(myConect);
 		}
 	}
-	
+
 	/*
 	 * ACTUALIZAR
 	 */
@@ -70,12 +75,13 @@ public class EntidadesUtils {
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.setString(1, what);
-			myPreStmt.setInt(2, id);
-
-			myPreStmt.executeUpdate();
-			System.out.println("Item Actualizado!");
+			if(myConect!=null) {
+				myPreStmt = myConect.prepareStatement(sql);
+				myPreStmt.setString(1, what);
+				myPreStmt.setInt(2, id);
+				myPreStmt.executeUpdate();
+				System.out.println("Item Actualizado!");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -87,7 +93,7 @@ public class EntidadesUtils {
 		activar(table,"activo",1,id);
 		System.out.println("Item Activado!");
 	}
-	
+
 	public static void desactivarItem(String table, int id) {
 		activar(table,"activo",0,id);
 		System.out.println("Item Desactivado!");
@@ -106,47 +112,52 @@ public class EntidadesUtils {
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.setInt(1, what);
-			myPreStmt.setInt(2, id);
-
-			myPreStmt.executeUpdate();
-			System.out.println("Item Actualizado!");
+			if(myConect!=null) {
+				myPreStmt = myConect.prepareStatement(sql);
+				myPreStmt.setInt(1, what);
+				myPreStmt.setInt(2, id);
+				myPreStmt.executeUpdate();
+				System.out.println("Item Actualizado!");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			c.closeConnect(myConect);
 		}
 	}
-	
+
 	/*
 	 * BUSCAR
 	 */
-	public static ArrayList<String> getListaByNAME(String table) {
-		String sql = "SELECT nombre from "+table;
-
+	public static <T> ObservableList<T> getLista(String sql) {
 		DB_Connection c = null;
 		Connection myConect = null;
 		Statement myStmt = null;
 		ResultSet rs = null;
-		ArrayList<String> myList = new ArrayList<String>();
+		ObservableList<T> data = FXCollections.observableArrayList();
 		try {
 			c = new DB_Connection();
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myStmt = c.getStatement(myConect);
-			rs = myStmt.executeQuery(sql);
-			while (rs.next()) {
-				myList.add(rs.getString("nombre"));
+			if(myConect!=null) {
+				myStmt = c.getStatement(myConect);
+				rs = myStmt.executeQuery(sql);
+				while(rs.next()){
+					ObservableList<T> row = FXCollections.observableArrayList();
+					for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+						row.add((T) rs.getString(i));
+					}
+					data.addAll(row);
+				}			
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			c.closeStatement(myStmt);
 			c.closeConnect(myConect);
 		}
-		return myList;
+		return data;
 	}
+
 }

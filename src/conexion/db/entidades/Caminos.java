@@ -7,7 +7,7 @@ public class Caminos extends EntidadesUtils{
 	private String table_name = TablesName.CAMINOS;
 
 	public void crearTablaCaminos() {
-		String sql = "id INT NOT NULL AUTO_INCREMENT,"
+		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL,"
 				+ "distancia INT(20),"
 				+ "peso_camino INT(5),"

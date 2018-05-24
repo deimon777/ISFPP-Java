@@ -7,8 +7,8 @@ public class TipoUsuarios extends EntidadesUtils{
 	private String table_name = TablesName.TIPO_USUARIO;
 
 	public void crearTablaTipoUsuario() {
-		String sql = "id INT NOT NULL AUTO_INCREMENT,"
-				+ "nombre VARCHAR(50) NOT NULL,"
+		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
+				+ "nombre VARCHAR(50) NOT NULL UNIQUE,"
 				+ "activo BIT(1) DEFAULT TRUE,"
 				+ "PRIMARY KEY (id)";
 		TablasUtiles.creatTable(table_name, sql);
