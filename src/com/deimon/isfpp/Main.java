@@ -6,7 +6,7 @@ import com.deimon.isfpp.configuracion.Constantes;
 
 import gui.menu.JFX_Menu_admin;
 import gui.menu.JFX_Menu_public;
-import gui.panels.JFX_Ver_Publico;
+import gui.panels.ver.JFX_Ver_Publico;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;

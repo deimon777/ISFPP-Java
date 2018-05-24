@@ -6,6 +6,17 @@ import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import gui.utils.TextoGUI;
 import gui.panels.*;
+import gui.panels.crear.JFX_Crear_Alojamiento;
+import gui.panels.crear.JFX_Crear_Camino;
+import gui.panels.crear.JFX_Crear_Ciudad;
+import gui.panels.crear.JFX_Crear_EstadoCamino;
+import gui.panels.crear.JFX_Crear_SitiosTuristicos;
+import gui.panels.crear.JFX_Crear_TipoCamino;
+import gui.panels.crear.JFX_Crear_Trafico;
+import gui.panels.ver.JFX_Ver_Camino;
+import gui.panels.ver.JFX_Ver_Ciudad;
+import gui.panels.ver.JFX_Ver_Publico;
+import gui.panels.ver.JFX_Ver_Recurso;
 import javafx.application.Platform;
 
 public class Menu_Utils {	

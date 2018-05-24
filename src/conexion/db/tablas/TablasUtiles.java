@@ -20,10 +20,11 @@ public class TablasUtiles {
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myStmt = c.getStatement(myConect);			
-
-			myStmt.execute("CREATE TABLE IF NOT EXISTS " + table + "(" + param + ")ENGINE=INNODB");
-			System.out.println("Tabla "+table+" creada");
+			if(myConect!=null) {
+				myStmt = c.getStatement(myConect);
+				myStmt.execute("CREATE TABLE IF NOT EXISTS " + table + "(" + param + ")ENGINE=INNODB");
+				System.out.println("Tabla "+table+" creada");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -41,10 +42,11 @@ public class TablasUtiles {
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myStmt = c.getStatement(myConect);	
-
-			myStmt.execute("DROP TABLE " + table);
-			System.out.println("Tabla "+table+" borrada");
+			if(myConect!=null) {
+				myStmt = c.getStatement(myConect);
+				myStmt.execute("DROP TABLE " + table);
+				System.out.println("Tabla "+table+" borrada");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -55,7 +57,7 @@ public class TablasUtiles {
 
 	public static void emptyTable(String table) {
 		String sql = "TRUNCATE TABLE "+table;
-		
+
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPreStmt = null;
@@ -64,9 +66,11 @@ public class TablasUtiles {
 			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myPreStmt = myConect.prepareStatement(sql);
-			myPreStmt.executeUpdate();
-			System.out.println("Tabla "+table+" vacia");
+			if(myConect!=null) {
+				myPreStmt = myConect.prepareStatement(sql);
+				myPreStmt.executeUpdate();
+				System.out.println("Tabla "+table+" vacia");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
