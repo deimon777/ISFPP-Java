@@ -1,6 +1,6 @@
-package gui.panels;
+package gui.panels.crear;
 
-import javafx.collections.FXCollections;
+import conexion.db.entidades.Ciudades;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,35 +17,31 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class JFX_Crear_SitiosTuristicos extends Pane{
+public class JFX_Crear_Alojamiento extends Pane{
 	VBox panel = new VBox();
 
-	public JFX_Crear_SitiosTuristicos() {
+	public JFX_Crear_Alojamiento() {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);
-		Text titulo = new Text("Sitios Turisticos");
+		Text titulo = new Text("Alojamiento");
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
 
-		GridPane gp = new GridPane();		
+		GridPane gp = new GridPane();
 //		gp.setGridLinesVisible(true);
 		gp.setAlignment(Pos.CENTER);
 		gp.setHgap(10);
 		gp.setVgap(10);
 		
-		Label nombre = new Label("Nombre del Sitio:");
+		Label nombre = new Label("Nombre del Alojamiento:");
 		TextField nombreTextField = new TextField();
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
 		Label city = new Label("Ciudad:");
 		ComboBox<String> list = new ComboBox<String>();
-	    ObservableList<String> data = FXCollections.observableArrayList(
-	            "chocolate", "salmon", "gold", "coral", "darkorchid",
-	            "darkgoldenrod", "lightsalmon", "black", "rosybrown", "blue",
-	            "blueviolet", "brown");
-	    list.setItems(data);
+		list.setItems((ObservableList<String>) new Ciudades().getCiudadesNombre());
 
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(activo, HPos.RIGHT);
@@ -60,6 +56,7 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 		
 		Button btn = new Button("Crear");
 		HBox hbBtn = new HBox();
+		hbBtn.getStyleClass().add("spacing-medio");
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
 		hbBtn.getChildren().add(btn);
 		gp.add(hbBtn, 1, 3);

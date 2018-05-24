@@ -1,4 +1,4 @@
-package gui.panels;
+package gui.panels.ver;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

@@ -1,4 +1,4 @@
-package gui.panels;
+package gui.panels.crear;
 
 import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_TipoCamino;
@@ -43,24 +43,20 @@ public class JFX_Crear_Camino {
 		NumberTextField distanciaTextField = new NumberTextField();
 		Label peso_camino = new Label("Peso Camino:");
 		ComboBox<String> lista_peso_camino = new ComboBox<String>();
-	    ObservableList<String> data_peso_camino = FXCollections.observableArrayList(
-	            "1", "2", "3");
+	    ObservableList<String> data_peso_camino = FXCollections.observableArrayList("1", "2", "3");
 	    lista_peso_camino.setItems(data_peso_camino);
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
 		Label tipo_camino = new Label("Tipo Camino:");
 		ComboBox<String> lista_tipo_camino = new ComboBox<String>();
-	    ObservableList<String> data_tipo_camino = FXCollections.observableArrayList(new Rec_TipoCamino().getTipoCamino());
-	    lista_tipo_camino.setItems(data_tipo_camino);
+	    lista_tipo_camino.setItems(new Rec_TipoCamino().getTipoCaminoNombre());
 		Label estado_camino = new Label("Estado Camino:");
 		ComboBox<String> lista_estado_camino = new ComboBox<String>();
-	    ObservableList<String> data_estado_camino = FXCollections.observableArrayList(new Rec_EstadoCamino().getEstadoCamino());
-	    lista_estado_camino.setItems(data_estado_camino);
+	    lista_estado_camino.setItems(new Rec_EstadoCamino().getEstadoCaminoNombre());
 		Label trafico = new Label("Trafico:");
 		ComboBox<String> lista_trafico = new ComboBox<String>();
-	    ObservableList<String> data_trafico = FXCollections.observableArrayList(new Rec_Trafico().getTrafico());
-	    lista_trafico.setItems(data_trafico);
+	    lista_trafico.setItems(new Rec_Trafico().getTraficoNombre());
 		
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(distancia, HPos.RIGHT);

@@ -1,4 +1,4 @@
-package gui.panels;
+package gui.panels.ver;
 
 import com.deimon.isfpp.configuracion.Constantes;
 

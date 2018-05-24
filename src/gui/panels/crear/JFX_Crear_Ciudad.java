@@ -1,7 +1,8 @@
-package gui.panels;
+package gui.panels.crear;
 
 import conexion.db.entidades.Ciudades;
 import gui.utils.NumberTextField;
+import gui.utils.DoubleTextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -44,9 +45,9 @@ public class JFX_Crear_Ciudad extends Pane{
 		TextArea historiasTextField = new TextArea();
 		historiasTextField.setPrefWidth(nombreTextField.getWidth()); //acomoda el ancho
 		Label latitud = new Label("Latitud: (*)");
-		TextField latitudTextField = new TextField();
+		DoubleTextField latitudTextField = new DoubleTextField();
 		Label longitud = new Label("Longitud: (*)");
-		TextField longitudTextField = new TextField();
+		DoubleTextField longitudTextField = new DoubleTextField();
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
@@ -90,34 +91,41 @@ public class JFX_Crear_Ciudad extends Pane{
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				boolean valido = true;
+				boolean valido = true;			
+				String n = nombreTextField.getText();
+				Integer hab = null;
+				String his = null;
+				Double lat = null;
+				Double lon = null;			
+				Boolean a = cb.selectedProperty().getValue();
+
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
 					output.setTextFill(Color.RED);
 					output.setText("Nombre Vacio"); //poner el output debajo de textfield
-					valido = false;
+					valido = false;					
 				}
-//				if (latitudTextField.getText() == null || latitudTextField.getText().trim().isEmpty()) {
-//					output.setTextFill(Color.RED);
-//					output.setText("Latitud Vacia");
-//					valido = false;
-//				}
-//				if (longitudTextField.getText() == null || longitudTextField.getText().trim().isEmpty()) {
-//					output.setTextFill(Color.RED);
-//					output.setText("Longitud Vacia");
-//					valido = false;
-//				}
-
-				String n = nombreTextField.getText();
-//				int hab = Integer.parseInt(habitantesTextField.getText());
-//				String his = historiasTextField.getText();
-//				double lat = latitudTextField.getText();	
-//				double longit = longitudTextField.getText();			
-//				Boolean a = cb.selectedProperty().getValue();
+				if (!(habitantesTextField.getText() == null || habitantesTextField.getText().trim().isEmpty())) {
+					hab = Integer.parseInt(habitantesTextField.getText());					
+				}
+				if (!(historiasTextField.getText() == null || historiasTextField.getText().trim().isEmpty())) {
+					his = historiasTextField.getText();				
+				}
+				if (!(latitudTextField.getText() == null || latitudTextField.getText().trim().isEmpty())) {
+					lat = Double.parseDouble(latitudTextField.getText());				
+				}
+				if (!(longitudTextField.getText() == null || longitudTextField.getText().trim().isEmpty())) {
+					lon = Double.parseDouble(longitudTextField.getText());			
+				}
+				
 				if(valido){
 					Ciudades record = new Ciudades();
-					record.insertar(n); //simple
-//					record.insertar(n,hab,his,lat, longit,a); //completo
+					record.insertar(n,hab,his,lat,lon,a);
 					nombreTextField.setText("");
+					habitantesTextField.setText("");
+					historiasTextField.setText("");
+					latitudTextField.setText("");
+					longitudTextField.setText("");
+					cb.setSelected(true);
 					output.setText("Ciudad Creada");
 				}
 				output.setOpacity(1);
