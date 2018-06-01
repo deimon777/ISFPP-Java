@@ -1,7 +1,10 @@
 package gui.panels.ver;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import com.deimon.isfpp.configuracion.Constantes;
 
+import conexion.db.entidades.Ciudades;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -39,11 +42,15 @@ public class JFX_Ver_Publico{
 		busqueda.setPrefWidth(Constantes.ANCHO/2);
 		busqueda.getStyleClass().add("padding-medio");
 		busqueda.getStyleClass().add("spacing-medio");
-
+		
 		TextField ruta_inicio = new TextField();
-		ruta_inicio.setPromptText("Ruta inicial"); //placeholder
+		ruta_inicio.setPromptText("Ruta inicial"); //placeholder		
 		TextField ruta_fin = new TextField();
 		ruta_fin.setPromptText("Ruta final");
+	
+		TextFields.bindAutoCompletion(ruta_inicio,new Ciudades().getCiudadesNombre());
+		TextFields.bindAutoCompletion(ruta_fin,new Ciudades().getCiudadesNombre());
+		
 		Button btn_ruta_buscar = new Button("Buscar Camino");
 		btn_ruta_buscar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
