@@ -14,6 +14,9 @@ import javafx.collections.ObservableList;
 public class Rec_Trafico extends EntidadesUtils{
 	private String table_name = TablesName.TRAFICO;
 
+	/**
+	 * Tiene el codigo SQL para crear la tabla trafico, y llama a la funcion para crear la misma
+	 */
 	public void crearTablaTrafico() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL UNIQUE,"
@@ -21,35 +24,21 @@ public class Rec_Trafico extends EntidadesUtils{
 				+ "PRIMARY KEY (id)";
 		TablasUtiles.creatTable(table_name, sql);
 	}
+	/**
+	 * Borra (DELETE) la tabla.
+	 */
 	public void borrarTablaTrafico() {
 		TablasUtiles.deleteTable(table_name);		
 	}
+	/**
+	 * Vacia (DROP) la tabla.
+	 */
 	public void vaciarTablaTrafico() {
 		TablasUtiles.emptyTable(table_name);		
 	}
 
-	/*
-	 * BORRAR
-	 */
-	public void deleteItemByID(int id) {
-		EntidadesUtils.deleteItemByID(table_name, id);
-	}
-
-	public void deleteItemByNAME(String nombre) {
-		EntidadesUtils.deleteItemByNAME(table_name, nombre);
-	}
-
-	/*
-	 * MODIFICAR
-	 */
-	public void modificarMombre(String nombre) {
-		System.out.println("Modificar nombre");	
-	}
-
-	public void modificarActivo(Boolean activo) {
-		System.out.println("Modificar activo");	
-	}
-
+	/*******************************************************************/
+	
 	/*
 	 * INSERTAR
 	 */
@@ -78,6 +67,14 @@ public class Rec_Trafico extends EntidadesUtils{
 			c.closeConnect(myConect);
 		}
 	}
+
+	/*
+	 * BORRAR
+	 */
+
+	/*
+	 * ACTUALIZAR
+	 */
 
 	/*
 	 * BUSCAR

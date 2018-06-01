@@ -2,10 +2,14 @@ package conexion.db.entidades;
 
 import conexion.db.tablas.TablasUtiles;
 import conexion.db.tablas.TablesName;
+import javafx.collections.ObservableList;
 
 public class Usuarios extends EntidadesUtils{
 	private String table_name = TablesName.USUARIOS;
 
+	/**
+	 * Tiene el codigo SQL para crear la tabla usuarios, y llama a la funcion para crear la misma
+	 */
 	public void crearTablaUsuario() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL," 
@@ -20,29 +24,37 @@ public class Usuarios extends EntidadesUtils{
 				+ " REFERENCES tipo_usuario (id) ON DELETE CASCADE ON UPDATE CASCADE";
 		TablasUtiles.creatTable(table_name, sql);
 	}
+	/**
+	 * Borra (DELETE) la tabla.
+	 */
 	public void borrarTablaUsuario() {
 		TablasUtiles.deleteTable(table_name);		
 	}
+	/**
+	 * Vacia (DROP) la tabla.
+	 */
 	public void vaciarTablaUsuario() {
 		TablasUtiles.emptyTable(table_name);		
 	}
 
-	/*
-	 * BORRAR
-	 */
-	public void deleteItemByID(int id) {
-		EntidadesUtils.deleteItemByID(table_name, id);
-	}
-	
-	public void deleteItemByNAME(String nombre) {
-		EntidadesUtils.deleteItemByNAME(table_name, nombre);
-	}
-	
-	/*
-	 * MODIFICAR
-	 */
-	
+	/*******************************************************************/
+
 	/*
 	 * INSERTAR
 	 */
+	
+	/*
+	 * BORRAR
+	 */
+
+	/*
+	 * ACTUALIZAR
+	 */
+
+	/*
+	 * BUSCAR
+	 */
+	public ObservableList<String> getUsuarios() {
+		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
+	}
 }

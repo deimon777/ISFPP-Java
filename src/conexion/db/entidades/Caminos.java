@@ -18,6 +18,9 @@ import javafx.collections.ObservableList;
 public class Caminos extends EntidadesUtils{
 	private String table_name = TablesName.CAMINOS;
 
+	/**
+	 * Tiene el codigo SQL para crear la tabla caminos, y llama a la funcion para crear la misma
+	 */
 	public void crearTablaCaminos() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL,"
@@ -36,28 +39,34 @@ public class Caminos extends EntidadesUtils{
 				+ " REFERENCES trafico (id) ON DELETE CASCADE ON UPDATE CASCADE";
 		TablasUtiles.creatTable(table_name, sql);
 	}
+	/**
+	 * Borra (DELETE) la tabla.
+	 */
 	public void borrarTablaCaminos() {
 		TablasUtiles.deleteTable(table_name);		
 	}
+	/**
+	 * Vacia (DROP) la tabla.
+	 */
 	public void vaciarTablaCaminos() {
 		TablasUtiles.emptyTable(table_name);		
 	}
 	
-
-	/*
-	 * BORRAR
-	 */
-	public void deleteItemByID(int id) {
-		EntidadesUtils.deleteItemByID(table_name, id);
-	}
+	/*******************************************************************/
 	
-	public void deleteItemByNAME(String nombre) {
-		EntidadesUtils.deleteItemByNAME(table_name, nombre);
-	}
 	/*
-	 * ACTUALIZAR
+	 * INSERTAR
 	 */
-	
+	/**
+	 * Crea un item en la base de datos.
+	 * @param nombre
+	 * @param distancia
+	 * @param peso
+	 * @param tipo
+	 * @param estado
+	 * @param trafico
+	 * @param activo
+	 */
 	public void insertar(String nombre, Integer distancia, Integer peso, String tipo, String estado, String trafico, Boolean activo) {
 		String sql = "INSERT INTO "+table_name+" (id, nombre, distancia, peso_camino, tipo_camino_id, estado_camino_id, trafico_id, activo) "
 				+ "VALUES (NULL, ?,?,?,?,?,?,?)";
@@ -102,14 +111,46 @@ public class Caminos extends EntidadesUtils{
 			c.closeConnect(myConect);
 		}
 	}
+	
+	/*
+	 * BORRAR
+	 */
+	/**
+	 * Borra un elemento de la tabla segun el ID
+	 * @param Recive el id del item a ser borrado
+	 */	
+	public void deleteItemByID(int id) {
+		EntidadesUtils.deleteItemByID(table_name, id);
+	}
+	
+	/**
+	 * Borra un elemento de la tabla segun el nombre
+	 * @param Recive el nombre del item a ser borrado
+	 */	
+	public void deleteItemByNAME(String nombre) {
+		EntidadesUtils.deleteItemByNAME(table_name, nombre);
+	}
 
+	/*
+	 * ACTUALIZAR
+	 */
+	
+	
 	/*
 	 * BUSCAR
 	 */
-	public ObservableList<String> getCiudadesNombre() {
+	/**
+	 * Crea una lista con los nombres de los caminos.
+	 * @return Lista con nombres de caminos
+	 */
+	public ObservableList<String> getCaminosNombre() {
 		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
 	}
 
+	/**
+	 * Trae todos los caminos (Objetos), con toda la informacion que esta en la base de datos.
+	 * @return Una lista de objetos tipo Caminos
+	 */
 	public ObservableList<Camino> getCaminos() {
 		String sql = "SELECT * from "+table_name;
 

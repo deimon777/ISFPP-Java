@@ -12,6 +12,14 @@ public class DB_Connection {
 	Connection myConect = null;
 	Statement myStmt = null;
 	/* --------------------------------------------------------------------------------------------- */
+	/**
+	 * Crea la conexion con la base de datos (DB) y retorna la misma.
+	 * 
+	 * @param url	Nombre de la DB
+	 * @param user	Usuario de la DB
+	 * @param password	Contraseña del usuario de la DB
+	 * @return una conexion
+	 */
 	public Connection getConection(String url, String user, String password) {
 		String urlBase = "jdbc:mysql://localhost:3306/";
 		try { 
@@ -41,18 +49,31 @@ public class DB_Connection {
 		return myConect;
 	}
 
-	public void closeConnect(Connection c) {
+	/**
+	 * Cierra la conexion creada con el metodo "getConection"
+	 * @param c		una conexion
+	 * @return si lo logro o no
+	 */
+	public boolean closeConnect(Connection c) {
+		boolean t = false;
 		try {
 			if(c != null) {
 				c.close();
-				System.out.println("Conexion cerrada!");				
+				System.out.println("Conexion cerrada!");	
+				t = true;			
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return t;
 	}
 
 	/* --------------------------------------------------------------------------------------------- */
+	/**
+	 * Crea una declaración, que se usa para el acceso de un propósito general a la base de datos.
+	 * @param Una conexion
+	 * @return La declaracion
+	 */
 	public Statement getStatement(Connection conex) {
 		try {
 			myStmt = conex.createStatement();
@@ -75,15 +96,23 @@ public class DB_Connection {
 		return myStmt;
 	}
 
-	public void closeStatement(Statement s) {
+	/**
+	 * Cierra la declaracion
+	 * @param un Statement
+	 * @return Retorna si lo logro o no.
+	 */
+	public boolean closeStatement(Statement s) {
+		boolean t = false;
 		try {
 			if(s != null) {
 				s.close();
-				System.out.println("Statement cerrada!");				
+				System.out.println("Statement cerrada!");	
+				t = true;			
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return t;
 	}
 
 

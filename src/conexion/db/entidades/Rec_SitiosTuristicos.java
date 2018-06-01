@@ -6,6 +6,9 @@ import conexion.db.tablas.TablesName;
 public class Rec_SitiosTuristicos extends EntidadesUtils{
 	private String table_name = TablesName.SITIOS_TURISTICOS;
 
+	/**
+	 * Tiene el codigo SQL para crear la tabla sitios_turisticos, y llama a la funcion para crear la misma
+	 */
 	public void crearTablaSitiosTuristicos() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT," 
 				+ "nombre VARCHAR(50) NOT NULL," 
@@ -16,28 +19,34 @@ public class Rec_SitiosTuristicos extends EntidadesUtils{
 				+ " REFERENCES ciudades (id) ON DELETE CASCADE ON UPDATE CASCADE";
 		TablasUtiles.creatTable(table_name, sql);
 	}
+	/**
+	 * Borra (DELETE) la tabla.
+	 */
 	public void borrarTablaSitiosTuristicos() {
 		TablasUtiles.deleteTable(table_name);		
 	}
+	/**
+	 * Vacia (DROP) la tabla.
+	 */
 	public void vaciarTablaSitiosTuristicos() {
 		TablasUtiles.emptyTable(table_name);		
 	}
 
+	/*******************************************************************/
+	
+	/*
+	 * INSERTAR
+	 */
+	
 	/*
 	 * BORRAR
 	 */
-	public void deleteItemByID(int id) {
-		EntidadesUtils.deleteItemByID(table_name, id);
-	}
 	
-	public void deleteItemByNAME(String nombre) {
-		EntidadesUtils.deleteItemByNAME(table_name, nombre);
-	}
 	/*
 	 * ACTUALIZAR
 	 */
 	
 	/*
-	 * INSERTAR
+	 * BUSCAR
 	 */
 }

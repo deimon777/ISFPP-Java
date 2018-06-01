@@ -13,6 +13,9 @@ import conexion.db.tablas.TablesName;
 public class Rec_Alojamientos extends EntidadesUtils{
 	private String table_name = TablesName.ALOJAMIENTOS;
 
+	/**
+	 * Tiene el codigo SQL para crear la tabla alojamiento, y llama a la funcion para crear la misma
+	 */
 	public void crearTablaAlojamientos() {		
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE," 
 				+ "nombre VARCHAR(50) NOT NULL," 
@@ -23,26 +26,20 @@ public class Rec_Alojamientos extends EntidadesUtils{
 				+ " REFERENCES ciudades (id) ON DELETE CASCADE ON UPDATE CASCADE";
 		TablasUtiles.creatTable(table_name, sql);
 	}
+	/**
+	 * Borra (DELETE) la tabla.
+	 */
 	public void borrarTablaAlojamientos() {
 		TablasUtiles.deleteTable(table_name);		
 	}
+	/**
+	 * Vacia (DROP) la tabla.
+	 */
 	public void vaciarTablaAlojamientos() {
 		TablasUtiles.emptyTable(table_name);		
 	}
-
-	/*
-	 * BORRAR
-	 */
-	public void deleteItemByID(int id) {
-		EntidadesUtils.deleteItemByID(table_name, id);
-	}
-
-	public void deleteItemByNAME(String nombre) {
-		EntidadesUtils.deleteItemByNAME(table_name, nombre);
-	}
-	/*
-	 * ACTUALIZAR
-	 */
+	
+	/*******************************************************************/
 
 	/*
 	 * INSERTAR
@@ -71,4 +68,18 @@ public class Rec_Alojamientos extends EntidadesUtils{
 			c.closeConnect(myConect);
 		}
 	}
+	
+	/*
+	 * BORRAR
+	 */
+	
+	
+	/*
+	 * ACTUALIZAR
+	 */
+	
+	
+	/*
+	 * BUSCAR
+	 */
 }

@@ -18,6 +18,9 @@ import javafx.collections.ObservableList;
 public class Ciudades extends EntidadesUtils{
 	private static String table_name = TablesName.CUIDADES;
 
+	/**
+	 * Tiene el codigo SQL para crear la tabla ciudades, y llama a la funcion para crear la misma
+	 */
 	public void crearTablaCiudad() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL UNIQUE,"
@@ -29,76 +32,33 @@ public class Ciudades extends EntidadesUtils{
 				+ "PRIMARY KEY (id)";
 		TablasUtiles.creatTable(table_name, sql);
 	}
+	/**
+	 * Borra (DELETE) la tabla.
+	 */
 	public void borrarTablaCiudad() {
 		TablasUtiles.deleteTable(table_name);		
 	}
+	/**
+	 * Vacia (DROP) la tabla.
+	 */
 	public void vaciarTablaCiudad() {
 		TablasUtiles.emptyTable(table_name);
 	}
-
-	/*
-	 * BORRAR
-	 */
-	public void deleteItemByID(int id) {
-		EntidadesUtils.deleteItemByID(table_name, id);
-	}
-
-	public void deleteItemByNAME(String nombre) {
-		EntidadesUtils.deleteItemByNAME(table_name, nombre);
-	}
-	/*
-	 * ACTUALIZAR
-	 */
-	public void updateItemBy(String donde, String que,int id) {
-		EntidadesUtils.updateItem(table_name, donde, que,id);
-	}
-
-	public void modificarActivo(Boolean activo) {
-		System.out.println("Modificar activo");	
-	}
-	public void activarCiudad(int id) {
-		EntidadesUtils.activarItem(table_name,id);
-	}
-
-	public void desactivarCiudad(int id) {
-		EntidadesUtils.desactivarItem(table_name,id);
-	}
+	
+	/*******************************************************************/
 
 	/*
 	 * INSERTAR
 	 */
-	public void insertar(String nombre) {
-		String sql = "INSERT INTO "+table_name+" (id, nombre) VALUES (NULL,?)";
-
-		DB_Connection c = null;
-		Connection myConect = null;
-		PreparedStatement myPrepStmt = null;
-		try {
-			c = new DB_Connection();
-			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-					ConstantesPropierties.DB_NAME_USER,
-					ConstantesPropierties.DB_NAME_PASS);
-			if(myConect!=null) {
-				myPrepStmt = myConect.prepareStatement(sql);
-				myPrepStmt.setString(1, nombre);
-				myPrepStmt.executeUpdate();
-				System.out.println("Ciudad Creada!");
-			}
-		} catch (SQLException e) {
-			//revisar posibles errores, salir de una manera elegante, o poner ventana de error!! 
-			//EJ: entrada duplicada
-			//    error en la conec
-
-			// com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-			// com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry 'Madryn' for key 'nombre
-			System.out.println("oh oh, entrada duplcada");
-			e.printStackTrace();
-		}finally {
-			c.closeConnect(myConect);
-		}
-	}
-
+	/** 
+	 * Crea un item en la base de datos.
+	 * @param nombre
+	 * @param habitantes
+	 * @param historia
+	 * @param latitud
+	 * @param longitud
+	 * @param activo
+	 */
 	public void insertar(String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
 		String sql = "INSERT INTO "+table_name+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
 				+ "VALUES (NULL, ?,?,?,?,?,?)";
@@ -147,15 +107,59 @@ public class Ciudades extends EntidadesUtils{
 			c.closeStatement(myPrepStmt);
 			c.closeConnect(myConect);
 		}
+	}	
+	
+	/*
+	 * BORRAR
+	 */
+	/**
+	 * Borra un elemento de la tabla segun el ID
+	 * @param Recive el id del item a ser borrado
+	 */	
+	public void deleteItemByID(int id) {
+		EntidadesUtils.deleteItemByID(table_name, id);
 	}
 
+	/**
+	 * Borra un elemento de la tabla segun el nombre
+	 * @param Recive el nombre del item a ser borrado
+	 */	
+	public void deleteItemByNAME(String nombre) {
+		EntidadesUtils.deleteItemByNAME(table_name, nombre);
+	}
+	
+	/*
+	 * ACTUALIZAR
+	 */
+	/**
+	 * Actualiza la informacion de un item en la base de datos.
+	 * @param nombre
+	 * @param distancia
+	 * @param peso
+	 * @param tipo
+	 * @param estado
+	 * @param trafico
+	 * @param activo
+	 */	
+	public void actualizar(String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
+		this.insertar(nombre, habitantes, historia, latitud, longitud, activo);
+	}
+	
 	/*
 	 * BUSCAR
+	 */
+	/**
+	 * Crea una lista con los nombres de las ciudades
+	 * @return Una lista con nombres de ciudades
 	 */
 	public ObservableList<String> getCiudadesNombre() {
 		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
 	}
 
+	/**
+	 * Trae todos las ciudades (Objetos), con toda la informacion que esta en la base de datos.
+	 * @return Una lista de objetos tipo Ciudad
+	 */
 	public ObservableList<Ciudad> getCiudades() {
 		String sql = "SELECT * from "+table_name;
 

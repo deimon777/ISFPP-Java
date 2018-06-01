@@ -11,6 +11,11 @@ import conexion.db.DB_Connection;
 
 public class TablasUtiles {
 
+	/**
+	 * Crea la Tabla en la Base de datos
+	 * @param table
+	 * @param param
+	 */
 	public static void creatTable(String table, String param) {
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -33,6 +38,10 @@ public class TablasUtiles {
 		}
 	}
 
+	/**
+	 * Borra la tabla en la Base de Datos
+	 * @param table
+	 */
 	public static void deleteTable(String table) {
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -55,6 +64,10 @@ public class TablasUtiles {
 		}
 	}
 
+	/**
+	 * Vacia la tabla en la Base de Datos
+	 * @param table
+	 */
 	public static void emptyTable(String table) {
 		String sql = "TRUNCATE TABLE "+table;
 

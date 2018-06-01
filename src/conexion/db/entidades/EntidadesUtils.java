@@ -65,66 +65,54 @@ public class EntidadesUtils {
 	/*
 	 * ACTUALIZAR
 	 */
-	public static void updateItem(String table, String where, String what, int id) {
-		String sql = "UPDATE "+table+" SET "+where+" = ? WHERE id = ?";
-		DB_Connection c = null;
-		Connection myConect = null;
-		PreparedStatement myPreStmt = null;
-		try {
-			c = new DB_Connection();
-			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-					ConstantesPropierties.DB_NAME_USER,
-					ConstantesPropierties.DB_NAME_PASS);
-			if(myConect!=null) {
-				myPreStmt = myConect.prepareStatement(sql);
-				myPreStmt.setString(1, what);
-				myPreStmt.setInt(2, id);
-				myPreStmt.executeUpdate();
-				System.out.println("Item Actualizado!");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			c.closeConnect(myConect);
-		}		
-	}
-
-	public static void activarItem(String table, int id) {
-		activar(table,"activo",1,id);
-		System.out.println("Item Activado!");
-	}
-
-	public static void desactivarItem(String table, int id) {
-		activar(table,"activo",0,id);
-		System.out.println("Item Desactivado!");
-	}
-
-	/*
-	 * Propias de la clase
-	 */
-	private static void activar(String table, String where, int what, int id) {
-		String sql = "UPDATE "+table+" SET "+where+" = ? WHERE id = ?";
-		DB_Connection c = null;
-		Connection myConect = null;
-		PreparedStatement myPreStmt = null;
-		try {
-			c = new DB_Connection();
-			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-					ConstantesPropierties.DB_NAME_USER,
-					ConstantesPropierties.DB_NAME_PASS);
-			if(myConect!=null) {
-				myPreStmt = myConect.prepareStatement(sql);
-				myPreStmt.setInt(1, what);
-				myPreStmt.setInt(2, id);
-				myPreStmt.executeUpdate();
-				System.out.println("Item Actualizado!");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			c.closeConnect(myConect);
-		}
-	}
+//	public void updateIdItem(String table, int id) {
+//	}
+//	public void updateNameItem(String table, String name, int id) {
+//		String sql = "UPDATE "+table+" SET nombre = ? WHERE id = ?";
+//		DB_Connection c = null;
+//		Connection myConect = null;
+//		PreparedStatement myPreStmt = null;
+//		try {
+//			c = new DB_Connection();
+//			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+//					ConstantesPropierties.DB_NAME_USER,
+//					ConstantesPropierties.DB_NAME_PASS);
+//			if(myConect!=null) {
+//				myPreStmt = myConect.prepareStatement(sql);
+//				myPreStmt.setString(1, name);
+//				myPreStmt.setInt(2, id);
+//				myPreStmt.executeUpdate();
+//				System.out.println("Item Actualizado!");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			c.closeConnect(myConect);
+//		}	
+//	}
+//	public void activateItem(String table, Boolean activo, int id) {
+//		String sql = "UPDATE "+table+" SET activo = ? WHERE id = ?";
+//		DB_Connection c = null;
+//		Connection myConect = null;
+//		PreparedStatement myPreStmt = null;
+//		try {
+//			c = new DB_Connection();
+//			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+//					ConstantesPropierties.DB_NAME_USER,
+//					ConstantesPropierties.DB_NAME_PASS);
+//			if(myConect!=null) {
+//				myPreStmt = myConect.prepareStatement(sql);
+//				myPreStmt.setBoolean(1, activo);
+//				myPreStmt.setInt(2, id);
+//				myPreStmt.executeUpdate();
+//				System.out.println("Item Actualizado!");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			c.closeConnect(myConect);
+//		}	
+//	}
 
 	/*
 	 * BUSCAR
