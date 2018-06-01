@@ -17,6 +17,9 @@ public class Camino {
 	public Camino() {
 	}
 	
+	public Camino(String nombre) {
+		this.nombre = nombre;
+	}
 	/*
 	 * Getter y Setter
 	 */
