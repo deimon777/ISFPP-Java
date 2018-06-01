@@ -1,12 +1,16 @@
 package gui.panels.ver;
 
 import com.deimon.ciudad.Ciudad;
-
 import conexion.db.entidades.Ciudades;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,7 +31,6 @@ public class JFX_Ver_Ciudad extends Pane{
 		hbox_titulo.getChildren().add(titulo);
 
 		TableView<Ciudad> table = new TableView<Ciudad>();
-		table.setPrefHeight(250); //Tamaño	
 		table.setEditable(true);
 		table.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
 
@@ -39,7 +42,7 @@ public class JFX_Ver_Ciudad extends Pane{
 		TableColumn<Ciudad,Object> longitudCol = new TableColumn<Ciudad, Object>("Longitud");
 		TableColumn<Ciudad,Object> activoCol = new TableColumn<Ciudad, Object>("Activo");
 		activoCol.setSortable(false);        
-		TableColumn<Ciudad,Object> accionesCol = new TableColumn<Ciudad, Object>("Acciones");
+		TableColumn<Ciudad,Ciudad> accionesCol = new TableColumn<Ciudad, Ciudad>("Acciones");
 		accionesCol.setSortable(false);        
 		activoCol.setMinWidth(70);
 		activoCol.setMaxWidth(100);		
@@ -52,25 +55,64 @@ public class JFX_Ver_Ciudad extends Pane{
 		latitudCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("latitud"));
 		longitudCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("longitud"));
 		activoCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("activo"));
-		accionesCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("acciones"));
+		accionesCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Ciudad>("acciones"));        
+        
+        accionesCol.setCellFactory(param -> new TableCell<Ciudad,Ciudad>() {
+            private final Button editButton = new Button("Modificar");
+            private final Button deleteButton = new Button("Eliminar");
+            @Override
+            protected void updateItem(Ciudad item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    HBox pane = new HBox(deleteButton, editButton);
+                    setGraphic(pane);
+                    setText(null);
+                }
+
+                deleteButton.setOnAction(event -> {
+                    Ciudad select = getTableView().getItems().get(getIndex());
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+        			alert.setTitle("Eliminar Ciudad");
+        			alert.setHeaderText(null);
+        			alert.setContentText("¿Segudo que desea eliminar la ciudad "+select.getNombre()+"?");
+//        			alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+                    alert.showAndWait();
+                    if (alert.getResult() == ButtonType.OK) {
+                        Ciudades.deleteItemByID("ciudades", select.getID());
+        				table.setItems(null);
+        				table.setItems(new Ciudades().getCiudades());
+                    }
+                });
+
+                editButton.setOnAction(event -> {
+                    Ciudad s = getTableView().getItems().get(getIndex());
+                    System.out.println("ID: "+s.getID());
+                });
+            }
+        });
 		
-		table.getColumns().addAll(nombreCol, habitantesCol, historiaCol, latitudCol, longitudCol, activoCol,accionesCol);
+		table.getColumns().addAll(nombreCol, habitantesCol, historiaCol, latitudCol, longitudCol, activoCol, accionesCol);
 
 		Button btn = new Button("Recargar Ciudades");
 		HBox hbBtn = new HBox();
-		hbBtn.setPrefHeight(150); //Tamaño	
+//		hbBtn.setPrefHeight(150); //Tamaño	
 		hbBtn.getStyleClass().add("padding-medio");
-		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
+		hbBtn.setAlignment(Pos.TOP_LEFT);
 		hbBtn.getChildren().add(btn);
 
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				System.out.println("Recargar ciudades");
+				table.setItems(null);
+				table.setItems(new Ciudades().getCiudades());
 			}
 		});
 
-		panel.getStyleClass().add("spacing-medio");
+		panel.getStyleClass().add("padding-medio");
 		panel.getChildren().addAll(hbox_titulo, table, hbBtn);
 	}
 
