@@ -1,20 +1,33 @@
 package com.deimon.camino;
 
 public class TipoCamino {
-	private String tipoCamino;
+	private String nombre;
+	private boolean activo;
 	
-	public TipoCamino(String tipoCamino) {
-		this.tipoCamino = tipoCamino;
+	public TipoCamino() {
 	}
 	
+	public TipoCamino(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public TipoCamino(String nombre, boolean activo) {
+		this.nombre = nombre;
+		this.activo = activo;
+	}
 	/*
 	 * Getter y Setter
 	 */
-	public String getTipoCamino() {
-		return tipoCamino;
+	public String getNombre() {
+		return nombre;
 	}
-
-	public void setTipoCamino(String tipoCamino) {
-		this.tipoCamino = tipoCamino;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public boolean isActivo() {
+		return activo;
+	}
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 }

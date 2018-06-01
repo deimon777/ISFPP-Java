@@ -8,6 +8,7 @@ package com.deimon.ciudad;
  *
  */
 public class Ciudad {
+	private int ID;
 	private String nombre = "Falto el nombre";
 	private int habitantes = 0;
     private String historia;
@@ -17,30 +18,23 @@ public class Ciudad {
 
 	//private int alojamientos; //falta el tipo (lista)
 	//private String sitios_turisticos; //falta el tipo (lista)
-    
-//	private Ciudad ciudadAnt = null;
-//	private Ciudad ciudadSig = null;
 	
-	public Ciudad() {
-		
+	public Ciudad() {		
 	}
 	
 	public Ciudad(String nombre) {
-		//super();
 		this.nombre = nombre;
-	}
-	
-	public Ciudad(String nombre, int habitantes) {
-		//super();
-		this.nombre = nombre;
-		this.habitantes = habitantes;
-		//this.ciudadAnt = null;
-		//this.ciudadSig = null;
 	}
 	
 	/*
 	 * Getter y Setter
 	 */
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
+	}
 	public String getNombre() {
 		return nombre;
 	}

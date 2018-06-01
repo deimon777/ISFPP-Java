@@ -36,8 +36,6 @@ public class Ciudades extends EntidadesUtils{
 		TablasUtiles.emptyTable(table_name);
 	}
 
-
-
 	/*
 	 * BORRAR
 	 */
@@ -171,18 +169,20 @@ public class Ciudades extends EntidadesUtils{
 			myConect = conec.getConection(ConstantesPropierties.DB_NAME_URL,
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
-			myStmt = conec.getStatement(myConect);
-			rs = myStmt.executeQuery(sql);
-
-			while (rs.next()) {
-				Ciudad ciudad = new Ciudad();
-				ciudad.setNombre(rs.getString("nombre"));
-				ciudad.setHabitantes(rs.getInt("habitantes"));
-				ciudad.setHistoria(rs.getString("historia"));
-				ciudad.setLatitud(rs.getDouble("latitud"));
-				ciudad.setLongitud(rs.getDouble("longitud"));
-				ciudad.setActivo(rs.getBoolean("activo"));
-				lista.add(ciudad);
+			if(myConect != null) {
+				myStmt = conec.getStatement(myConect);
+				rs = myStmt.executeQuery(sql);
+				while (rs.next()) {
+					Ciudad ciudad = new Ciudad();
+					ciudad.setID(rs.getInt("id"));
+					ciudad.setNombre(rs.getString("nombre"));
+					ciudad.setHabitantes(rs.getInt("habitantes"));
+					ciudad.setHistoria(rs.getString("historia"));
+					ciudad.setLatitud(rs.getDouble("latitud"));
+					ciudad.setLongitud(rs.getDouble("longitud"));
+					ciudad.setActivo(rs.getBoolean("activo"));
+					lista.add(ciudad);
+				}
 			}
 
 		} catch (SQLException e) {
