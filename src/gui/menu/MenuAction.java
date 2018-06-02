@@ -10,6 +10,7 @@ import gui.panels.crear.JFX_Crear_Alojamiento;
 import gui.panels.crear.JFX_Crear_Camino;
 import gui.panels.crear.JFX_Crear_Ciudad;
 import gui.panels.crear.JFX_Crear_EstadoCamino;
+import gui.panels.crear.JFX_Crear_Grafo;
 import gui.panels.crear.JFX_Crear_SitiosTuristicos;
 import gui.panels.crear.JFX_Crear_TipoCamino;
 import gui.panels.crear.JFX_Crear_Trafico;
@@ -19,7 +20,7 @@ import gui.panels.ver.JFX_Ver_Publico;
 import gui.panels.ver.JFX_Ver_Recurso;
 import javafx.application.Platform;
 
-public class Menu_Utils {	
+public class MenuAction {	
 	public <T> EventHandler<ActionEvent> setAction() {
 		EventHandler<ActionEvent> action = changeView();
 		return action;
