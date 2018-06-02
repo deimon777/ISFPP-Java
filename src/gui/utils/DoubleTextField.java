@@ -4,6 +4,13 @@ import javafx.scene.control.TextField;
 
 public class DoubleTextField extends TextField{
 
+	public DoubleTextField() {		
+	}
+	
+	public DoubleTextField(double n) {
+		super.setText(""+n);
+	}
+	
     @Override
     public void replaceText(int start, int end, String text)
     {

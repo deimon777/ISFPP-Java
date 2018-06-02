@@ -3,8 +3,15 @@ package gui.utils;
 import javafx.scene.control.TextField;
 
 public class NumberTextField extends TextField{
+	
+	public NumberTextField() {		
+	}
+	
+	public NumberTextField(int n) {
+		super.setText(""+n);
+	}
 
-    @Override
+	@Override
     public void replaceText(int start, int end, String text)
     {
         if (validate(text))
