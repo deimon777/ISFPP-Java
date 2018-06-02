@@ -44,7 +44,7 @@ public class Ciudades extends EntidadesUtils{
 	public void vaciarTablaCiudad() {
 		TablasUtiles.emptyTable(table_name);
 	}
-	
+
 	/*******************************************************************/
 
 	/*
@@ -59,9 +59,9 @@ public class Ciudades extends EntidadesUtils{
 	 * @param longitud
 	 * @param activo
 	 */
-	public void insertar(String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
+	public void insertar( String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
 		String sql = "INSERT INTO "+table_name+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
-				+ "VALUES (NULL, ?,?,?,?,?,?)";
+				+ "VALUES (NULL,?,?,?,?,?,?)";
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -95,8 +95,8 @@ public class Ciudades extends EntidadesUtils{
 				else {
 					myPrepStmt.setDouble(5, longitud);
 				}
-
 				myPrepStmt.setBoolean(6, activo);
+
 				myPrepStmt.executeUpdate();
 				System.out.println("Ciudad Creada!");
 			}
@@ -108,7 +108,7 @@ public class Ciudades extends EntidadesUtils{
 			c.closeConnect(myConect);
 		}
 	}	
-	
+
 	/*
 	 * BORRAR
 	 */
@@ -127,7 +127,7 @@ public class Ciudades extends EntidadesUtils{
 	public void deleteItemByNAME(String nombre) {
 		EntidadesUtils.deleteItemByNAME(table_name, nombre);
 	}
-	
+
 	/*
 	 * ACTUALIZAR
 	 */
@@ -141,10 +141,56 @@ public class Ciudades extends EntidadesUtils{
 	 * @param trafico
 	 * @param activo
 	 */	
-	public void actualizar(String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
-		this.insertar(nombre, habitantes, historia, latitud, longitud, activo);
+	public void actualizar(Integer id, String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
+		String sql = "UPDATE "+table_name+" SET nombre = ?, habitantes = ?, historia = ?, latitud = ?, longitud = ?, activo = ? WHERE id = ?";		
+
+		DB_Connection c = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.setString(1, nombre);
+				if (habitantes == null) {
+					myPrepStmt.setNull(2, java.sql.Types.INTEGER);				
+				}
+				else {
+					myPrepStmt.setInt(2, habitantes);
+				}
+				myPrepStmt.setString(3, historia);
+
+				if (latitud == null) {
+					myPrepStmt.setNull(4, java.sql.Types.DOUBLE);				
+				}
+				else {
+					myPrepStmt.setDouble(4, latitud);
+				}
+
+				if (longitud == null) {
+					myPrepStmt.setNull(5, java.sql.Types.DOUBLE);				
+				}
+				else {
+					myPrepStmt.setDouble(5, longitud);
+				}
+				myPrepStmt.setBoolean(6, activo);
+				myPrepStmt.setInt(7, id);
+
+				myPrepStmt.executeUpdate();
+				System.out.println("Ciudad Creada!");
+			}
+		} catch (SQLException e) {
+			//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Out of range value for column 'latitud' at row 1
+			e.printStackTrace();
+		}finally {
+			c.closeStatement(myPrepStmt);
+			c.closeConnect(myConect);
+		}
 	}
-	
+
 	/*
 	 * BUSCAR
 	 */
