@@ -15,7 +15,7 @@ public class JFX_Menu_admin {
 	MenuBar menu = new MenuBar();
 
 	public JFX_Menu_admin() {
-		EventHandler<ActionEvent> action = new Menu_Utils().setAction();
+		EventHandler<ActionEvent> action = new MenuAction().setAction();
 
 		/*
 		 * Creando las secciones del menú

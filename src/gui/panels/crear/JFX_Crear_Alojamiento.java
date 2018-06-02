@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class JFX_Crear_Alojamiento extends Pane{
@@ -36,35 +37,48 @@ public class JFX_Crear_Alojamiento extends Pane{
 		
 		Label nombre = new Label("Nombre del Alojamiento:");
 		TextField nombreTextField = new TextField();
+		Label outputNombre = new Label("Nombre Vacio");
+		outputNombre.setTextFill(Color.RED);
+		outputNombre.setOpacity(0);
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
-		Label city = new Label("Ciudad:");
-		ComboBox<String> list = new ComboBox<String>();
-		list.setItems((ObservableList<String>) new Ciudades().getCiudadesNombre());
+		Label ciudad = new Label("Ciudad:");
+		ComboBox<String> listCiudad = new ComboBox<String>();
+		listCiudad.setItems((ObservableList<String>) new Ciudades().getCiudadesNombre());
+		Label outputCiudad = new Label("Ciudad Vacia");
+		outputCiudad.setTextFill(Color.RED);
+		outputCiudad.setOpacity(0);
 
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(activo, HPos.RIGHT);
-		GridPane.setHalignment(city, HPos.RIGHT);	    
+		GridPane.setHalignment(ciudad, HPos.RIGHT);	    
 	    
-		gp.add(nombre, 0, 0);
-		gp.add(nombreTextField, 1, 0);
-		gp.add(activo, 0, 1);
-		gp.add(cb, 1, 1);
-		gp.add(city, 0, 2);
-		gp.add(list, 1, 2);
+		int fila = 0;
+		gp.add(nombre, 0, fila);
+		gp.add(nombreTextField, 1, fila++);
+		gp.add(outputNombre, 1, fila++);
+		gp.add(activo, 0, fila);
+		gp.add(cb, 1, fila++);
+		gp.add(ciudad, 0, fila);
+		gp.add(listCiudad, 1, fila++);
+		gp.add(outputCiudad, 1, fila++);
 		
 		Button btn = new Button("Crear");
 		HBox hbBtn = new HBox();
 		hbBtn.getStyleClass().add("spacing-medio");
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
 		hbBtn.getChildren().add(btn);
-		gp.add(hbBtn, 1, 3);
+		gp.add(hbBtn, 1, fila++);
+
+		Label output = new Label("");
+		output.setOpacity(0);
+		gp.add(output, 1, fila);
 
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				System.out.println("Login, apretado");
+				System.out.println("Alojamiento apretado");
 			}
 		});
 

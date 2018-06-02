@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -37,6 +38,10 @@ public class JFX_Crear_Camino {
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
 
+		ScrollPane scroll = new ScrollPane();
+		scroll.setFitToHeight(true);
+		scroll.setFitToWidth(true);
+		scroll.getStyleClass().add("padding-medio");
 		GridPane gp = new GridPane();
 		//		gp.setGridLinesVisible(true);
 		gp.setAlignment(Pos.CENTER);
@@ -45,33 +50,57 @@ public class JFX_Crear_Camino {
 
 		Label nombre = new Label("Nombre del Camino:");
 		TextField nombreTextField = new TextField();
+		Label outputNombre = new Label("Nombre Vacio");
+		outputNombre.setTextFill(Color.RED);
+		outputNombre.setOpacity(0); //ver como no ocupan espacio 
 		Label distancia = new Label("Distancia:");
 		NumberTextField distanciaTextField = new NumberTextField();
+		Label outputDistancia = new Label("Este campo no puede estar vacio");
+		outputDistancia.setTextFill(Color.RED);
+		outputDistancia.setOpacity(0);
 		Label peso_camino = new Label("Peso Camino:");
 		ComboBox<String> lista_peso_camino = new ComboBox<String>();
 		ObservableList<String> data_peso_camino = FXCollections.observableArrayList("1", "2", "3");
 		lista_peso_camino.setItems(data_peso_camino);
+		Label outputPeso = new Label("Este campo no puede estar vacio");
+		outputPeso.setTextFill(Color.RED);
+		outputPeso.setOpacity(0);
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
 		Label tipo_camino = new Label("Tipo Camino:");
 		ComboBox<String> lista_tipo_camino = new ComboBox<String>();
 		lista_tipo_camino.setItems(new Rec_TipoCamino().getTipoCaminoNombre());
+		Label outputTipoCamino = new Label("Este campo no puede estar vacio");
+		outputTipoCamino.setTextFill(Color.RED);
+		outputTipoCamino.setOpacity(0);
 		Label estado_camino = new Label("Estado Camino:");
 		ComboBox<String> lista_estado_camino = new ComboBox<String>();
 		lista_estado_camino.setItems(new Rec_EstadoCamino().getEstadoCaminoNombre());
+		Label outpuEstadoCamino = new Label("Este campo no puede estar vacio");
+		outpuEstadoCamino.setTextFill(Color.RED);
+		outpuEstadoCamino.setOpacity(0);
 		Label trafico = new Label("Trafico:");
 		ComboBox<String> lista_trafico = new ComboBox<String>();
 		lista_trafico.setItems(new Rec_Trafico().getTraficoNombre());
-		Label ciudad_inicio = new Label("Ciudad de Inicio:");
-		TextField cInicioTextField = new TextField();
-		Label ciudad_fin = new Label("Ciudad de Fin:");
-		TextField cFinTextField = new TextField();
+		Label outputTrafico = new Label("Este campo no puede estar vacio");
+		outputTrafico.setTextFill(Color.RED);
+		outputTrafico.setOpacity(0);
+		Label ciudad1 = new Label("Nombre del Ciudad:");
+		TextField ciudad1TextField = new TextField();
+		Label outputCiudad1 = new Label("Este campo no puede estar vacio");
+		outputCiudad1.setTextFill(Color.RED);
+		outputCiudad1.setOpacity(0);
+		Label ciudad2 = new Label("Nombre del Ciudad:");
+		TextField ciudad2TextField = new TextField();
+		Label outputCiudad2 = new Label("Este campo no puede estar vacio");
+		outputCiudad2.setTextFill(Color.RED);
+		outputCiudad2.setOpacity(0);
 
-		//Autocompletar las ciudad
-		TextFields.bindAutoCompletion(cInicioTextField,new Ciudades().getCiudadesNombre());
-		TextFields.bindAutoCompletion(cFinTextField,new Ciudades().getCiudadesNombre());		
-
+		TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre());
+		TextFields.bindAutoCompletion(ciudad1TextField,new Ciudades().getCiudadesNombre());
+		TextFields.bindAutoCompletion(ciudad2TextField,new Ciudades().getCiudadesNombre());
+		
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(distancia, HPos.RIGHT);
 		GridPane.setHalignment(peso_camino, HPos.RIGHT);
@@ -81,42 +110,53 @@ public class JFX_Crear_Camino {
 		GridPane.setHalignment(lista_peso_camino, HPos.RIGHT);
 		GridPane.setHalignment(lista_tipo_camino, HPos.RIGHT);
 		GridPane.setHalignment(trafico, HPos.RIGHT);
-		GridPane.setHalignment(ciudad_inicio, HPos.RIGHT);
-		GridPane.setHalignment(ciudad_fin, HPos.RIGHT);
 		GridPane.setHalignment(lista_peso_camino, HPos.LEFT);
 		GridPane.setHalignment(lista_tipo_camino, HPos.LEFT);
 		GridPane.setHalignment(lista_estado_camino, HPos.LEFT);
 		GridPane.setHalignment(lista_trafico, HPos.LEFT); 
-
-		gp.add(nombre, 0, 0);
-		gp.add(nombreTextField, 1, 0);
-		gp.add(distancia, 0, 1);
-		gp.add(distanciaTextField, 1, 1);
-		gp.add(peso_camino, 0, 2);
-		gp.add(lista_peso_camino, 1, 2);
-		gp.add(activo, 0, 3);
-		gp.add(cb, 1, 3);
-		gp.add(tipo_camino, 0, 4);
-		gp.add(lista_tipo_camino, 1, 4);
-		gp.add(estado_camino, 0, 5);
-		gp.add(lista_estado_camino, 1, 5);
-		gp.add(trafico, 0, 6);
-		gp.add(lista_trafico, 1, 6);
-		gp.add(ciudad_inicio, 0, 7);
-		gp.add(cInicioTextField, 1, 7);
-		gp.add(ciudad_fin, 0, 8);
-		gp.add(cFinTextField, 1, 8);
+		GridPane.setHalignment(ciudad1, HPos.RIGHT);
+		GridPane.setHalignment(ciudad2TextField, HPos.LEFT);
+		GridPane.setHalignment(ciudad2, HPos.RIGHT);
+		GridPane.setHalignment(ciudad2TextField, HPos.LEFT);		
+		
+		int fila = 0;
+		gp.add(nombre, 0, fila);
+		gp.add(nombreTextField, 1, fila++);
+		gp.add(outputNombre, 1, fila++);
+		gp.add(distancia, 0, fila);
+		gp.add(distanciaTextField, 1, fila++);
+		gp.add(outputDistancia, 1, fila++);
+		gp.add(peso_camino, 0, fila);
+		gp.add(lista_peso_camino, 1, fila++);
+		gp.add(outputPeso, 1, fila++);		
+		gp.add(activo, 0, fila);
+		gp.add(cb, 1, fila++);
+		gp.add(tipo_camino, 0, fila);
+		gp.add(lista_tipo_camino, 1, fila++);
+		gp.add(outputTipoCamino, 1, fila++);
+		gp.add(estado_camino, 0, fila);
+		gp.add(lista_estado_camino, 1, fila++);
+		gp.add(outpuEstadoCamino, 1, fila++);
+		gp.add(trafico, 0, fila);
+		gp.add(lista_trafico, 1, fila++);
+		gp.add(outputTrafico, 1, fila++);
+		gp.add(ciudad1, 0, fila);
+		gp.add(ciudad1TextField, 1, fila++);
+		gp.add(outputCiudad1, 1, fila++);
+		gp.add(ciudad2, 0, fila);
+		gp.add(ciudad2TextField, 1, fila++);		
+		gp.add(outputCiudad2, 1, fila++);
 
 		Button btn = new Button("Crear");
 		HBox hbBtn = new HBox();
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
 		hbBtn.getChildren().add(btn);
-		gp.add(hbBtn, 1, 9);
+		gp.add(hbBtn, 1, fila++);
 
 		Label output = new Label("");
 		output.setOpacity(0);
-		gp.add(output, 1, 10);
-
+		gp.add(output, 1, fila);
+		
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -128,40 +168,30 @@ public class JFX_Crear_Camino {
 				String estado = null; //ver aca
 				String trafico = null; //ver aca
 				Boolean activo = cb.selectedProperty().getValue();
-				String ciudad_inicio = cInicioTextField.getText();
-				String ciudad_fin = cFinTextField.getText();
 
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
-					output.setTextFill(Color.RED);
-					output.setText("Nombre Vacio"); //poner el output debajo de textfield
+					outputNombre.setOpacity(1);
 					valido = false;	
-				}
-				if (cInicioTextField.getText() == null || cInicioTextField.getText().trim().isEmpty()) {
-					output.setTextFill(Color.RED);
-					output.setText("Ciudad Vacia"); //poner el output debajo de textfield
-					valido = false;	
-				}
-				if (cFinTextField.getText() == null || cFinTextField.getText().trim().isEmpty()) {
-					output.setTextFill(Color.RED);
-					output.setText("Ciudad Vacia"); //poner el output debajo de textfield
-					valido = false;	
-				}				
+				}		
 
 				if(valido){
-					Caminos record = new Caminos();
-					record.insertar(nombre,distancia,peso,tipo,estado,trafico,activo);
+//					Caminos record = new Caminos();
+//					record.insertar(nombre,distancia,peso,tipo,estado,trafico,activo);
 					nombreTextField.setText("");
 					distanciaTextField.setText("");
 					cb.setSelected(true);
-					output.setText("Ciudad Creada");
+					output.setText("Camino Creado");					
+					TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre()); //controlar aca
+				}else {
+					output.setText("Controlar los errores");					
 				}
-
 				output.setOpacity(1);	
 			}
 		});
 
-		panel.getStyleClass().add("spacing-medio");
-		panel.getChildren().addAll(hbox_titulo,gp);
+//		panel.getStyleClass().add("spacing-medio");
+		scroll.setContent(gp);
+		panel.getChildren().addAll(hbox_titulo,scroll);
 	}
 
 	public VBox getPanel() {

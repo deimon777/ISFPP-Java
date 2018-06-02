@@ -36,6 +36,9 @@ public class JFX_Crear_TipoCamino extends Pane{
 
 		Label nombre = new Label("Nombre:");
 		TextField nombreTextField = new TextField();
+		Label outputNombre = new Label("Nombre Vacio");
+		outputNombre.setTextFill(Color.RED);
+		outputNombre.setOpacity(0);
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();
 		cb.setSelected(true);
@@ -43,10 +46,12 @@ public class JFX_Crear_TipoCamino extends Pane{
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(activo, HPos.RIGHT);   
 
-		gp.add(nombre, 0, 0);
-		gp.add(nombreTextField, 1, 0);
-		gp.add(activo, 0, 1);
-		gp.add(cb, 1, 1);
+		int fila = 0;
+		gp.add(nombre, 0, fila);
+		gp.add(nombreTextField, 1, fila++);
+		gp.add(outputNombre, 1, fila++);
+		gp.add(activo, 0, fila);
+		gp.add(cb, 1, fila++);
 
 		Button btn = new Button("Crear");
 		//btn.setDisable(true);
@@ -54,26 +59,27 @@ public class JFX_Crear_TipoCamino extends Pane{
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
 		hbBtn.getChildren().add(btn);
 
-		gp.add(hbBtn, 1, 2);
+		gp.add(hbBtn, 1, fila++);
 
 		Label output = new Label("");
 		output.setOpacity(0);
-		gp.add(output, 1, 3);
+		gp.add(output, 1, fila);
 
 
 		/* ACCIONES */		
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {				
-				String n = nombreTextField.getText();
-				Boolean a = cb.selectedProperty().getValue();
+				String nombre = nombreTextField.getText();
+				Boolean activo = cb.selectedProperty().getValue();
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
-					output.setTextFill(Color.RED);
-					output.setText("Nombre Vacio");
+					outputNombre.setOpacity(1);
+					output.setText("No se pudo crear, controlar los errores");
 				}else {
 					Rec_TipoCamino record = new Rec_TipoCamino();
-					record.insertar(n, a);
+					record.insertar(nombre, activo);
 					nombreTextField.setText("");
+					outputNombre.setOpacity(0);
 					output.setText("Tipo Camino Creado");
 				}
 				output.setOpacity(1);

@@ -27,7 +27,7 @@ public class JFX_Crear_Ciudad extends Pane{
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);
-		Text titulo = new Text("Crear Camino");
+		Text titulo = new Text("Crear Ciudad");
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
 
@@ -39,8 +39,10 @@ public class JFX_Crear_Ciudad extends Pane{
 		
 		Label nombre = new Label("Nombre de la Ciudad: (*)");
 		TextField nombreTextField = new TextField();
+		Label outputNombre = new Label("Nombre Vacio");
+		outputNombre.setTextFill(Color.RED);
+		outputNombre.setOpacity(0);
 		Label habitantes = new Label("Habitantes:");
-//		TextField habitantesTextField = new TextField();
 		NumberTextField habitantesTextField = new NumberTextField();
 		Label historia = new Label("Historia:");
 		TextArea historiasTextField = new TextArea();
@@ -66,28 +68,30 @@ public class JFX_Crear_Ciudad extends Pane{
 		GridPane.setHalignment(activo, HPos.RIGHT);
 		GridPane.setHalignment(cb, HPos.LEFT);
 
-		gp.add(nombre, 0, 0);
-		gp.add(nombreTextField, 1, 0);
-		gp.add(habitantes, 0, 1);
-		gp.add(habitantesTextField, 1, 1);
-		gp.add(historia, 0, 2);
-		gp.add(historiasTextField, 1, 2);
-		gp.add(latitud, 0, 3);
-		gp.add(latitudTextField, 1, 3);
-		gp.add(longitud, 0, 4);
-		gp.add(longitudTextField, 1, 4);
-		gp.add(activo, 0, 5);
-		gp.add(cb, 1, 5);
+		int fila = 0;
+		gp.add(nombre, 0, fila);
+		gp.add(nombreTextField, 1, fila++);
+		gp.add(outputNombre, 1, fila++);
+		gp.add(habitantes, 0, fila);
+		gp.add(habitantesTextField, 1, fila++);
+		gp.add(historia, 0, fila);
+		gp.add(historiasTextField, 1, fila++);
+		gp.add(latitud, 0, fila);
+		gp.add(latitudTextField, 1, fila++);
+		gp.add(longitud, 0, fila);
+		gp.add(longitudTextField, 1, fila++);
+		gp.add(activo, 0, fila);
+		gp.add(cb, 1, fila++);
 		
 		Button btn = new Button("Crear");
 		HBox hbBtn = new HBox();
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
 		hbBtn.getChildren().add(btn);
-		gp.add(hbBtn, 1, 6);
+		gp.add(hbBtn, 1, fila++);
 
 		Label output = new Label("");
 		output.setOpacity(0);
-		gp.add(output, 1, 7);
+		gp.add(output, 1, fila);
 
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -101,8 +105,8 @@ public class JFX_Crear_Ciudad extends Pane{
 				Boolean activo = cb.selectedProperty().getValue();
 
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
-					output.setTextFill(Color.RED);
-					output.setText("Nombre Vacio"); //poner el output debajo de textfield
+					outputNombre.setOpacity(1);
+					output.setText("Controlar los errores");	
 					valido = false;					
 				}
 				if (!(habitantesTextField.getText() == null || habitantesTextField.getText().trim().isEmpty())) {
