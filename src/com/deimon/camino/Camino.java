@@ -72,4 +72,19 @@ public class Camino {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
+
+	public Camino getCaminioInicio() {
+		return inicio;
+	}
+	public void setCaminioInicio(Camino nombre) {
+		this.inicio = nombre;
+	}
+
+	public Camino getCaminioFin() {
+		return fin;
+	}
+	public void setCaminioFin(Camino nombre) {
+		this.fin = nombre;
+	}
 }
