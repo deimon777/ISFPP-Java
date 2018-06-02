@@ -1,8 +1,10 @@
 package gui.panels.ver;
 
 import com.deimon.ciudad.Ciudad;
-import conexion.db.entidades.Ciudades;
+import com.deimon.isfpp.Main;
 
+import conexion.db.entidades.Ciudades;
+import gui.panels.modificar.JFX_Modificar_Ciudad;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -89,8 +91,17 @@ public class JFX_Ver_Ciudad extends Pane{
                 });
 
                 editButton.setOnAction(event -> {
-                    Ciudad s = getTableView().getItems().get(getIndex());
-                    System.out.println("ID: "+s.getID());
+                    Ciudad ciudad = getTableView().getItems().get(getIndex());			
+                	new Main<VBox>().cambiarVista(
+                			new JFX_Modificar_Ciudad(
+                					ciudad.getID(),
+                					ciudad.getNombre(),
+                					ciudad.getHabitantes(),
+                					ciudad.getHistoria(),
+                					ciudad.getLatitud(),
+                					ciudad.getLongitud(),
+                					ciudad.isActivo()
+                					).getPanel());
                 });
             }
         });
