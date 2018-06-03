@@ -1,7 +1,12 @@
 package gui.panels.crear;
 
+import java.sql.Connection;
+
 import org.controlsfx.control.textfield.TextFields;
 
+import com.deimon.isfpp.configuracion.ConstantesPropierties;
+
+import conexion.db.DB_Connection;
 import conexion.db.entidades.Caminos;
 import conexion.db.entidades.Ciudades;
 import conexion.db.entidades.Rec_EstadoCamino;
@@ -168,19 +173,6 @@ public class JFX_Crear_Camino {
 				String trafico = lista_trafico.getValue();
 				String ciudad1 = ciudad1TextField.getText();
 				String ciudad2 = ciudad2TextField.getText();
-
-
-				System.out.println("Nombre: "+nombre);
-				System.out.println("Distancia: "+distancia);
-				System.out.println("Peso: "+peso);
-				System.out.println("Activo: "+activo);
-				System.out.println("Tipo: "+tipo);
-				System.out.println("Estado: "+estado);
-				System.out.println("Trafico: "+trafico);
-				System.out.println("Ciudad1: "+ciudad1);
-				System.out.println("Ciudad2: "+ciudad2);
-				System.out.println("------------");
-				
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
 					outputNombre.setOpacity(1);
 					valido = false;	
@@ -189,29 +181,20 @@ public class JFX_Crear_Camino {
 
 				if(valido){
 					int tipo_id = new Rec_TipoCamino().getTipoCaminoID(tipo);
-					int estado_id = new Rec_EstadoCamino().getEstadoCaminoID(tipo);
-					int trafico_id = new Rec_Trafico().getTraficoID(tipo);
+					int estado_id = new Rec_EstadoCamino().getEstadoCaminoID(estado);
+					int trafico_id = new Rec_Trafico().getTraficoID(trafico);					
 					Ciudades ciudad = new Ciudades();
 					int ciudad_id1 = ciudad.getCiudadesID(ciudad1);
 					int ciudad_id2 = ciudad.getCiudadesID(ciudad2);
-
-					System.out.println("Nombre: "+nombre);
-					System.out.println("Distancia: "+distancia);
-					System.out.println("Peso: "+peso);
-					System.out.println("Activo: "+activo);
-					System.out.println("Tipo: "+tipo_id);
-					System.out.println("Estado: "+estado_id);
-					System.out.println("Trafico: "+trafico_id);
-					System.out.println("Ciudad1: "+ciudad_id1);
-					System.out.println("Ciudad2: "+ciudad_id2);
 					
 					Caminos record = new Caminos();
-//					record.insertar(nombre,distancia,peso,activo,tipo_id,estado_id,trafico_id,ciudad_id1,ciudad_id2);
+					record.insertar(nombre,distancia,peso,activo,tipo_id,estado_id,trafico_id,ciudad_id1,ciudad_id2);
 					nombreTextField.setText("");
 					distanciaTextField.setText("");
 					cb.setSelected(true);
 					output.setText("Camino Creado");
-//					TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre()); //controlar aca
+					TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre()); //controlar aca
+					
 				}else {
 					output.setText("Controlar los errores");					
 				}
