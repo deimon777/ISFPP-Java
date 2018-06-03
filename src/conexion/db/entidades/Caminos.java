@@ -36,7 +36,13 @@ public class Caminos extends EntidadesUtils{
 				+ " REFERENCES estado_camino (id) ON DELETE CASCADE ON UPDATE CASCADE,"
 				+ "trafico_id INT NOT NULL,"
 				+ "CONSTRAINT fk_trafico FOREIGN KEY (trafico_id)"
-				+ " REFERENCES trafico (id) ON DELETE CASCADE ON UPDATE CASCADE";
+				+ " REFERENCES trafico (id) ON DELETE CASCADE ON UPDATE CASCADE,"
+				+ "ciudad_inicial_id INT NOT NULL," 
+				+ "CONSTRAINT fk_ciudad_inicial FOREIGN KEY (ciudad_inicial_id)" 
+				+ " REFERENCES ciudades (id) ON DELETE CASCADE ON UPDATE CASCADE,"
+				+ "ciudad_final_id INT NOT NULL," 
+				+ "CONSTRAINT fk_ciudad_final FOREIGN KEY (ciudad_final_id)" 
+				+ " REFERENCES ciudades (id) ON DELETE CASCADE ON UPDATE CASCADE";
 		TablasUtiles.creatTable(table_name, sql);
 	}
 	/**
@@ -67,9 +73,9 @@ public class Caminos extends EntidadesUtils{
 	 * @param trafico
 	 * @param activo
 	 */
-	public void insertar(String nombre, Integer distancia, Integer peso, String tipo, String estado, String trafico, Boolean activo) {
-		String sql = "INSERT INTO "+table_name+" (id, nombre, distancia, peso_camino, tipo_camino_id, estado_camino_id, trafico_id, activo) "
-				+ "VALUES (NULL, ?,?,?,?,?,?,?)";
+	public void insertar(String nombre, Integer distancia, Integer peso, Boolean activo, int tipo_id, int estado_id, int trafico_id, int ciudad_inicio_id, int ciudad_fin_id) {
+		String sql = "INSERT INTO "+table_name+" (id, nombre, distancia, peso_camino, activo, tipo_camino_id, estado_camino_id, trafico_id, ciudad_inicial_id, ciudad_final_id) "
+				+ "VALUES (NULL, ?,?,?,?,?,?,?,?,?)";
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -82,24 +88,15 @@ public class Caminos extends EntidadesUtils{
 			if(myConect!=null) {
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
-				if (distancia == null) {
-					myPrepStmt.setNull(2, java.sql.Types.INTEGER);				
-				}
-				else {
-					myPrepStmt.setInt(2, distancia);
-				}
-//				if (peso == null) {
-//					myPrepStmt.setNull(3, java.sql.Types.INTEGER);				
-//				}
-//				else {
-//					myPrepStmt.setInt(3, peso);
-//				}
-				myPrepStmt.setString(3, null); //peso
-				myPrepStmt.setString(4, null); //tipo
-				myPrepStmt.setString(5, null); //estado
-				myPrepStmt.setString(6, null); //trafico
-
-				myPrepStmt.setBoolean(7, activo);
+				myPrepStmt.setInt(2, distancia);
+				myPrepStmt.setInt(3, peso);
+				myPrepStmt.setBoolean(4, activo);
+				myPrepStmt.setInt(5, tipo_id);
+				myPrepStmt.setInt(6, estado_id);
+				myPrepStmt.setInt(7, trafico_id);
+				myPrepStmt.setInt(8, ciudad_inicio_id);
+				myPrepStmt.setInt(9, ciudad_fin_id);
+				
 				myPrepStmt.executeUpdate();
 				System.out.println("Ciudad Creada!");
 			}
