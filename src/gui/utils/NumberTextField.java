@@ -33,4 +33,8 @@ public class NumberTextField extends TextField{
     {
         return text.matches("[0-9]*");
     }
+
+	public int getValue() {
+		return Integer.parseInt(super.getText());
+	}
 }
