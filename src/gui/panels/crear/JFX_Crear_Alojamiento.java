@@ -1,6 +1,7 @@
 package gui.panels.crear;
 
 import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Rec_Alojamientos;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,8 +45,8 @@ public class JFX_Crear_Alojamiento extends Pane{
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
 		Label ciudad = new Label("Ciudad:");
-		ComboBox<String> listCiudad = new ComboBox<String>();
-		listCiudad.setItems((ObservableList<String>) new Ciudades().getCiudadesNombre());
+		ComboBox<String> lista_ciudad = new ComboBox<String>();
+		lista_ciudad.setItems((ObservableList<String>) new Ciudades().getCiudadesNombre());
 		Label outputCiudad = new Label("Ciudad Vacia");
 		outputCiudad.setTextFill(Color.RED);
 		outputCiudad.setOpacity(0);
@@ -61,7 +62,7 @@ public class JFX_Crear_Alojamiento extends Pane{
 		gp.add(activo, 0, fila);
 		gp.add(cb, 1, fila++);
 		gp.add(ciudad, 0, fila);
-		gp.add(listCiudad, 1, fila++);
+		gp.add(lista_ciudad, 1, fila++);
 		gp.add(outputCiudad, 1, fila++);
 		
 		Button btn = new Button("Crear");
@@ -78,7 +79,27 @@ public class JFX_Crear_Alojamiento extends Pane{
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				System.out.println("Alojamiento apretado");
+				boolean valido = true;
+				String nombre = nombreTextField.getText();
+				Boolean activo = cb.selectedProperty().getValue();
+				
+				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
+					outputNombre.setOpacity(1);
+					output.setText("Controlar los errores");	
+					valido = false;					
+				}
+				//Agregar la validacion de la ciudad
+				
+				if(valido){
+					int id = new Ciudades().getCiudadesID(lista_ciudad.getValue());
+					
+					Rec_Alojamientos record = new Rec_Alojamientos();
+					record.insertar(nombre,activo, id);
+					nombreTextField.setText("");
+					cb.setSelected(true);
+					output.setText("Alojamiento Creado");
+				}
+				output.setOpacity(1);
 			}
 		});
 

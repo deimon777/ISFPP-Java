@@ -1,6 +1,7 @@
 package gui.panels.crear;
 
 import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Rec_SitiosTuristicos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -29,11 +30,11 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 		hbox_titulo.getChildren().add(titulo);
 
 		GridPane gp = new GridPane();		
-//		gp.setGridLinesVisible(true);
+		//		gp.setGridLinesVisible(true);
 		gp.setAlignment(Pos.CENTER);
 		gp.setHgap(10);
 		gp.setVgap(10);
-		
+
 		Label nombre = new Label("Nombre del Sitio:");
 		TextField nombreTextField = new TextField();
 		Label outputNombre = new Label("Nombre Vacio");
@@ -52,7 +53,7 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(activo, HPos.RIGHT);
 		GridPane.setHalignment(ciudad, HPos.RIGHT);	    
-	    
+
 		int fila = 0;
 		gp.add(nombre, 0, fila);
 		gp.add(nombreTextField, 1, fila++);
@@ -62,7 +63,7 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 		gp.add(ciudad, 0, fila);
 		gp.add(listCiudad, 1, fila++);
 		gp.add(outputCiudad, 1, fila++);
-		
+
 		Button btn = new Button("Crear");
 		HBox hbBtn = new HBox();
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
@@ -72,11 +73,32 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 		Label output = new Label("");
 		output.setOpacity(0);
 		gp.add(output, 1, fila);
-		
-		btn.setOnAction(new EventHandler<ActionEvent>() {
+
+		btn.setOnAction(new EventHandler<ActionEvent>() {			
 			@Override
 			public void handle(ActionEvent e) {
-				System.out.println("Sitios Turisticos apretado");
+				boolean valido = true;
+				String nombre = nombreTextField.getText();
+				Boolean activo = cb.selectedProperty().getValue();
+
+				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
+					outputNombre.setOpacity(1);
+					output.setText("Controlar los errores");	
+					valido = false;					
+				}
+				//Agregar la validacion de la ciudad
+
+
+				if(valido){
+					int id = new Ciudades().getCiudadesID(listCiudad.getValue());
+					
+					Rec_SitiosTuristicos record = new Rec_SitiosTuristicos();
+					record.insertar(nombre,activo, id);
+					nombreTextField.setText("");
+					cb.setSelected(true);
+					output.setText("Sitio Turistico Creado");
+				}
+				output.setOpacity(1);
 			}
 		});
 

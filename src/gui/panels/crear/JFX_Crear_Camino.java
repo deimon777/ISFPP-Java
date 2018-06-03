@@ -10,7 +10,6 @@ import conexion.db.entidades.Rec_Trafico;
 import gui.utils.NumberTextField;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -59,9 +58,8 @@ public class JFX_Crear_Camino {
 		outputDistancia.setTextFill(Color.RED);
 		outputDistancia.setOpacity(0);
 		Label peso_camino = new Label("Peso Camino:");
-		ComboBox<String> lista_peso_camino = new ComboBox<String>();
-		ObservableList<String> data_peso_camino = FXCollections.observableArrayList("1", "2", "3");
-		lista_peso_camino.setItems(data_peso_camino);
+		ComboBox<String> lista_peso = new ComboBox<String>();
+		lista_peso.setItems(FXCollections.observableArrayList("1", "2", "3"));
 		Label outputPeso = new Label("Este campo no puede estar vacio");
 		outputPeso.setTextFill(Color.RED);
 		outputPeso.setOpacity(0);
@@ -107,10 +105,10 @@ public class JFX_Crear_Camino {
 		GridPane.setHalignment(activo, HPos.RIGHT);
 		GridPane.setHalignment(tipo_camino, HPos.RIGHT);
 		GridPane.setHalignment(estado_camino, HPos.RIGHT);
-		GridPane.setHalignment(lista_peso_camino, HPos.RIGHT);
+		GridPane.setHalignment(lista_peso, HPos.RIGHT);
 		GridPane.setHalignment(lista_tipo_camino, HPos.RIGHT);
 		GridPane.setHalignment(trafico, HPos.RIGHT);
-		GridPane.setHalignment(lista_peso_camino, HPos.LEFT);
+		GridPane.setHalignment(lista_peso, HPos.LEFT);
 		GridPane.setHalignment(lista_tipo_camino, HPos.LEFT);
 		GridPane.setHalignment(lista_estado_camino, HPos.LEFT);
 		GridPane.setHalignment(lista_trafico, HPos.LEFT); 
@@ -127,7 +125,7 @@ public class JFX_Crear_Camino {
 		gp.add(distanciaTextField, 1, fila++);
 		gp.add(outputDistancia, 1, fila++);
 		gp.add(peso_camino, 0, fila);
-		gp.add(lista_peso_camino, 1, fila++);
+		gp.add(lista_peso, 1, fila++);
 		gp.add(outputPeso, 1, fila++);		
 		gp.add(activo, 0, fila);
 		gp.add(cb, 1, fila++);
@@ -162,26 +160,58 @@ public class JFX_Crear_Camino {
 			public void handle(ActionEvent e) {
 				boolean valido = true;
 				String nombre = nombreTextField.getText();
-				Integer distancia = null;
-				Integer peso = null;
-				String tipo = null; //ver aca
-				String estado = null; //ver aca
-				String trafico = null; //ver aca
+				int distancia = distanciaTextField.getValue();
+				int peso = Integer.parseInt(lista_peso.getValue());
 				Boolean activo = cb.selectedProperty().getValue();
+				String tipo = lista_tipo_camino.getValue();
+				String estado = lista_estado_camino.getValue();
+				String trafico = lista_trafico.getValue();
+				String ciudad1 = ciudad1TextField.getText();
+				String ciudad2 = ciudad2TextField.getText();
 
+
+				System.out.println("Nombre: "+nombre);
+				System.out.println("Distancia: "+distancia);
+				System.out.println("Peso: "+peso);
+				System.out.println("Activo: "+activo);
+				System.out.println("Tipo: "+tipo);
+				System.out.println("Estado: "+estado);
+				System.out.println("Trafico: "+trafico);
+				System.out.println("Ciudad1: "+ciudad1);
+				System.out.println("Ciudad2: "+ciudad2);
+				System.out.println("------------");
+				
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
 					outputNombre.setOpacity(1);
 					valido = false;	
-				}		
+				}
+				//validad Todo
 
 				if(valido){
-//					Caminos record = new Caminos();
-//					record.insertar(nombre,distancia,peso,tipo,estado,trafico,activo);
+					int tipo_id = new Rec_TipoCamino().getTipoCaminoID(tipo);
+					int estado_id = new Rec_EstadoCamino().getEstadoCaminoID(tipo);
+					int trafico_id = new Rec_Trafico().getTraficoID(tipo);
+					Ciudades ciudad = new Ciudades();
+					int ciudad_id1 = ciudad.getCiudadesID(ciudad1);
+					int ciudad_id2 = ciudad.getCiudadesID(ciudad2);
+
+					System.out.println("Nombre: "+nombre);
+					System.out.println("Distancia: "+distancia);
+					System.out.println("Peso: "+peso);
+					System.out.println("Activo: "+activo);
+					System.out.println("Tipo: "+tipo_id);
+					System.out.println("Estado: "+estado_id);
+					System.out.println("Trafico: "+trafico_id);
+					System.out.println("Ciudad1: "+ciudad_id1);
+					System.out.println("Ciudad2: "+ciudad_id2);
+					
+					Caminos record = new Caminos();
+//					record.insertar(nombre,distancia,peso,activo,tipo_id,estado_id,trafico_id,ciudad_id1,ciudad_id2);
 					nombreTextField.setText("");
 					distanciaTextField.setText("");
 					cb.setSelected(true);
-					output.setText("Camino Creado");					
-					TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre()); //controlar aca
+					output.setText("Camino Creado");
+//					TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre()); //controlar aca
 				}else {
 					output.setText("Controlar los errores");					
 				}
