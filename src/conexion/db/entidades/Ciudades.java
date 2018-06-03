@@ -133,6 +133,7 @@ public class Ciudades extends EntidadesUtils{
 	 */
 	/**
 	 * Actualiza la informacion de un item en la base de datos.
+	 * @param id
 	 * @param nombre
 	 * @param distancia
 	 * @param peso
@@ -195,14 +196,6 @@ public class Ciudades extends EntidadesUtils{
 	 * BUSCAR
 	 */
 	/**
-	 * Crea una lista con los nombres de las ciudades
-	 * @return Una lista con nombres de ciudades
-	 */
-	public ObservableList<String> getCiudadesNombre() {
-		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
-	}
-
-	/**
 	 * Trae todos las ciudades (Objetos), con toda la informacion que esta en la base de datos.
 	 * @return Una lista de objetos tipo Ciudad
 	 */
@@ -242,5 +235,22 @@ public class Ciudades extends EntidadesUtils{
 			conec.closeConnect(myConect);
 		}
 		return lista;
+	}
+	/**
+	 * Crea una lista con los nombres de las ciudades
+	 * @return Una lista con nombres de ciudades
+	 */
+	public ObservableList<String> getCiudadesNombre() {
+		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
+	}
+
+	/**
+	 * Trae el ID de una ciudad segun su nombre
+	 * @param nombre
+	 * @return El ID de la ciudad.
+	 */
+	public int getCiudadesID(String nombre) {
+		int id = EntidadesUtils.getItemFromNombre(table_name, "id", nombre);
+		return id;
 	}
 }
