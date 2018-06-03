@@ -25,7 +25,15 @@ public class Ciudad {
 	public Ciudad(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
+	@Override
+	public String toString() {
+//		return "Ciudad [ID=" + ID + ", nombre=" + nombre + ", habitantes=" + habitantes + ", historia=" + historia
+//				+ ", latitud=" + latitud + ", longitud=" + longitud + ", activo=" + activo + "]";
+
+		return nombre;
+	}
+
 	/*
 	 * Getter y Setter
 	 */
