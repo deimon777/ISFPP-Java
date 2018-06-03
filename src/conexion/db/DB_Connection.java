@@ -2,6 +2,7 @@ package conexion.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -11,6 +12,7 @@ import javafx.scene.control.Alert.AlertType;
 public class DB_Connection {
 	Connection myConect = null;
 	Statement myStmt = null;
+	PreparedStatement myPreStmt = null;
 	/* --------------------------------------------------------------------------------------------- */
 	/**
 	 * Crea la conexion con la base de datos (DB) y retorna la misma.
@@ -114,6 +116,5 @@ public class DB_Connection {
 		}
 		return t;
 	}
-
 
 }
