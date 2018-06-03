@@ -176,5 +176,4 @@ public class EntidadesUtils {
 		}
 		return data;
 	}
-
 }
