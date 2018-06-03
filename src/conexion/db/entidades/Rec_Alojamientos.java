@@ -44,8 +44,8 @@ public class Rec_Alojamientos extends EntidadesUtils{
 	/*
 	 * INSERTAR
 	 */
-	public void insertar(String nombre, int activo, int ciudad_id) {
-		String sql = "INSERT INTO "+table_name+" (id, nombre, activo, ciudad_id) VALUES (NULL, ?,?,?)";
+	public void insertar(String nombre, Boolean activo, int ciudad_id) {
+		String sql = "INSERT INTO "+table_name+" (id, nombre, activo, ciudades_id) VALUES (NULL, ?,?,?)";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPrepStmt = null;
@@ -57,7 +57,7 @@ public class Rec_Alojamientos extends EntidadesUtils{
 			if(myConect!=null) {
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
-				myPrepStmt.setInt(2, activo);
+				myPrepStmt.setBoolean(2, activo);
 				myPrepStmt.setInt(3, ciudad_id);
 				myPrepStmt.executeUpdate();			
 				System.out.println("ALojamiento Creada!");

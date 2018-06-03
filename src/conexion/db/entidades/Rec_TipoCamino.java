@@ -83,4 +83,14 @@ public class Rec_TipoCamino extends EntidadesUtils{
 	public ObservableList<String> getTipoCaminoNombre() {
 		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
 	}
+
+	/**
+	 * Trae el ID de una TipoCamino segun su nombre
+	 * @param nombre
+	 * @return El ID del tipo camino.
+	 */
+	public int getTipoCaminoID(String nombre) {
+		int id = EntidadesUtils.getItemFromNombre(table_name, "id", nombre);
+		return id;
+	}
 }

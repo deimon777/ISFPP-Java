@@ -86,4 +86,14 @@ public class Rec_EstadoCamino extends EntidadesUtils{
 	public ObservableList<String> getEstadoCaminoNombre() {
 		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
 	}
+	
+	/**
+	 * Trae el ID de un Estado segun su nombre
+	 * @param nombre
+	 * @return El ID del estado.
+	 */
+	public int getEstadoCaminoID(String nombre) {
+		int id = EntidadesUtils.getItemFromNombre(table_name, "id", nombre);
+		return id;
+	}
 }

@@ -1,5 +1,12 @@
 package conexion.db.entidades;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.deimon.isfpp.configuracion.ConstantesPropierties;
+
+import conexion.db.DB_Connection;
 import conexion.db.tablas.TablasUtiles;
 import conexion.db.tablas.TablesName;
 
@@ -37,6 +44,30 @@ public class Rec_SitiosTuristicos extends EntidadesUtils{
 	/*
 	 * INSERTAR
 	 */
+	public void insertar(String nombre, Boolean activo, int ciudad_id) {
+			String sql = "INSERT INTO "+table_name+" (id, nombre, activo, ciudades_id) VALUES (NULL, ?,?,?)";
+			DB_Connection c = null;
+			Connection myConect = null;
+			PreparedStatement myPrepStmt = null;
+			try {
+				c = new DB_Connection();
+				myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+						ConstantesPropierties.DB_NAME_USER,
+						ConstantesPropierties.DB_NAME_PASS);
+				if(myConect!=null) {
+					myPrepStmt = myConect.prepareStatement(sql);
+					myPrepStmt.setString(1, nombre);
+					myPrepStmt.setBoolean(2, activo);
+					myPrepStmt.setInt(3, ciudad_id);
+					myPrepStmt.executeUpdate();			
+					System.out.println("ALojamiento Creada!");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				c.closeConnect(myConect);
+			}
+		}
 	
 	/*
 	 * BORRAR
