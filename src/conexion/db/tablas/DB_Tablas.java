@@ -25,27 +25,27 @@ public class DB_Tablas {
 	private Rec_Alojamientos alojamientos = new Rec_Alojamientos();
 	private Rec_SitiosTuristicos sitios_turisticos = new Rec_SitiosTuristicos();
 	
-	private Ciudades_Caminos ciudades_caminos = new Ciudades_Caminos();
+//	private Ciudades_Caminos ciudades_caminos = new Ciudades_Caminos();
 	
 	public void crearTodasLasTablas() {
 		tipo_usuario.crearTablaTipoUsuario();
 		usuario.crearTablaUsuario();		
 		tipo_camino.crearTablaTipoCamino();
 		estado_camino.crearTablaEstadoCamino();
-		trafico.crearTablaTrafico();		
-		caminos.crearTablaCaminos();		
+		trafico.crearTablaTrafico();
 		ciudades.crearTablaCiudad();
+		caminos.crearTablaCaminos();		
 		alojamientos.crearTablaAlojamientos();
 		sitios_turisticos.crearTablaSitiosTuristicos();		
-		ciudades_caminos.crearTablaCiudadesCaminos();		
+//		ciudades_caminos.crearTablaCiudadesCaminos();		
 	}
 		
 	public void borrarTodasLasTablas() {
-		ciudades_caminos.borrarTablaCiudadesCaminos();
+//		ciudades_caminos.borrarTablaCiudadesCaminos();
 		sitios_turisticos.borrarTablaSitiosTuristicos();
 		alojamientos.borrarTablaAlojamientos();
-		ciudades.borrarTablaCiudad();
 		caminos.borrarTablaCaminos();
+		ciudades.borrarTablaCiudad();
 		trafico.borrarTablaTrafico();
 		estado_camino.borrarTablaEstadoCamino();
 		tipo_camino.borrarTablaTipoCamino();
@@ -57,7 +57,7 @@ public class DB_Tablas {
 		alojamientos.vaciarTablaAlojamientos();
 		caminos.vaciarTablaCaminos();
 		ciudades.vaciarTablaCiudad();
-		ciudades_caminos.vaciarTablaCiudadesCaminos();
+//		ciudades_caminos.vaciarTablaCiudadesCaminos();
 		estado_camino.vaciarTablaEstadoCamino();
 		sitios_turisticos.vaciarTablaSitiosTuristicos();
 		tipo_camino.vaciarTablaTipoCamino();
