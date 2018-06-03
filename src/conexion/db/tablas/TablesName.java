@@ -14,7 +14,7 @@ public class TablesName {
 	public final static String TIPO_CAMINO = RECURSO_SUFIJO+"tipo_camino";
 	public final static String ESTADO_CAMINO = RECURSO_SUFIJO+"estado_camino";
 	
-	public final static String CIUDADES_CAMINOS = "ciudades_caminos";
+	public final static String CIUDADES_CAMINOS = "ciudades_caminos"; //no va mas
 	
 	public final static String USUARIOS = "usuarios";
 	public final static String TIPO_USUARIO = "tipo_usuario";
