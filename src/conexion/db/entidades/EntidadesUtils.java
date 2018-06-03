@@ -148,4 +148,33 @@ public class EntidadesUtils {
 		return data;
 	}
 
+	public static int getItemFromNombre(String table, String columna,String nombre) {
+		String sql = "SELECT "+columna+" FROM "+table+" WHERE nombre = '"+nombre+"'";
+		
+		DB_Connection c = null;
+		Connection myConect = null;
+		PreparedStatement myPreStmt = null;
+		ResultSet rs = null;
+		int data = -1;
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect!=null) {
+				myPreStmt = myConect.prepareStatement(sql);
+				rs = myPreStmt.executeQuery(sql);
+				while(rs.next()){
+					data = rs.getInt("id");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			c.closeStatement(myPreStmt);
+			c.closeConnect(myConect);
+		}
+		return data;
+	}
+
 }
