@@ -245,6 +245,14 @@ public class Ciudades extends EntidadesUtils{
 	}
 
 	/**
+	 * Crea una lista con los nombres de las ciudades activas
+	 * @return Una lista con nombres de ciudades
+	 */
+	public ObservableList<String> getCiudadesActivas() {
+		return EntidadesUtils.getLista("SELECT nombre from "+table_name+" WHERE activo = 1");
+	}
+
+	/**
 	 * Trae el ID de una ciudad segun su nombre
 	 * @param nombre
 	 * @return El ID de la ciudad.
