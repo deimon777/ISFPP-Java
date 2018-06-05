@@ -43,8 +43,8 @@ public class Main<T> extends Application{
 		T publico = (T)jfx_p.getPanel();
 
 		root.setTop(menu);
-		this.cambiarVista(publico);   	    
-
+		this.cambiarVista(publico);
+		
 		Scene scene = new Scene(root,Constantes.ANCHO,Constantes.ALTO);
 		
 		URL url = this.getClass().getResource("../../../gui/resource/styles.css");
