@@ -101,8 +101,8 @@ public class JFX_Crear_Camino {
 		outputCiudad2.setOpacity(0);
 
 		TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre());
-		TextFields.bindAutoCompletion(ciudad1TextField,new Ciudades().getCiudadesNombre());
-		TextFields.bindAutoCompletion(ciudad2TextField,new Ciudades().getCiudadesNombre());
+		TextFields.bindAutoCompletion(ciudad1TextField,new Ciudades().getCiudadesActivas());
+		TextFields.bindAutoCompletion(ciudad2TextField,new Ciudades().getCiudadesActivas());
 		
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(distancia, HPos.RIGHT);

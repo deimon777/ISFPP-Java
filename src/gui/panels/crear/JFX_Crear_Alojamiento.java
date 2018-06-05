@@ -46,7 +46,7 @@ public class JFX_Crear_Alojamiento extends Pane{
 		cb.setSelected(true);
 		Label ciudad = new Label("Ciudad:");
 		ComboBox<String> lista_ciudad = new ComboBox<String>();
-		lista_ciudad.setItems((ObservableList<String>) new Ciudades().getCiudadesNombre());
+		lista_ciudad.setItems((ObservableList<String>) new Ciudades().getCiudadesActivas());
 		Label outputCiudad = new Label("Ciudad Vacia");
 		outputCiudad.setTextFill(Color.RED);
 		outputCiudad.setOpacity(0);

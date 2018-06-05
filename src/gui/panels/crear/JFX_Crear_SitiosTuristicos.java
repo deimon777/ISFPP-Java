@@ -44,8 +44,8 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
 		Label ciudad = new Label("Ciudad:");
-		ComboBox<String> listCiudad = new ComboBox<String>();
-		listCiudad.setItems(new Ciudades().getCiudadesNombre());
+		ComboBox<String> lista_ciudad = new ComboBox<String>();
+		lista_ciudad.setItems(new Ciudades().getCiudadesActivas());
 		Label outputCiudad = new Label("Ciudad Vacia");
 		outputCiudad.setTextFill(Color.RED);
 		outputCiudad.setOpacity(0);
@@ -61,7 +61,7 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 		gp.add(activo, 0, fila);
 		gp.add(cb, 1, fila++);
 		gp.add(ciudad, 0, fila);
-		gp.add(listCiudad, 1, fila++);
+		gp.add(lista_ciudad, 1, fila++);
 		gp.add(outputCiudad, 1, fila++);
 
 		Button btn = new Button("Crear");
@@ -90,7 +90,7 @@ public class JFX_Crear_SitiosTuristicos extends Pane{
 
 
 				if(valido){
-					int id = new Ciudades().getCiudadesID(listCiudad.getValue());
+					int id = new Ciudades().getCiudadesID(lista_ciudad.getValue());
 					
 					Rec_SitiosTuristicos record = new Rec_SitiosTuristicos();
 					record.insertar(nombre,activo, id);

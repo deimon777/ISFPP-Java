@@ -1,10 +1,13 @@
 package gui.panels.ver;
 
-import org.controlsfx.control.textfield.TextFields;
-
 import com.deimon.isfpp.configuracion.Constantes;
+import com.sothawo.mapjfx.MapView;
+import com.sothawo.mapjfx.WMSParam;
 
 import conexion.db.entidades.Ciudades;
+
+import org.controlsfx.control.textfield.TextFields;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -22,11 +25,21 @@ public class JFX_Ver_Publico{
 	public JFX_Ver_Publico() {
 		/*
 		 * Mapa de los caminos
-		 */
+		 */		
+		
+		
+		WMSParam wmsParam = new WMSParam()
+                .setUrl("http://geonode.wfp.org:80/geoserver/ows")
+                .addParam("layers", "geonode:admin_2_gaul_2015");
+		
+		MapView mapa = new MapView();
+		mapa.setAnimationDuration(500);
+		mapa.setWMSParam(wmsParam);
+		mapa.initialize();
 		HBox josm = new HBox();
 		josm.setPrefHeight(450); //Tamaño
 		josm.setAlignment(Pos.TOP_CENTER);
-		josm.getChildren().add(new Label("MAPA!!!"));
+		josm.getChildren().add(mapa);
 		josm.getStyleClass().add("josm");
 
 		/*
@@ -48,8 +61,8 @@ public class JFX_Ver_Publico{
 		TextField ruta_fin = new TextField();
 		ruta_fin.setPromptText("Ruta final");
 	
-		TextFields.bindAutoCompletion(ruta_inicio,new Ciudades().getCiudadesNombre());
-		TextFields.bindAutoCompletion(ruta_fin,new Ciudades().getCiudadesNombre());
+		TextFields.bindAutoCompletion(ruta_inicio,new Ciudades().getCiudadesActivas());
+		TextFields.bindAutoCompletion(ruta_fin,new Ciudades().getCiudadesActivas());
 		
 		Button btn_ruta_buscar = new Button("Buscar Camino");
 		btn_ruta_buscar.setOnAction(new EventHandler<ActionEvent>() {
