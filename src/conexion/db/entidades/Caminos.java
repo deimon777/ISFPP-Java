@@ -143,7 +143,13 @@ public class Caminos extends EntidadesUtils{
 	public ObservableList<String> getCaminosNombre() {
 		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
 	}
-
+	/**
+	 * Crea una lista con los nombres de los caminos activos
+	 * @return Lista con nombres de caminos
+	 */
+	public ObservableList<String> getCaminosActivos() {
+		return EntidadesUtils.getLista("SELECT nombre from "+table_name+" WHERE activo = 1");
+	}
 	/**
 	 * Trae todos los caminos (Objetos), con toda la informacion que esta en la base de datos.
 	 * @return Una lista de objetos tipo Caminos
