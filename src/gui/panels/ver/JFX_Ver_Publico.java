@@ -1,10 +1,18 @@
 package gui.panels.ver;
 
 import com.deimon.isfpp.configuracion.Constantes;
+import com.sothawo.mapjfx.Coordinate;
+import com.sothawo.mapjfx.CoordinateLine;
+import com.sothawo.mapjfx.MapLabel;
 import com.sothawo.mapjfx.MapView;
+import com.sothawo.mapjfx.Marker;
 import com.sothawo.mapjfx.WMSParam;
+import com.sothawo.mapjfx.offline.OfflineCache;
 
 import conexion.db.entidades.Ciudades;
+
+import java.nio.file.FileSystems;
+import java.util.Collections;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -12,34 +20,55 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+
 
 
 public class JFX_Ver_Publico{
 	VBox panel = new VBox();
 
+	private static WMSParam wmsParam = null;
+	private MapView mapa = null;
+	private static final Coordinate chubut = new Coordinate(-44.038186, -68.705483);
+
 	public JFX_Ver_Publico() {
 		/*
 		 * Mapa de los caminos
-		 */		
-		
-		
-		WMSParam wmsParam = new WMSParam()
-                .setUrl("http://geonode.wfp.org:80/geoserver/ows")
-                .addParam("layers", "geonode:admin_2_gaul_2015");
-		
-		MapView mapa = new MapView();
+		 */
+
+		wmsParam = new WMSParam()
+				.setUrl("http://geonode.wfp.org:80/geoserver/ows")
+				.addParam("layers", "geonode:admin_2_gaul_2015");
+
+		mapa = new MapView();
 		mapa.setAnimationDuration(500);
+		mapa.setCenter(chubut);
+		mapa.setZoom(6);
 		mapa.setWMSParam(wmsParam);
+		
+//		final OfflineCache offlineCache = mapa.getOfflineCache();
+//		offlineCache.setCacheDirectory(FileSystems.getDefault().getPath("tmp"));
+//		offlineCache.setActive(false);
+//		offlineCache.setNoCacheFilters(Collections.singletonList(".*\\.sothawo\\.com/.*"));
+		
+//		mapa.initializedProperty().addListener((observable, oldValue, newValue) -> {
+//			if (newValue) {
+//				mapa.setCenter(chubut);
+//				mapa.setZoom(7);
+//			}
+//		});
+		
 		mapa.initialize();
-		HBox josm = new HBox();
+		BorderPane josm = new BorderPane();
 		josm.setPrefHeight(450); //Tamaño
-		josm.setAlignment(Pos.TOP_CENTER);
-		josm.getChildren().add(mapa);
+		//		josm.setAlignment(Pos.TOP_CENTER);
+		josm.setCenter(mapa);
+		//		josm.getChildren().add(mapa);
 		josm.getStyleClass().add("josm");
 
 		/*
@@ -55,15 +84,15 @@ public class JFX_Ver_Publico{
 		busqueda.setPrefWidth(Constantes.ANCHO/2);
 		busqueda.getStyleClass().add("padding-medio");
 		busqueda.getStyleClass().add("spacing-medio");
-		
+
 		TextField ruta_inicio = new TextField();
 		ruta_inicio.setPromptText("Ruta inicial"); //placeholder		
 		TextField ruta_fin = new TextField();
 		ruta_fin.setPromptText("Ruta final");
-	
+
 		TextFields.bindAutoCompletion(ruta_inicio,new Ciudades().getCiudadesActivas());
 		TextFields.bindAutoCompletion(ruta_fin,new Ciudades().getCiudadesActivas());
-		
+
 		Button btn_ruta_buscar = new Button("Buscar Camino");
 		btn_ruta_buscar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -76,7 +105,7 @@ public class JFX_Ver_Publico{
 
 		// Derecha
 		GridPane funciones_extras = new GridPane();
-//		funciones_extras.setGridLinesVisible(true);
+		//		funciones_extras.setGridLinesVisible(true);
 		funciones_extras.setPrefWidth(Constantes.ANCHO/2);
 		funciones_extras.getStyleClass().add("padding-medio");
 		funciones_extras.getStyleClass().add("spacing-medio");
