@@ -2,17 +2,11 @@ package gui.panels.ver;
 
 import com.deimon.isfpp.configuracion.Constantes;
 import com.sothawo.mapjfx.Coordinate;
-import com.sothawo.mapjfx.CoordinateLine;
-import com.sothawo.mapjfx.MapLabel;
 import com.sothawo.mapjfx.MapView;
-import com.sothawo.mapjfx.Marker;
 import com.sothawo.mapjfx.WMSParam;
 import com.sothawo.mapjfx.offline.OfflineCache;
 
 import conexion.db.entidades.Ciudades;
-
-import java.nio.file.FileSystems;
-import java.util.Collections;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -25,7 +19,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 
 
