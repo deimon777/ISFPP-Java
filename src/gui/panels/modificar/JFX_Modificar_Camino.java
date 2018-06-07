@@ -1,5 +1,4 @@
-package gui.panels.crear;
-
+package gui.panels.modificar;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -27,10 +26,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class JFX_Crear_Camino {
+public class JFX_Modificar_Camino {
 	VBox panel = new VBox();
 
-	public JFX_Crear_Camino() {
+	public JFX_Modificar_Camino(int nId, String nNombre, int nDistancia, int nPeso, String nTipo, String nEstado, boolean nActivo, String nCiudad1, String nCiudad2) {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);

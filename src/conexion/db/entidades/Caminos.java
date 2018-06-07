@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.deimon.camino.*;
+import com.deimon.entidades.camino.*;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
@@ -171,16 +171,20 @@ public class Caminos extends EntidadesUtils{
 				myStmt = conec.getStatement(myConect);
 				rs = myStmt.executeQuery(sql);
 				while (rs.next()) {
-					Camino ciudad = new Camino();
-					ciudad.setID(rs.getInt("id")); //poner los campos en el txt
-					ciudad.setNombre(rs.getString("nombre"));
-					ciudad.setDistancia(rs.getInt("distancia"));
-					ciudad.setPesoCamino(rs.getInt("peso_camino"));
-					ciudad.setTipoCamino((TipoCamino) rs.getObject("tipo_camino"));
-					ciudad.setEstadoCamino((EstadoCamino) rs.getObject("estado_camino"));
-					ciudad.setTrafico((Trafico) rs.getObject("trafico"));
-					ciudad.setActivo(rs.getBoolean("activo"));
-					lista.add(ciudad);
+					Camino camino = new Camino();
+					camino.setID(rs.getInt("id")); //poner los campos en txt
+					camino.setNombre(rs.getString("nombre"));
+					camino.setDistancia(rs.getInt("distancia"));
+					camino.setPesoCamino(rs.getInt("peso_camino"));
+//					TipoCamino tc = new TipoCamino();
+//					tc.setNombre(rs.getObject("tipo_camino_id"));
+//					camino.setTipoCamino(tc);
+//					camino.setTipoCamino((TipoCamino) rs.getObject("tipo_camino_id"));
+					camino.setTipoCamino((TipoCamino) rs.getObject("tipo_camino_id"));
+					camino.setEstadoCamino((EstadoCamino) rs.getObject("estado_camino_id"));
+					camino.setTrafico((Trafico) rs.getObject("trafico_id"));
+					camino.setActivo(rs.getBoolean("activo"));
+					lista.add(camino);
 				}
 			}
 

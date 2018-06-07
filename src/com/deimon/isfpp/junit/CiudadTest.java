@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.deimon.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Ciudad;
 
 @DisplayName("Ciudad Test")
 class CiudadTest {

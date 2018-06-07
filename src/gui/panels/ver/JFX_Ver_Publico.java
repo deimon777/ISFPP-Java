@@ -7,6 +7,7 @@ import com.sothawo.mapjfx.WMSParam;
 import com.sothawo.mapjfx.offline.OfflineCache;
 
 import conexion.db.entidades.Ciudades;
+import gui.mapa.Mapa;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -25,44 +26,19 @@ import javafx.scene.layout.VBox;
 public class JFX_Ver_Publico{
 	VBox panel = new VBox();
 
-	private static WMSParam wmsParam = null;
-	private MapView mapa = null;
-	private static final Coordinate chubut = new Coordinate(-44.038186, -68.705483);
-
 	public JFX_Ver_Publico() {
 		/*
 		 * Mapa de los caminos
 		 */
-
-		wmsParam = new WMSParam()
-				.setUrl("http://geonode.wfp.org:80/geoserver/ows")
-				.addParam("layers", "geonode:admin_2_gaul_2015");
-
-		mapa = new MapView();
-		mapa.setAnimationDuration(500);
-		mapa.setCenter(chubut);
-		mapa.setZoom(6);
-		mapa.setWMSParam(wmsParam);
+		MapView mapa = new MapView();
+		Mapa m = new Mapa();
+		mapa = m.crearMapa();
 		
-//		final OfflineCache offlineCache = mapa.getOfflineCache();
-//		offlineCache.setCacheDirectory(FileSystems.getDefault().getPath("tmp"));
-//		offlineCache.setActive(false);
-//		offlineCache.setNoCacheFilters(Collections.singletonList(".*\\.sothawo\\.com/.*"));
-		
-//		mapa.initializedProperty().addListener((observable, oldValue, newValue) -> {
-//			if (newValue) {
-//				mapa.setCenter(chubut);
-//				mapa.setZoom(7);
-//			}
-//		});
-		
-		mapa.initialize();
 		BorderPane josm = new BorderPane();
-		josm.setPrefHeight(450); //Tamaño
-		//		josm.setAlignment(Pos.TOP_CENTER);
+		josm.setPrefHeight(450);
 		josm.setCenter(mapa);
-		//		josm.getChildren().add(mapa);
 		josm.getStyleClass().add("josm");
+		m.iniciarMapa();
 
 		/*
 		 * Seccion de busqueda de caminos

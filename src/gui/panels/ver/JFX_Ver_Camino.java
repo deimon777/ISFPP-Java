@@ -1,8 +1,10 @@
 package gui.panels.ver;
 
-import com.deimon.camino.Camino;
-import conexion.db.entidades.Caminos;
+import com.deimon.entidades.camino.Camino;
+import com.deimon.isfpp.Main;
 
+import conexion.db.entidades.Caminos;
+import gui.panels.modificar.JFX_Modificar_Camino;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -47,6 +49,8 @@ public class JFX_Ver_Camino {
 		activoCol.setMaxWidth(100);		
 				
 		table.setItems(new Caminos().getCaminos());
+		
+		System.out.println("T: "+table);
 
 		nombreCol.setCellValueFactory(new PropertyValueFactory<Camino,Object>("nombre"));
 		distanciaCol.setCellValueFactory(new PropertyValueFactory<Camino,Object>("distancia"));
@@ -90,7 +94,29 @@ public class JFX_Ver_Camino {
 
                 editButton.setOnAction(event -> {
                     Camino select = getTableView().getItems().get(getIndex());
-                    System.out.println("ID: "+select.getID());
+                    
+                    System.out.println(select.getID());
+                    System.out.println(select.getNombre());
+                    System.out.println(select.getDistancia());
+                    System.out.println(select.getPesoCamino());
+                    System.out.println(select.getTipoCamino().getNombre());
+                    System.out.println(select.getEstadoCamino().getNombre());
+                    System.out.println(select.isActivo());
+                    System.out.println(select.getCiudadInicio().getNombre());
+                    System.out.println(select.getCiudadFin().getNombre());
+                    
+//                	new Main<VBox>().cambiarVista(
+//                			new JFX_Modificar_Camino(
+//                					select.getID(),
+//                					select.getNombre(),
+//                					select.getDistancia(),
+//                					select.getPesoCamino(),
+//                					select.getTipoCamino().getNombre(),
+//                					select.getEstadoCamino().getNombre(),
+//                					select.isActivo(),
+//                					select.getCiudadInicio().getNombre(),
+//                					select.getCiudadFin().getNombre()
+//                					).getPanel());
                 });
             }
         });
