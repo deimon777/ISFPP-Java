@@ -1,17 +1,18 @@
-package com.deimon.camino;
+package com.deimon.entidades.camino;
 
-public class EstadoCamino {
+public class Trafico {
+	private int id;
 	private String nombre;
 	private boolean activo;
 	
-	public EstadoCamino() {
+	public Trafico() {
 	}
 	
-	public EstadoCamino(String nombre) {
+	public Trafico(String nombre) {
 		this.nombre = nombre;
 	}
 	
-	public EstadoCamino(String nombre, boolean activo) {
+	public Trafico(String nombre, boolean activo) {
 		this.nombre = nombre;
 		this.activo = activo;
 	}
@@ -19,6 +20,12 @@ public class EstadoCamino {
 	/*
 	 * Getter y Setter
 	 */
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -1,24 +1,26 @@
 /**
  * 
  */
-package com.deimon.ciudad;
+package com.deimon.entidades.ciudad;
+
+import java.util.List;
 
 /**
  * @author deimon
  *
  */
 public class Ciudad {
-	private int ID;
-	private String nombre = "Falto el nombre";
-	private int habitantes = 0;
+	private int id;
+	private String nombre;
+	private int habitantes;
     private String historia;
     private double latitud;
     private double longitud;
     private boolean activo;
 
-	//private int alojamientos; //falta el tipo (lista)
-	//private String sitios_turisticos; //falta el tipo (lista)
-	
+	private List<Alojamiento> alojamientos;
+	private List<SitioTuristico> sitios_turisticos;
+
 	public Ciudad() {		
 	}
 	
@@ -38,10 +40,10 @@ public class Ciudad {
 	 * Getter y Setter
 	 */
 	public int getID() {
-		return ID;
+		return id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int id) {
+		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;
@@ -78,5 +80,21 @@ public class Ciudad {
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
-	}	
+	}
+	
+	
+	public List<Alojamiento> getListaAlojamientos() {
+		return alojamientos;
+	}
+	public void setAlojamientos(List<Alojamiento> alojamientos) {
+		this.alojamientos = alojamientos;
+	}
+
+	public List<SitioTuristico> getListaSitiosTuristicos() {
+		return sitios_turisticos;
+	}
+
+	public void setSitiosTuristicos(List<SitioTuristico> sitios_turisticos) {
+		this.sitios_turisticos = sitios_turisticos;
+	}
 }

@@ -1,6 +1,7 @@
-package com.deimon.camino;
+package com.deimon.entidades.camino;
 
 public class TipoCamino {
+	private int id;
 	private String nombre;
 	private boolean activo;
 	
@@ -18,6 +19,12 @@ public class TipoCamino {
 	/*
 	 * Getter y Setter
 	 */
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -1,8 +1,8 @@
-package com.deimon.camino;
+package com.deimon.entidades.camino;
 
 public class Camino {
 
-	private int ID;
+	private int id;
 	private String nombre;
 	private int distancia;
 	private int peso_camino;
@@ -11,8 +11,8 @@ public class Camino {
 	private Trafico trafico = null;
     private boolean activo;
     
-	private Camino inicio = null;
-	private Camino fin = null;
+	private Camino ciudad_inicio = null;
+	private Camino ciudad_fin = null;
 
 	public Camino() {
 	}
@@ -24,10 +24,10 @@ public class Camino {
 	 * Getter y Setter
 	 */
 	public int getID() {
-		return ID;
+		return id;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int id) {
+		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;
@@ -74,17 +74,17 @@ public class Camino {
 	}
 	
 
-	public Camino getCaminioInicio() {
-		return inicio;
+	public Camino getCiudadInicio() {
+		return ciudad_inicio;
 	}
-	public void setCaminioInicio(Camino nombre) {
-		this.inicio = nombre;
+	public void setCiudadInicio(Camino nombre) {
+		this.ciudad_inicio = nombre;
 	}
 
-	public Camino getCaminioFin() {
-		return fin;
+	public Camino getCiudadFin() {
+		return ciudad_fin;
 	}
-	public void setCaminioFin(Camino nombre) {
-		this.fin = nombre;
+	public void setCiudadFin(Camino nombre) {
+		this.ciudad_fin = nombre;
 	}
 }
