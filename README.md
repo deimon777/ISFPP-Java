@@ -5,5 +5,5 @@ Trabajo Final de la materia Programación orientadas a Objetos
 * JavaFX  (Jar incluido) - instalar para tener el visualizador
 * JUnit5 (Jar incluido)
 * JDBC (Jar incluido)
-* JOSM - OpenStreetMaps (Jar incluido) (proximamente)
+* Mapajfx con JOSM - OpenStreetMaps (Jar incluido)
 * Log4J (Jar incluido) (proximamente)
