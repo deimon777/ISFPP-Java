@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.deimon.entidades.camino.*;
+import com.deimon.entidades.ciudad.Ciudad;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
@@ -154,7 +155,7 @@ public class Caminos extends EntidadesUtils{
 	 * Trae todos los caminos (Objetos), con toda la informacion que esta en la base de datos.
 	 * @return Una lista de objetos tipo Caminos
 	 */
-	public ObservableList<Camino> getCaminos() {
+	public ObservableList<Camino> getListaCaminos() {
 		String sql = "SELECT * from "+table_name;
 
 		DB_Connection conec = null;
@@ -196,4 +197,90 @@ public class Caminos extends EntidadesUtils{
 		}
 		return lista;
 	}
+	
+
+
+	public Camino getCaminos(int caminoId) {
+		String sql = "SELECT "
+				+ table_name+".*, "
+				+ "tipo_camino.nombre AS tipo_camino_nombre, "
+				+ "tipo_camino.activo AS tipo_camino_activo, "
+				+ "estado_camino.nombre AS estado_camino_nombre, "
+				+ "estado_camino.activo AS estado_camino_activo, "
+				+ "trafico.nombre AS trafico_nombre, "
+				+ "trafico.activo AS trafico_activo, "
+				+ "ciudad_inicial.nombre AS ciudad_inicial_nombre, "
+				+ "ciudad_inicial.habitantes AS ciudad_inicial_habitante, "
+				+ "ciudad_inicial.historia AS ciudad_inicial_historia, "
+				+ "ciudad_inicial.latitud AS ciudad_inicial_lat, "
+				+ "ciudad_inicial.longitud AS ciudad_inicial_long, "
+				+ "ciudad_inicial.activo AS ciudad_inicial_activa, "
+				+ "ciudad_final.nombre AS ciudad_final_nombre, "
+				+ "ciudad_final.habitantes AS ciudad_final_habitante, "
+				+ "ciudad_final.historia AS ciudad_final_historia, "
+				+ "ciudad_final.latitud AS ciudad_final_lat, "
+				+ "ciudad_final.longitud AS ciudad_final_long, "
+				+ "ciudad_final.activo AS ciudad_final_activa "
+				+ "FROM "+table_name+" "
+				+ "JOIN tipo_camino "
+				+ "ON "+table_name+".tipo_camino_id=tipo_camino.id "
+				+ "JOIN estado_camino "
+				+ "ON "+table_name+".estado_camino_id=estado_camino.id "
+				+ "JOIN trafico "
+				+ "ON "+table_name+".trafico_id=trafico.id "
+				+ "JOIN ciudades ciudad_inicial "
+				+ "ON "+table_name+".ciudad_inicial_id=ciudad_inicial.id "
+				+ "JOIN ciudades ciudad_final "
+				+ "ON "+table_name+".ciudad_final_id=ciudad_final.id "
+				+ "WHERE "+table_name+".id = ?";
+
+		DB_Connection conec = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		ResultSet rs = null;
+		Camino camino = null;
+		try {
+			conec = new DB_Connection();
+			myConect = conec.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect != null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.setInt(1, caminoId);
+				rs = myPrepStmt.executeQuery();			
+				while (rs.next()) {
+					camino = new Camino();
+					camino.setNombre(rs.getString("nombre"));
+					camino.setDistancia(rs.getInt("distancia"));
+					camino.setPesoCamino(rs.getInt("peso_camino"));
+					camino.setActivo(rs.getBoolean("activo"));
+					TipoCamino tc = new TipoCamino();
+					tc.setNombre(rs.getString("tipo_camino_nombre"));
+					camino.setTipoCamino(tc);
+					EstadoCamino ec = new EstadoCamino("estado_camino_nombre");
+					ec.setNombre(rs.getString("estado_camino_nombre"));
+					camino.setEstadoCamino(ec);
+					Trafico t = new Trafico();
+					t.setNombre(rs.getString("trafico_nombre"));
+					camino.setTrafico(t);
+					Ciudad c1 = new Ciudad();
+					c1.setNombre(rs.getString("ciudad_inicial_nombre"));
+					camino.setCiudadInicio(c1);
+					
+					
+					Ciudad c2 = new Ciudad();
+					c2.setNombre(rs.getString("ciudad_final_nombre"));
+					camino.setCiudadFin(c2);
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conec.closeStatement(myPrepStmt);
+			conec.closeConnect(myConect);
+		}
+		return camino;
+	}
+	
 }
