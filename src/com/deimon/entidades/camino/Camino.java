@@ -1,5 +1,7 @@
 package com.deimon.entidades.camino;
 
+import com.deimon.entidades.ciudad.Ciudad;
+
 public class Camino {
 
 	private int id;
@@ -11,8 +13,8 @@ public class Camino {
 	private Trafico trafico = null;
     private boolean activo;
     
-	private Camino ciudad_inicio = null;
-	private Camino ciudad_fin = null;
+	private Ciudad ciudad_inicio = null;
+	private Ciudad ciudad_fin = null;
 
 	public Camino() {
 	}
@@ -74,17 +76,17 @@ public class Camino {
 	}
 	
 
-	public Camino getCiudadInicio() {
+	public Ciudad getCiudadInicio() {
 		return ciudad_inicio;
 	}
-	public void setCiudadInicio(Camino nombre) {
+	public void setCiudadInicio(Ciudad nombre) {
 		this.ciudad_inicio = nombre;
 	}
 
-	public Camino getCiudadFin() {
+	public Ciudad getCiudadFin() {
 		return ciudad_fin;
 	}
-	public void setCiudadFin(Camino nombre) {
+	public void setCiudadFin(Ciudad nombre) {
 		this.ciudad_fin = nombre;
 	}
 }

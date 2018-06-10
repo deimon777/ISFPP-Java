@@ -11,7 +11,7 @@ public class SitioTuristico {
 	private int id;
 	private String nombre;
     private boolean activo;
-	private Ciudad ciudad_id = null;
+	private Ciudad ciudad;
 	
 	public SitioTuristico() {		
 	}
@@ -41,10 +41,10 @@ public class SitioTuristico {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Ciudad getCiudad_id() {
-		return ciudad_id;
+	public Ciudad getCiudad() {
+		return ciudad;
 	}
-	public void setCiudad_id(Ciudad ciudad_id) {
-		this.ciudad_id = ciudad_id;
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
 	}	
 }
