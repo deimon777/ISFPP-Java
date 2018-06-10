@@ -265,11 +265,19 @@ public class Caminos extends EntidadesUtils{
 					camino.setTrafico(t);
 					Ciudad c1 = new Ciudad();
 					c1.setNombre(rs.getString("ciudad_inicial_nombre"));
+					c1.setHabitantes(rs.getInt("ciudad_inicial_habitante"));
+					c1.setHistoria(rs.getString("ciudad_inicial_historia"));
+					c1.setLatitud(rs.getDouble("ciudad_inicial_lat"));
+					c1.setLongitud(rs.getDouble("ciudad_inicial_long"));
+					c1.setActivo(rs.getBoolean("ciudad_inicial_activa"));
 					camino.setCiudadInicio(c1);
-					
-					
 					Ciudad c2 = new Ciudad();
 					c2.setNombre(rs.getString("ciudad_final_nombre"));
+					c2.setHabitantes(rs.getInt("ciudad_final_habitante"));
+					c2.setHistoria(rs.getString("ciudad_final_historia"));
+					c2.setLatitud(rs.getDouble("ciudad_final_lat"));
+					c2.setLongitud(rs.getDouble("ciudad_final_long"));
+					c2.setActivo(rs.getBoolean("ciudad_final_activa"));					
 					camino.setCiudadFin(c2);
 				}
 			}
