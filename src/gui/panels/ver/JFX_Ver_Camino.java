@@ -48,7 +48,7 @@ public class JFX_Ver_Camino {
 		activoCol.setMinWidth(70);
 		activoCol.setMaxWidth(100);		
 				
-		table.setItems(new Caminos().getCaminos());
+		table.setItems(new Caminos().getListaCaminos());
 		
 		System.out.println("T: "+table);
 
@@ -88,7 +88,7 @@ public class JFX_Ver_Camino {
                     if (alert.getResult() == ButtonType.OK) {
                         Caminos.deleteItemByID("ciudades", select.getID());
         				table.setItems(null);
-        				table.setItems(new Caminos().getCaminos());
+        				table.setItems(new Caminos().getListaCaminos());
                     }
                 });
 
@@ -134,7 +134,7 @@ public class JFX_Ver_Camino {
 			@Override
 			public void handle(ActionEvent e) {
 				table.setItems(null);
-				table.setItems(new Caminos().getCaminos());
+				table.setItems(new Caminos().getListaCaminos());
 			}
 		});
 
