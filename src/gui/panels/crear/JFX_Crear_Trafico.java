@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -38,19 +37,13 @@ public class JFX_Crear_Trafico extends Pane{
 		Label outputNombre = new Label("Nombre Vacio");
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0);
-		Label activo = new Label("Activo:");
-		CheckBox cb = new CheckBox();
-		cb.setSelected(true);		
 
 		GridPane.setHalignment(nombre, HPos.RIGHT);
-		GridPane.setHalignment(activo, HPos.RIGHT);   
 	    
 		int fila = 0;
 		gp.add(nombre, 0, fila);
 		gp.add(nombreTextField, 1, fila++);
 		gp.add(outputNombre, 1, fila++);
-		gp.add(activo, 0, fila);
-		gp.add(cb, 1, fila++);
 		
 		Button btn = new Button("Crear");
 		HBox hbBtn = new HBox();
@@ -66,13 +59,12 @@ public class JFX_Crear_Trafico extends Pane{
 			@Override
 			public void handle(ActionEvent e) {
 				String nombre = nombreTextField.getText();
-				Boolean activo = cb.selectedProperty().getValue();
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
 					outputNombre.setOpacity(1);
 					output.setText("No se pudo crear, controlar los errores");
 				}else {
 					Rec_Trafico record = new Rec_Trafico();
-					record.insertar(nombre, activo);
+					record.insertar(nombre);
 					nombreTextField.setText("");
 					outputNombre.setOpacity(0);
 					output.setText("Trafico Creado");

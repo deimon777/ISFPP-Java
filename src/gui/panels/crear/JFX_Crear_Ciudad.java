@@ -1,9 +1,8 @@
 package gui.panels.crear;
 
 import conexion.db.entidades.Ciudades;
-import gui.utils.NumberTextField;
-import gui.utils.DoubleTextField;
-
+import gui.utiles.DoubleTextField;
+import gui.utiles.NumberTextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;

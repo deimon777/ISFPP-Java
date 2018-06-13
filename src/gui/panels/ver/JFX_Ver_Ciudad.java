@@ -49,7 +49,7 @@ public class JFX_Ver_Ciudad extends Pane{
 		activoCol.setMinWidth(70);
 		activoCol.setMaxWidth(100);		
 				
-		table.setItems(new Ciudades().getCiudades());
+		table.setItems(new Ciudades().getListaCiudades());
 
 		nombreCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("nombre"));
 		habitantesCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("habitantes"));
@@ -60,8 +60,8 @@ public class JFX_Ver_Ciudad extends Pane{
 		accionesCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Ciudad>("acciones"));        
         
         accionesCol.setCellFactory(param -> new TableCell<Ciudad,Ciudad>() {
-            private final Button editButton = new Button("Modificar");
-            private final Button deleteButton = new Button("Eliminar");
+            private final Button editButton = new Button("");
+            private final Button deleteButton = new Button("");
             @Override
             protected void updateItem(Ciudad item, boolean empty) {
                 super.updateItem(item, empty);
@@ -75,6 +75,9 @@ public class JFX_Ver_Ciudad extends Pane{
                     setText(null);
                 }
 
+				deleteButton.getStyleClass().add("action-button");
+				deleteButton.getStyleClass().add("delete-button");
+				deleteButton.setPrefWidth(accionesCol.getWidth()/2);
                 deleteButton.setOnAction(event -> {
                     Ciudad select = getTableView().getItems().get(getIndex());
                     Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -86,10 +89,13 @@ public class JFX_Ver_Ciudad extends Pane{
                     if (alert.getResult() == ButtonType.OK) {
                         Ciudades.deleteItemByID("ciudades", select.getID());
         				table.setItems(null);
-        				table.setItems(new Ciudades().getCiudades());
+        				table.setItems(new Ciudades().getListaCiudades());
                     }
                 });
 
+				editButton.getStyleClass().add("action-button");
+				editButton.getStyleClass().add("edit-button");
+				editButton.setPrefWidth(accionesCol.getWidth()/2);
                 editButton.setOnAction(event -> {
                     Ciudad select = getTableView().getItems().get(getIndex());			
                 	new Main<VBox>().cambiarVista(
@@ -119,7 +125,7 @@ public class JFX_Ver_Ciudad extends Pane{
 			@Override
 			public void handle(ActionEvent e) {
 				table.setItems(null);
-				table.setItems(new Ciudades().getCiudades());
+				table.setItems(new Ciudades().getListaCiudades());
 			}
 		});
 

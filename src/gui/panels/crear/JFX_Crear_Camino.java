@@ -8,8 +8,7 @@ import conexion.db.entidades.Ciudades;
 import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_TipoCamino;
 import conexion.db.entidades.Rec_Trafico;
-import gui.utils.NumberTextField;
-
+import gui.utiles.NumberTextField;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -59,8 +58,8 @@ public class JFX_Crear_Camino {
 		outputDistancia.setTextFill(Color.RED);
 		outputDistancia.setOpacity(0);
 		Label peso_camino = new Label("Peso Camino:");
-		ComboBox<String> lista_peso = new ComboBox<String>();
-		lista_peso.setItems(FXCollections.observableArrayList("1", "2", "3"));
+		ComboBox<Integer> lista_peso = new ComboBox<Integer>();
+		lista_peso.setItems(FXCollections.observableArrayList(1, 2, 3));
 		Label outputPeso = new Label("Este campo no puede estar vacio");
 		outputPeso.setTextFill(Color.RED);
 		outputPeso.setOpacity(0);
@@ -162,7 +161,7 @@ public class JFX_Crear_Camino {
 				boolean valido = true;
 				String nombre = nombreTextField.getText();
 				int distancia = distanciaTextField.getValue();
-				int peso = Integer.parseInt(lista_peso.getValue());
+				int peso = lista_peso.getValue();
 				Boolean activo = cb.selectedProperty().getValue();
 				String tipo = lista_tipo_camino.getValue();
 				String estado = lista_estado_camino.getValue();

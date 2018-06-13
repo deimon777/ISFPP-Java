@@ -3,10 +3,9 @@ package gui.panels.modificar;
 import com.deimon.isfpp.Main;
 
 import conexion.db.entidades.Ciudades;
-import gui.utils.NumberTextField;
 import gui.panels.ver.JFX_Ver_Ciudad;
-import gui.utils.DoubleTextField;
-
+import gui.utiles.DoubleTextField;
+import gui.utiles.NumberTextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;

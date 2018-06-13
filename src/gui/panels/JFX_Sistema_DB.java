@@ -21,19 +21,18 @@ public class JFX_Sistema_DB {
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
 
-		GridPane gp = new GridPane();
-		//		gp.setGridLinesVisible(true);
-		gp.setAlignment(Pos.CENTER);
-		gp.setHgap(10);
-		gp.setVgap(10);
+		GridPane gpDB = new GridPane();
+		gpDB.setAlignment(Pos.CENTER);
+		gpDB.setHgap(10);
+		gpDB.setVgap(10);
 
 		Button btnCrearDB = new Button("Crear DB");
 		Button btnDeleteDB = new Button("Borrar DB");
 		Button btnVaciarDB = new Button("Vaciar DB");
 
-		gp.add(btnCrearDB, 0, 0);
-		gp.add(btnDeleteDB, 1, 0);
-		gp.add(btnVaciarDB, 2, 0);
+		gpDB.add(btnCrearDB, 0, 0);
+		gpDB.add(btnDeleteDB, 1, 0);
+		gpDB.add(btnVaciarDB, 2, 0);
 
 
 		btnCrearDB.setOnAction(new EventHandler<ActionEvent>() {
@@ -42,14 +41,14 @@ public class JFX_Sistema_DB {
 				new DB_Tablas().crearTodasLasTablas();
 			};
 		});
-		
+
 		btnDeleteDB.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				new DB_Tablas().borrarTodasLasTablas();
 			};
 		});
-		
+
 		btnVaciarDB.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -57,12 +56,11 @@ public class JFX_Sistema_DB {
 			};
 		});
 
-
 		panel.getStyleClass().add("spacing-medio");
-		panel.getChildren().addAll(hbox_titulo,gp);
-		}
-
-		public VBox getPanel() {
-			return this.panel;
-		}
+		panel.getChildren().addAll(hbox_titulo,gpDB);
 	}
+
+	public VBox getPanel() {
+		return this.panel;
+	}
+}

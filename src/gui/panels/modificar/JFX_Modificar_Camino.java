@@ -2,13 +2,15 @@ package gui.panels.modificar;
 
 import org.controlsfx.control.textfield.TextFields;
 
+import com.deimon.isfpp.Main;
+
 import conexion.db.entidades.Caminos;
 import conexion.db.entidades.Ciudades;
 import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_TipoCamino;
 import conexion.db.entidades.Rec_Trafico;
-import gui.utils.NumberTextField;
-
+import gui.panels.ver.JFX_Ver_Camino;
+import gui.utiles.NumberTextField;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -29,11 +31,11 @@ import javafx.scene.text.Text;
 public class JFX_Modificar_Camino {
 	VBox panel = new VBox();
 
-	public JFX_Modificar_Camino(int nId, String nNombre, int nDistancia, int nPeso, String nTipo, String nEstado, boolean nActivo, String nCiudad1, String nCiudad2) {
+	public JFX_Modificar_Camino(int nId, String nNombre, int nDistancia, int nPeso, String nTipo, String nEstado, String nTrafico,boolean nActivo, String nCiudad1, String nCiudad2) {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);
-		Text titulo = new Text("Crear Camino");
+		Text titulo = new Text("Modificar Camino");
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
 
@@ -48,49 +50,53 @@ public class JFX_Modificar_Camino {
 		gp.setVgap(10);
 
 		Label nombre = new Label("Nombre del Camino:");
-		TextField nombreTextField = new TextField();
+		TextField nombreTextField = new TextField(nNombre);
 		Label outputNombre = new Label("Nombre Vacio");
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0); //ver como no ocupan espacio 
 		Label distancia = new Label("Distancia:");
-		NumberTextField distanciaTextField = new NumberTextField();
+		NumberTextField distanciaTextField = new NumberTextField(nDistancia);
 		Label outputDistancia = new Label("Este campo no puede estar vacio");
 		outputDistancia.setTextFill(Color.RED);
 		outputDistancia.setOpacity(0);
 		Label peso_camino = new Label("Peso Camino:");
-		ComboBox<String> lista_peso = new ComboBox<String>();
-		lista_peso.setItems(FXCollections.observableArrayList("1", "2", "3"));
+		ComboBox<Integer> lista_peso = new ComboBox<Integer>();
+		lista_peso.setItems(FXCollections.observableArrayList(1, 2, 3));
+		lista_peso.setValue(nPeso);
 		Label outputPeso = new Label("Este campo no puede estar vacio");
 		outputPeso.setTextFill(Color.RED);
 		outputPeso.setOpacity(0);
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
-		cb.setSelected(true);
+		cb.setSelected(nActivo);
 		Label tipo_camino = new Label("Tipo Camino:");
 		ComboBox<String> lista_tipo_camino = new ComboBox<String>();
 		lista_tipo_camino.setItems(new Rec_TipoCamino().getTipoCaminoNombre());
+		lista_tipo_camino.setValue(nTipo);
 		Label outputTipoCamino = new Label("Este campo no puede estar vacio");
 		outputTipoCamino.setTextFill(Color.RED);
 		outputTipoCamino.setOpacity(0);
 		Label estado_camino = new Label("Estado Camino:");
 		ComboBox<String> lista_estado_camino = new ComboBox<String>();
 		lista_estado_camino.setItems(new Rec_EstadoCamino().getEstadoCaminoNombre());
+		lista_estado_camino.setValue(nEstado);
 		Label outpuEstadoCamino = new Label("Este campo no puede estar vacio");
 		outpuEstadoCamino.setTextFill(Color.RED);
 		outpuEstadoCamino.setOpacity(0);
 		Label trafico = new Label("Trafico:");
 		ComboBox<String> lista_trafico = new ComboBox<String>();
 		lista_trafico.setItems(new Rec_Trafico().getTraficoNombre());
+		lista_trafico.setValue(nTrafico);
 		Label outputTrafico = new Label("Este campo no puede estar vacio");
 		outputTrafico.setTextFill(Color.RED);
 		outputTrafico.setOpacity(0);
 		Label ciudad1 = new Label("Nombre del Ciudad:");
-		TextField ciudad1TextField = new TextField();
+		TextField ciudad1TextField = new TextField(nCiudad1);
 		Label outputCiudad1 = new Label("Este campo no puede estar vacio");
 		outputCiudad1.setTextFill(Color.RED);
 		outputCiudad1.setOpacity(0);
 		Label ciudad2 = new Label("Nombre del Ciudad:");
-		TextField ciudad2TextField = new TextField();
+		TextField ciudad2TextField = new TextField(nCiudad2);
 		Label outputCiudad2 = new Label("Este campo no puede estar vacio");
 		outputCiudad2.setTextFill(Color.RED);
 		outputCiudad2.setOpacity(0);
@@ -145,7 +151,7 @@ public class JFX_Modificar_Camino {
 		gp.add(ciudad2TextField, 1, fila++);		
 		gp.add(outputCiudad2, 1, fila++);
 
-		Button btn = new Button("Crear");
+		Button btn = new Button("Modificar");
 		HBox hbBtn = new HBox();
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
 		hbBtn.getChildren().add(btn);
@@ -161,8 +167,9 @@ public class JFX_Modificar_Camino {
 				boolean valido = true;
 				String nombre = nombreTextField.getText();
 				int distancia = distanciaTextField.getValue();
-				int peso = Integer.parseInt(lista_peso.getValue());
+				int peso = lista_peso.getValue();
 				Boolean activo = cb.selectedProperty().getValue();
+				
 				String tipo = lista_tipo_camino.getValue();
 				String estado = lista_estado_camino.getValue();
 				String trafico = lista_trafico.getValue();
@@ -181,14 +188,13 @@ public class JFX_Modificar_Camino {
 					Ciudades ciudad = new Ciudades();
 					int ciudad_id1 = ciudad.getCiudadesID(ciudad1);
 					int ciudad_id2 = ciudad.getCiudadesID(ciudad2);
-					
 					Caminos record = new Caminos();
-					record.insertar(nombre,distancia,peso,activo,tipo_id,estado_id,trafico_id,ciudad_id1,ciudad_id2);
+					record.actualizar(nId,nombre,distancia,peso,activo,tipo_id,estado_id,trafico_id,ciudad_id1,ciudad_id2);
 					nombreTextField.setText("");
 					distanciaTextField.setText("");
 					cb.setSelected(true);
-					output.setText("Camino Creado");
-					TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre()); //controlar aca
+					output.setText("Camino Modificado!");
+					new Main<VBox>().cambiarVista(new JFX_Ver_Camino().getPanel());
 					
 				}else {
 					output.setText("Controlar los errores");					

@@ -2,7 +2,7 @@ package gui.panels;
 
 import com.deimon.isfpp.configuracion.Constantes;
 
-import gui.utils.TextoGUI;
+import gui.utiles.TextoGUI;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
