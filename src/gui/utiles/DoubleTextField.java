@@ -1,17 +1,17 @@
-package gui.utils;
+package gui.utiles;
 
 import javafx.scene.control.TextField;
 
-public class NumberTextField extends TextField{
-	
-	public NumberTextField() {		
+public class DoubleTextField extends TextField{
+
+	public DoubleTextField() {		
 	}
 	
-	public NumberTextField(int n) {
+	public DoubleTextField(double n) {
 		super.setText(""+n);
 	}
-
-	@Override
+	
+    @Override
     public void replaceText(int start, int end, String text)
     {
         if (validate(text))
@@ -31,10 +31,7 @@ public class NumberTextField extends TextField{
 
     private boolean validate(String text)
     {
-        return text.matches("[0-9]*");
+        return text.matches("[-]?[0-9]*[\\.]{0,1}?[0-9]*"); //poner bien el double, q no permita --123...123.1.123
+        
     }
-
-	public int getValue() {
-		return Integer.parseInt(super.getText());
-	}
 }

@@ -1,4 +1,4 @@
-package gui.utils;
+package gui.utiles;
 
 public class TextoGUI {
 	public final static String TITULO = "Buscador de Rutas";
@@ -37,6 +37,9 @@ public class TextoGUI {
 	public final static String MENU_SISTEMA = "_Sistema";
 	public final static String MENU_SISTEMA_TEMA = "Tema";
 	public final static String MENU_SISTEMA_BASE_DE_DATOS = "Base de Datos";
+	public final static String MENU_SISTEMA_AUTOMATIZAR= "Automatizar carga";
+	public final static String MENU_SISTEMA_AUTO_AUTO= "Cargar Datos";
+	public final static String MENU_SISTEMA_AUTO_CSV= "Cargar por CSV";
 	
 	public final static String MENU_AYUDA = "A_yuda";
 	public final static String MENU_AYUDA_ACERCA = "Acerca de";
