@@ -10,10 +10,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class JFX_Sistema_DB {
+public class JFX_SistemaDB {
 	VBox panel = new VBox();
 
-	public JFX_Sistema_DB() {
+	public JFX_SistemaDB() {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);

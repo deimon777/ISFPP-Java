@@ -9,7 +9,7 @@ import conexion.db.entidades.Ciudades;
 import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_TipoCamino;
 import conexion.db.entidades.Rec_Trafico;
-import gui.panels.ver.JFX_Ver_Camino;
+import gui.panels.ver.JFX_VerCamino;
 import gui.utiles.NumberTextField;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -28,10 +28,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class JFX_Modificar_Camino {
+public class JFX_ModificarCamino {
 	VBox panel = new VBox();
 
-	public JFX_Modificar_Camino(int nId, String nNombre, int nDistancia, int nPeso, String nTipo, String nEstado, String nTrafico,boolean nActivo, String nCiudad1, String nCiudad2) {
+	public JFX_ModificarCamino(int nId, String nNombre, int nDistancia, int nPeso, String nTipo, String nEstado, String nTrafico,boolean nActivo, String nCiudad1, String nCiudad2) {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);
@@ -194,7 +194,7 @@ public class JFX_Modificar_Camino {
 					distanciaTextField.setText("");
 					cb.setSelected(true);
 					output.setText("Camino Modificado!");
-					new Main<VBox>().cambiarVista(new JFX_Ver_Camino().getPanel());
+					new Main<VBox>().cambiarVista(new JFX_VerCamino().getPanel());
 					
 				}else {
 					output.setText("Controlar los errores");					

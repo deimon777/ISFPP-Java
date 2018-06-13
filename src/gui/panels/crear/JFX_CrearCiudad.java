@@ -1,9 +1,6 @@
-package gui.panels.modificar;
-
-import com.deimon.isfpp.Main;
+package gui.panels.crear;
 
 import conexion.db.entidades.Ciudades;
-import gui.panels.ver.JFX_Ver_Ciudad;
 import gui.utiles.DoubleTextField;
 import gui.utiles.NumberTextField;
 import javafx.event.ActionEvent;
@@ -22,14 +19,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class JFX_Modificar_Ciudad extends Pane{
+public class JFX_CrearCiudad extends Pane{
 	VBox panel = new VBox();
 
-	public JFX_Modificar_Ciudad(int nId, String nNombre, int nHabitantes, String nHistoria, double nLatitud, double nLongitud, boolean nActivo) {
+	public JFX_CrearCiudad() {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);
-		Text titulo = new Text("Modificar Ciudad");
+		Text titulo = new Text("Crear Ciudad");
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
 
@@ -40,22 +37,22 @@ public class JFX_Modificar_Ciudad extends Pane{
 		gp.setVgap(10);
 		
 		Label nombre = new Label("Nombre de la Ciudad: (*)");
-		TextField nombreTextField = new TextField(nNombre);
+		TextField nombreTextField = new TextField();
 		Label outputNombre = new Label("Nombre Vacio");
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0);
 		Label habitantes = new Label("Habitantes:");
-		NumberTextField habitantesTextField = new NumberTextField(nHabitantes);
+		NumberTextField habitantesTextField = new NumberTextField();
 		Label historia = new Label("Historia:");
-		TextArea historiasTextField = new TextArea(nHistoria);
+		TextArea historiasTextField = new TextArea();
 		historiasTextField.setPrefWidth(nombreTextField.getWidth()); //acomoda el ancho
 		Label latitud = new Label("Latitud: (*)");
-		DoubleTextField latitudTextField = new DoubleTextField(nLatitud);
+		DoubleTextField latitudTextField = new DoubleTextField();
 		Label longitud = new Label("Longitud: (*)");
-		DoubleTextField longitudTextField = new DoubleTextField(nLongitud);
+		DoubleTextField longitudTextField = new DoubleTextField();
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
-		cb.setSelected(nActivo);
+		cb.setSelected(true);
 		
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(nombreTextField, HPos.LEFT);
@@ -85,7 +82,7 @@ public class JFX_Modificar_Ciudad extends Pane{
 		gp.add(activo, 0, fila);
 		gp.add(cb, 1, fila++);
 		
-		Button btn = new Button("Modificar");
+		Button btn = new Button("Crear");
 		HBox hbBtn = new HBox();
 		hbBtn.setAlignment(Pos.BOTTOM_LEFT);
 		hbBtn.getChildren().add(btn);
@@ -125,16 +122,15 @@ public class JFX_Modificar_Ciudad extends Pane{
 				}
 				
 				if(valido){
-					Ciudades ciudad = new Ciudades();
-					ciudad.actualizar(nId,nombre,habitantes,historia,latitud,longitud,activo);
+					Ciudades record = new Ciudades();
+					record.insertar(nombre,habitantes,historia,latitud,longitud,activo);
 					nombreTextField.setText("");
 					habitantesTextField.setText("");
 					historiasTextField.setText("");
 					latitudTextField.setText("");
 					longitudTextField.setText("");
 					cb.setSelected(true);
-					output.setText("Ciudad Modificada");
-					new Main<VBox>().cambiarVista(new JFX_Ver_Ciudad().getPanel());
+					output.setText("Ciudad Creada");
 				}
 				output.setOpacity(1);
 			}

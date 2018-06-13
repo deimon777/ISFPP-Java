@@ -10,11 +10,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 
-public class JFX_Menu_admin {
+public class JFX_MenuAdmin {
 
 	MenuBar menu = new MenuBar();
 
-	public JFX_Menu_admin() {
+	public JFX_MenuAdmin() {
 		EventHandler<ActionEvent> action = new MenuAction().setAction();
 
 		/*

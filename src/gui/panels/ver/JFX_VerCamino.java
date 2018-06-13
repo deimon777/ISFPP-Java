@@ -8,7 +8,7 @@ import com.deimon.entidades.ciudad.Ciudad;
 import com.deimon.isfpp.Main;
 
 import conexion.db.entidades.Caminos;
-import gui.panels.modificar.JFX_Modificar_Camino;
+import gui.panels.modificar.JFX_ModificarCamino;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -24,10 +24,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class JFX_Ver_Camino {
+public class JFX_VerCamino {
 	VBox panel = new VBox();
 
-	public JFX_Ver_Camino() {
+	public JFX_VerCamino() {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);
@@ -125,7 +125,7 @@ public class JFX_Ver_Camino {
 					System.out.println(select.getCiudadFin().getNombre());
 
 					new Main<VBox>().cambiarVista(
-							new JFX_Modificar_Camino(
+							new JFX_ModificarCamino(
 									select.getID(),
 									select.getNombre(),
 									select.getDistancia(),

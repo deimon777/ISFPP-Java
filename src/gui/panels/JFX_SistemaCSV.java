@@ -19,10 +19,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
-public class JFX_Sistema_CSV {
+public class JFX_SistemaCSV {
 	VBox panel = new VBox();
 
-	public JFX_Sistema_CSV() {
+	public JFX_SistemaCSV() {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);

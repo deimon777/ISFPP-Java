@@ -4,7 +4,7 @@ import com.deimon.entidades.ciudad.Ciudad;
 import com.deimon.isfpp.Main;
 
 import conexion.db.entidades.Ciudades;
-import gui.panels.modificar.JFX_Modificar_Ciudad;
+import gui.panels.modificar.JFX_ModificarCiudad;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -21,10 +21,10 @@ import javafx.scene.text.Text;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
-public class JFX_Ver_Ciudad extends Pane{
+public class JFX_VerCiudad extends Pane{
 	VBox panel = new VBox();
 
-	public JFX_Ver_Ciudad() {
+	public JFX_VerCiudad() {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);
@@ -99,7 +99,7 @@ public class JFX_Ver_Ciudad extends Pane{
                 editButton.setOnAction(event -> {
                     Ciudad select = getTableView().getItems().get(getIndex());			
                 	new Main<VBox>().cambiarVista(
-                			new JFX_Modificar_Ciudad(
+                			new JFX_ModificarCiudad(
                 					select.getID(),
                 					select.getNombre(),
                 					select.getHabitantes(),

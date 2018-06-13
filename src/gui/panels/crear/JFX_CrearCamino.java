@@ -26,10 +26,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class JFX_Crear_Camino {
+public class JFX_CrearCamino {
 	VBox panel = new VBox();
 
-	public JFX_Crear_Camino() {
+	public JFX_CrearCamino() {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);

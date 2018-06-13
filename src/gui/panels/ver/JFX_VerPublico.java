@@ -8,6 +8,7 @@ import com.sothawo.mapjfx.offline.OfflineCache;
 
 import conexion.db.entidades.Ciudades;
 import gui.mapa.Mapa;
+import gui.utiles.CrearGrafo;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -23,10 +24,10 @@ import javafx.scene.layout.VBox;
 
 
 
-public class JFX_Ver_Publico{
+public class JFX_VerPublico{
 	VBox panel = new VBox();
 
-	public JFX_Ver_Publico() {
+	public JFX_VerPublico() {
 		/*
 		 * Mapa de los caminos
 		 */
@@ -94,6 +95,15 @@ public class JFX_Ver_Publico{
 
 		panel.getStyleClass().add("spacing-medio");
 		panel.getChildren().addAll(josm,buscar_ruta);
+		
+		
+		
+		
+		
+		
+		CrearGrafo graf = new CrearGrafo();
+		graf.cargarVertices();
+		graf.cargarAristas();
 	}
 
 	public VBox getPanel() {
