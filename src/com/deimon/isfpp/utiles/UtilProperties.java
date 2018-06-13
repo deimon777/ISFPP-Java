@@ -1,4 +1,4 @@
-package com.deimon.isfpp.configuracion;
+package com.deimon.isfpp.utiles;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
