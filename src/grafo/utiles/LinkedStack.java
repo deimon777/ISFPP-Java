@@ -1,4 +1,4 @@
-package grafo.utils;
+package grafo.utiles;
 /*
  * Copyright 2014, Michael T. Goodrich, Roberto Tamassia, Michael H. Goldwasser
  *
@@ -23,43 +23,65 @@ package grafo.utils;
  */
 
 /**
- * A collection of objects that are inserted and removed according to the last-in
- * first-out principle. Although similar in purpose, this interface differs from
- * java.util.Stack.
+ * Realization of a stack as an adaptation of a SinglyLinkedList.
+ * All operations are performed in constant time.
  *
  * @author Michael T. Goodrich
  * @author Roberto Tamassia
  * @author Michael H. Goldwasser
+ * @see SinglyLinkedList
  */
-public interface Stack<E> {
+public class LinkedStack<E> implements Stack<E> {
+
+  /** The primary storage for elements of the stack */
+  private SinglyLinkedList<E> list = new SinglyLinkedList<>();   // an empty list
+
+  /** Constructs an initially empty stack. */
+  public LinkedStack() { }                   // new stack relies on the initially empty list
 
   /**
    * Returns the number of elements in the stack.
    * @return number of elements in the stack
    */
-  int size();
+  @Override
+  public int size() { return list.size(); }
 
   /**
    * Tests whether the stack is empty.
    * @return true if the stack is empty, false otherwise
    */
-  boolean isEmpty();
+  @Override
+  public boolean isEmpty() { return list.isEmpty(); }
 
   /**
    * Inserts an element at the top of the stack.
-   * @param e   the element to be inserted
+   * @param element   the element to be inserted
    */
-  void push(E e);
+  @Override
+  public void push(E element) { list.addFirst(element); }
 
   /**
    * Returns, but does not remove, the element at the top of the stack.
    * @return top element in the stack (or null if empty)
    */
-  E top();
+  @Override
+  public E top() { return list.first(); }
 
   /**
    * Removes and returns the top element from the stack.
    * @return element removed (or null if empty)
    */
-  E pop();
+  @Override
+  public E pop() { return list.removeFirst(); }
+
+  /** Produces a string representation of the contents of the stack.
+   *  (ordered from top to bottom)
+   *
+   * This exists for debugging purposes only.
+   *
+   * @return textual representation of the stack
+   */
+  public String toString() {
+    return list.toString();
+  }
 }

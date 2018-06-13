@@ -1,4 +1,4 @@
-package grafo.utils;
+package grafo.utiles;
 /*
  * Copyright 2014, Michael T. Goodrich, Roberto Tamassia, Michael H. Goldwasser
  *
@@ -23,22 +23,43 @@ package grafo.utils;
  */
 
 /**
- * Interface for a key-value pair.
+ * A collection of objects that are inserted and removed according to the last-in
+ * first-out principle. Although similar in purpose, this interface differs from
+ * java.util.Stack.
  *
  * @author Michael T. Goodrich
  * @author Roberto Tamassia
  * @author Michael H. Goldwasser
  */
-public interface Entry<K,V> {
-  /**
-   * Returns the key stored in this entry.
-   * @return the entry's key
-   */
-  K getKey();
+public interface Stack<E> {
 
   /**
-   * Returns the value stored in this entry.
-   * @return the entry's value
+   * Returns the number of elements in the stack.
+   * @return number of elements in the stack
    */
-  V getValue();
+  int size();
+
+  /**
+   * Tests whether the stack is empty.
+   * @return true if the stack is empty, false otherwise
+   */
+  boolean isEmpty();
+
+  /**
+   * Inserts an element at the top of the stack.
+   * @param e   the element to be inserted
+   */
+  void push(E e);
+
+  /**
+   * Returns, but does not remove, the element at the top of the stack.
+   * @return top element in the stack (or null if empty)
+   */
+  E top();
+
+  /**
+   * Removes and returns the top element from the stack.
+   * @return element removed (or null if empty)
+   */
+  E pop();
 }

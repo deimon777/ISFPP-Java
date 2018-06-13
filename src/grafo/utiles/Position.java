@@ -1,4 +1,4 @@
-package grafo.utils;
+package grafo.utiles;
 /*
  * Copyright 2014, Michael T. Goodrich, Roberto Tamassia, Michael H. Goldwasser
  *
@@ -22,26 +22,21 @@ package grafo.utils;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import java.util.Comparator;
-
 /**
- * Comparator based on the compareTo method of a Comparable element type.
+ * An interface for a position which is an abstraction for the
+ * location at which a single element is stored in a positional
+ * container.
  *
  * @author Michael T. Goodrich
  * @author Roberto Tamassia
  * @author Michael H. Goldwasser
  */
-public class DefaultComparator<E> implements Comparator<E> {
-
+public interface Position<E> {
   /**
-   * Compares two elements.
+   * Returns the element stored at this position.
    *
-   * @return a negative integer if <tt>a</tt> is less than <tt>b</tt>,
-   * zero if <tt>a</tt> equals <tt>b</tt>, or a positive integer if
-   * <tt>a</tt> is greater than <tt>b</tt>
+   * @return the stored element
+   * @throws IllegalStateException if position no longer valid
    */
-  @SuppressWarnings({"unchecked"})
-  public int compare(E a, E b) throws ClassCastException {
-    return ((Comparable<E>) a).compareTo(b);
-  }
+  E getElement() throws IllegalStateException;
 }
