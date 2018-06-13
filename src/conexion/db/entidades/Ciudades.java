@@ -16,7 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Ciudades extends EntidadesUtils{
-	private static String table_name = TablesName.CUIDADES;
+	private static String tableName = TablesName.CUIDADES;
 
 	/**
 	 * Tiene el codigo SQL para crear la tabla ciudades, y llama a la funcion para crear la misma
@@ -30,19 +30,19 @@ public class Ciudades extends EntidadesUtils{
 				+ "longitud DOUBLE(10,6),"
 				+ "activo BIT(1) DEFAULT TRUE,"
 				+ "PRIMARY KEY (id)";
-		TablasUtiles.creatTable(table_name, sql);
+		TablasUtiles.creatTable(tableName, sql);
 	}
 	/**
 	 * Borra (DELETE) la tabla.
 	 */
 	public void borrarTablaCiudad() {
-		TablasUtiles.deleteTable(table_name);		
+		TablasUtiles.deleteTable(tableName);		
 	}
 	/**
 	 * Vacia (DROP) la tabla.
 	 */
 	public void vaciarTablaCiudad() {
-		TablasUtiles.emptyTable(table_name);
+		TablasUtiles.emptyTable(tableName);
 	}
 
 	/*******************************************************************/
@@ -60,7 +60,7 @@ public class Ciudades extends EntidadesUtils{
 	 * @param activo
 	 */
 	public void insertar( String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
-		String sql = "INSERT INTO "+table_name+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
+		String sql = "INSERT INTO "+tableName+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
 				+ "VALUES (NULL,?,?,?,?,?,?)";
 
 		DB_Connection c = null;
@@ -109,6 +109,36 @@ public class Ciudades extends EntidadesUtils{
 		}
 	}	
 
+	/**
+	 * Inserta los valores a la tabla
+	 * @param valorSql
+	 */
+	public void cargarValores(String valorSql) {
+		String sql = "INSERT INTO "+tableName+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
+				+ "VALUES "+valorSql;
+
+		DB_Connection c = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.executeUpdate();
+				System.out.println("Ciudad Cargada!");
+			}
+		} catch (SQLException e) {
+			//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Out of range value for column 'latitud' at row 1
+			e.printStackTrace();
+		}finally {
+			c.closeStatement(myPrepStmt);
+			c.closeConnect(myConect);
+		}
+
+	}
 	/*
 	 * BORRAR
 	 */
@@ -117,7 +147,7 @@ public class Ciudades extends EntidadesUtils{
 	 * @param Recive el id del item a ser borrado
 	 */	
 	public void deleteItemByID(int id) {
-		EntidadesUtils.deleteItemByID(table_name, id);
+		EntidadesUtils.deleteItemByID(tableName, id);
 	}
 
 	/**
@@ -125,7 +155,7 @@ public class Ciudades extends EntidadesUtils{
 	 * @param Recive el nombre del item a ser borrado
 	 */	
 	public void deleteItemByNAME(String nombre) {
-		EntidadesUtils.deleteItemByNAME(table_name, nombre);
+		EntidadesUtils.deleteItemByNAME(tableName, nombre);
 	}
 
 	/*
@@ -142,8 +172,15 @@ public class Ciudades extends EntidadesUtils{
 	 * @param trafico
 	 * @param activo
 	 */	
-	public void actualizar(Integer id, String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
-		String sql = "UPDATE "+table_name+" SET nombre = ?, habitantes = ?, historia = ?, latitud = ?, longitud = ?, activo = ? WHERE id = ?";		
+	public void actualizar(int id, String nombre, Integer habitantes, String historia, Double latitud, Double longitud, boolean activo) {
+		String sql = "UPDATE "+tableName+" "
+				+ "SET nombre = ?, "
+				+ "habitantes = ?, "
+				+ "historia = ?, "
+				+ "latitud = ?, "
+				+ "longitud = ?, "
+				+ "activo = ? "
+				+ "WHERE "+tableName+".id = ?";	
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -181,7 +218,7 @@ public class Ciudades extends EntidadesUtils{
 				myPrepStmt.setInt(7, id);
 
 				myPrepStmt.executeUpdate();
-				System.out.println("Ciudad Creada!");
+				System.out.println("Ciudad Modificada!");
 			}
 		} catch (SQLException e) {
 			//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Out of range value for column 'latitud' at row 1
@@ -199,8 +236,8 @@ public class Ciudades extends EntidadesUtils{
 	 * Trae todos las ciudades (Objetos), con toda la informacion que esta en la base de datos.
 	 * @return Una lista de objetos tipo Ciudad
 	 */
-	public ObservableList<Ciudad> getCiudades() {
-		String sql = "SELECT * from "+table_name;
+	public ObservableList<Ciudad> getListaCiudades() {
+		String sql = "SELECT * from "+tableName;
 
 		DB_Connection conec = null;
 		Connection myConect = null;
@@ -241,7 +278,7 @@ public class Ciudades extends EntidadesUtils{
 	 * @return Una lista con nombres de ciudades
 	 */
 	public ObservableList<String> getCiudadesNombre() {
-		return EntidadesUtils.getLista("SELECT nombre from "+table_name);
+		return EntidadesUtils.getLista("SELECT nombre from "+tableName);
 	}
 
 	/**
@@ -249,7 +286,7 @@ public class Ciudades extends EntidadesUtils{
 	 * @return Una lista con nombres de ciudades
 	 */
 	public ObservableList<String> getCiudadesActivas() {
-		return EntidadesUtils.getLista("SELECT nombre from "+table_name+" WHERE activo = 1");
+		return EntidadesUtils.getLista("SELECT nombre from "+tableName+" WHERE activo = 1");
 	}
 
 	/**
@@ -258,7 +295,7 @@ public class Ciudades extends EntidadesUtils{
 	 * @return El ID de la ciudad.
 	 */
 	public int getCiudadesID(String nombre) {
-		int id = EntidadesUtils.getItemFromNombre(table_name, "id", nombre);
+		int id = EntidadesUtils.getItemFromNombre(tableName, "id", nombre);
 		return id;
 	}
 }

@@ -17,7 +17,7 @@ public class EntidadesUtils {
 	 * BORRAR
 	 */
 	public static void deleteItemByID(String table, int id) {
-		String sql = "DELETE FROM "+table+" WHERE id = ?";
+		String sql = "DELETE FROM "+table+" WHERE "+table+".id = ?";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPreStmt = null;
@@ -40,7 +40,7 @@ public class EntidadesUtils {
 	}
 
 	public static void deleteItemByNAME(String table, String nombre) {
-		String sql = "DELETE FROM "+table+" WHERE id = ?";
+		String sql = "DELETE FROM "+table+" WHERE "+table+"id = ?";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPreStmt = null;
@@ -65,54 +65,6 @@ public class EntidadesUtils {
 	/*
 	 * ACTUALIZAR
 	 */
-//	public void updateIdItem(String table, int id) {
-//	}
-//	public void updateNameItem(String table, String name, int id) {
-//		String sql = "UPDATE "+table+" SET nombre = ? WHERE id = ?";
-//		DB_Connection c = null;
-//		Connection myConect = null;
-//		PreparedStatement myPreStmt = null;
-//		try {
-//			c = new DB_Connection();
-//			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-//					ConstantesPropierties.DB_NAME_USER,
-//					ConstantesPropierties.DB_NAME_PASS);
-//			if(myConect!=null) {
-//				myPreStmt = myConect.prepareStatement(sql);
-//				myPreStmt.setString(1, name);
-//				myPreStmt.setInt(2, id);
-//				myPreStmt.executeUpdate();
-//				System.out.println("Item Actualizado!");
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			c.closeConnect(myConect);
-//		}	
-//	}
-//	public void activateItem(String table, Boolean activo, int id) {
-//		String sql = "UPDATE "+table+" SET activo = ? WHERE id = ?";
-//		DB_Connection c = null;
-//		Connection myConect = null;
-//		PreparedStatement myPreStmt = null;
-//		try {
-//			c = new DB_Connection();
-//			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-//					ConstantesPropierties.DB_NAME_USER,
-//					ConstantesPropierties.DB_NAME_PASS);
-//			if(myConect!=null) {
-//				myPreStmt = myConect.prepareStatement(sql);
-//				myPreStmt.setBoolean(1, activo);
-//				myPreStmt.setInt(2, id);
-//				myPreStmt.executeUpdate();
-//				System.out.println("Item Actualizado!");
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			c.closeConnect(myConect);
-//		}	
-//	}
 
 	/*
 	 * BUSCAR

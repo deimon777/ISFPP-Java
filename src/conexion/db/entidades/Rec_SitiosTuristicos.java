@@ -14,7 +14,7 @@ import conexion.db.tablas.TablasUtiles;
 import conexion.db.tablas.TablesName;
 
 public class Rec_SitiosTuristicos extends EntidadesUtils{
-	private String table_name = TablesName.SITIOS_TURISTICOS;
+	private String tableName = TablesName.SITIOS_TURISTICOS;
 
 	/**
 	 * Tiene el codigo SQL para crear la tabla sitios_turisticos, y llama a la funcion para crear la misma
@@ -26,76 +26,102 @@ public class Rec_SitiosTuristicos extends EntidadesUtils{
 				+ "PRIMARY KEY (id)," 
 				+ "ciudades_id INT NOT NULL," 
 				+ "CONSTRAINT fk_sitios_turisticos FOREIGN KEY (ciudades_id)" 
-				+ " REFERENCES ciudades (id) ON DELETE CASCADE ON UPDATE CASCADE";
-		TablasUtiles.creatTable(table_name, sql);
+				+ " REFERENCES ciudades (id)";
+		TablasUtiles.creatTable(tableName, sql);
 	}
 	/**
 	 * Borra (DELETE) la tabla.
 	 */
 	public void borrarTablaSitiosTuristicos() {
-		TablasUtiles.deleteTable(table_name);		
+		TablasUtiles.deleteTable(tableName);		
 	}
 	/**
 	 * Vacia (DROP) la tabla.
 	 */
 	public void vaciarTablaSitiosTuristicos() {
-		TablasUtiles.emptyTable(table_name);		
+		TablasUtiles.emptyTable(tableName);		
 	}
 
 	/*******************************************************************/
-	
+
 	/*
 	 * INSERTAR
 	 */
 	public void insertar(String nombre, Boolean activo, int ciudad_id) {
-			String sql = "INSERT INTO "+table_name+" (id, nombre, activo, ciudades_id) VALUES (NULL, ?,?,?)";
-			DB_Connection c = null;
-			Connection myConect = null;
-			PreparedStatement myPrepStmt = null;
-			try {
-				c = new DB_Connection();
-				myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
-						ConstantesPropierties.DB_NAME_USER,
-						ConstantesPropierties.DB_NAME_PASS);
-				if(myConect!=null) {
-					myPrepStmt = myConect.prepareStatement(sql);
-					myPrepStmt.setString(1, nombre);
-					myPrepStmt.setBoolean(2, activo);
-					myPrepStmt.setInt(3, ciudad_id);
-					myPrepStmt.executeUpdate();			
-					System.out.println("ALojamiento Creada!");
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				c.closeConnect(myConect);
+		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, ciudades_id) VALUES (NULL, ?,?,?)";
+		DB_Connection c = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.setString(1, nombre);
+				myPrepStmt.setBoolean(2, activo);
+				myPrepStmt.setInt(3, ciudad_id);
+				myPrepStmt.executeUpdate();			
+				System.out.println("ALojamiento Creada!");
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			c.closeConnect(myConect);
 		}
-	
+	}
+
+	public void cargarValores(String valorSql) {
+		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, ciudades_id) "
+				+ "VALUES "+valorSql;
+
+		DB_Connection c = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.executeUpdate();
+				System.out.println("Sitios Turisticos Cargado!");
+			}
+		} catch (SQLException e) {
+			//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Out of range value for column 'latitud' at row 1
+			e.printStackTrace();
+		}finally {
+			c.closeStatement(myPrepStmt);
+			c.closeConnect(myConect);
+		}
+	}
+
 	/*
 	 * BORRAR
 	 */
-	
+
 	/*
 	 * ACTUALIZAR
 	 */
-	
+
 	/*
 	 * BUSCAR
 	 */
 	public SitioTuristico getSitioTuristico(int sitioTuristicoId) {
 		String sql = "SELECT "
-				+ table_name+".*, "
+				+ tableName+".*, "
 				+ "ciudades.nombre AS ciudad_nombre, "
 				+ "ciudades.habitantes, "
 				+ "ciudades.historia, "
 				+ "ciudades.latitud, "
 				+ "ciudades.longitud, "
 				+ "ciudades.activo AS ciudad_activa "
-				+ "FROM "+table_name+" "
+				+ "FROM "+tableName+" "
 				+ "JOIN `ciudades` "
-				+ "ON "+table_name+".ciudades_id=ciudades.id "
-				+ "WHERE "+table_name+".id = ?";
+				+ "ON "+tableName+".ciudades_id=ciudades.id "
+				+ "WHERE "+tableName+".id = ?";
 
 		DB_Connection conec = null;
 		Connection myConect = null;
