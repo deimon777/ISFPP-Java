@@ -4,7 +4,6 @@ import com.deimon.isfpp.Main;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
-import gui.utils.TextoGUI;
 import gui.panels.*;
 import gui.panels.crear.JFX_Crear_Alojamiento;
 import gui.panels.crear.JFX_Crear_Camino;
@@ -18,6 +17,7 @@ import gui.panels.ver.JFX_Ver_Camino;
 import gui.panels.ver.JFX_Ver_Ciudad;
 import gui.panels.ver.JFX_Ver_Publico;
 import gui.panels.ver.JFX_Ver_Recurso;
+import gui.utiles.TextoGUI;
 import javafx.application.Platform;
 
 public class MenuAction {	
@@ -101,6 +101,14 @@ public class MenuAction {
 				case TextoGUI.MENU_SISTEMA_BASE_DE_DATOS:
 					System.out.println("Base de datos"); //LOG
 					vista = (T)new JFX_Sistema_DB().getPanel();
+					break;
+				case TextoGUI.MENU_SISTEMA_AUTO_AUTO:
+					System.out.println("Automatizar"); //LOG
+					vista = (T)new JFX_Sistema_Auto().getPanel();
+					break;
+				case TextoGUI.MENU_SISTEMA_AUTO_CSV:
+					System.out.println("Automatizar CSV"); //LOG
+					vista = (T)new JFX_Sistema_CSV().getPanel();
 					break;
 
 					//AYUDA

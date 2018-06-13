@@ -1,5 +1,6 @@
 package gui.menu;
 
+import gui.utiles.TextoGUI;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -8,7 +9,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import gui.utils.TextoGUI;
 
 public class JFX_Menu_public {
 

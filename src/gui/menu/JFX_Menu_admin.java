@@ -1,5 +1,6 @@
 package gui.menu;
 
+import gui.utiles.TextoGUI;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
@@ -8,7 +9,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import gui.utils.TextoGUI;
 
 public class JFX_Menu_admin {
 
@@ -44,6 +44,9 @@ public class JFX_Menu_admin {
 		Menu sistema = new Menu(TextoGUI.MENU_SISTEMA);
 //		MenuItem sistemaTema = new MenuItem(TextoGUI.MENU_SISTEMA_TEMA);
 		MenuItem sistemaDB= new MenuItem(TextoGUI.MENU_SISTEMA_BASE_DE_DATOS);
+		Menu sistemaAutomatizar = new Menu(TextoGUI.MENU_SISTEMA_AUTOMATIZAR);
+		MenuItem sistemaAutoAuto= new MenuItem(TextoGUI.MENU_SISTEMA_AUTO_AUTO);
+		MenuItem sistemaAutoCSV = new MenuItem(TextoGUI.MENU_SISTEMA_AUTO_CSV);
 
 		Menu ayuda = new Menu(TextoGUI.MENU_AYUDA);
 		MenuItem ayudaAcerca = new MenuItem(TextoGUI.MENU_AYUDA_ACERCA);
@@ -56,7 +59,8 @@ public class JFX_Menu_admin {
 		ver.getItems().addAll(verPublico, verCiudades, verCaminos, verRecursos);
 		crearRecursos.getItems().addAll(crearRecursoAlojamiento, crearRecursoTrafico, crearRecursoSitioTuristico, crearRecursoEstadoCamino, crearRecursoTipoCamino);
 		crear.getItems().addAll(crearCiudad, crearCamino, crearRecursos);
-		sistema.getItems().addAll(sistemaDB);
+		sistemaAutomatizar.getItems().addAll(sistemaAutoAuto,sistemaAutoCSV);
+		sistema.getItems().addAll(sistemaDB,sistemaAutomatizar);
 		ayuda.getItems().addAll(ayudaAcerca,ayudaAyuda);
 
 		/*
@@ -94,6 +98,8 @@ public class JFX_Menu_admin {
 		crearRecursoEstadoCamino.setOnAction(action);
 
 		sistemaDB.setOnAction(action);
+		sistemaAutoAuto.setOnAction(action);
+		sistemaAutoCSV.setOnAction(action);
 		
 		ayudaAcerca.setOnAction(action);
 		ayudaAyuda.setOnAction(action);
