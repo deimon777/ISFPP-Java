@@ -33,8 +33,18 @@
 }
 
 /* ADMIN */
+.delete-button {
+  -fx-background-image: url("./delete.png");
+}
 
-
+.edit-button {
+  -fx-background-image: url("./edit.png");
+}
+.action-button{	
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-background-size: 25;  
+}
 
 
 
