@@ -2,7 +2,6 @@ package conexion.db.tablas;
 
 import conexion.db.entidades.Caminos;
 import conexion.db.entidades.Ciudades;
-import conexion.db.entidades.Ciudades_Caminos;
 import conexion.db.entidades.Rec_Alojamientos;
 import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_SitiosTuristicos;
@@ -37,11 +36,9 @@ public class DB_Tablas {
 		caminos.crearTablaCaminos();		
 		alojamientos.crearTablaAlojamientos();
 		sitios_turisticos.crearTablaSitiosTuristicos();		
-//		ciudades_caminos.crearTablaCiudadesCaminos();		
 	}
 		
 	public void borrarTodasLasTablas() {
-//		ciudades_caminos.borrarTablaCiudadesCaminos();
 		sitios_turisticos.borrarTablaSitiosTuristicos();
 		alojamientos.borrarTablaAlojamientos();
 		caminos.borrarTablaCaminos();
@@ -57,7 +54,6 @@ public class DB_Tablas {
 		alojamientos.vaciarTablaAlojamientos();
 		caminos.vaciarTablaCaminos();
 		ciudades.vaciarTablaCiudad();
-//		ciudades_caminos.vaciarTablaCiudadesCaminos();
 		estado_camino.vaciarTablaEstadoCamino();
 		sitios_turisticos.vaciarTablaSitiosTuristicos();
 		tipo_camino.vaciarTablaTipoCamino();
