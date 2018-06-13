@@ -21,7 +21,7 @@ public class Usuarios extends EntidadesUtils{
 				+ "PRIMARY KEY (id)," 
 				+ "tipo_usuario_id INT NOT NULL," 
 				+ "CONSTRAINT fk_usuarios FOREIGN KEY (tipo_usuario_id) "
-				+ " REFERENCES tipo_usuario (id) ON DELETE CASCADE ON UPDATE CASCADE";
+				+ " REFERENCES tipo_usuario (id)";
 		TablasUtiles.creatTable(table_name, sql);
 	}
 	/**
