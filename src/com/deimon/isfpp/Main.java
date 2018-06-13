@@ -4,9 +4,9 @@ import java.net.URL;
 
 import com.deimon.isfpp.configuracion.Constantes;
 
-import gui.menu.JFX_Menu_admin;
-import gui.menu.JFX_Menu_public;
-import gui.panels.ver.JFX_Ver_Publico;
+import gui.menu.JFX_MenuAdmin;
+import gui.menu.JFX_MenuPublico;
+import gui.panels.ver.JFX_VerPublico;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -35,11 +35,11 @@ public class Main<T> extends Application{
 		primaryStage.setTitle("Buscador de Rutas");
 		primaryStage.setResizable(false);
 
-		JFX_Menu_admin jfx_m = new JFX_Menu_admin();
+		JFX_MenuAdmin jfx_m = new JFX_MenuAdmin();
 //		JFX_Menu_public jfx_m = new JFX_Menu_public();
 		MenuBar menu = jfx_m.getMenu();
 		
-		JFX_Ver_Publico jfx_p= new JFX_Ver_Publico();
+		JFX_VerPublico jfx_p= new JFX_VerPublico();
 		T publico = (T)jfx_p.getPanel();
 
 		root.setTop(menu);

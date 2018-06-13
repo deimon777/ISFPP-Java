@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.deimon.entidades.ciudad.Ciudad;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
@@ -241,7 +240,7 @@ public class Ciudades extends EntidadesUtils{
 
 		DB_Connection conec = null;
 		Connection myConect = null;
-		Statement myStmt = null;
+		PreparedStatement myPrepStmt = null;
 		ResultSet rs = null;
 		ObservableList<Ciudad> lista = FXCollections.observableArrayList();
 		try {
@@ -250,8 +249,8 @@ public class Ciudades extends EntidadesUtils{
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
 			if(myConect != null) {
-				myStmt = conec.getStatement(myConect);
-				rs = myStmt.executeQuery(sql);
+				myPrepStmt = myConect.prepareStatement(sql);
+				rs = myPrepStmt.executeQuery();	
 				while (rs.next()) {
 					Ciudad ciudad = new Ciudad();
 					ciudad.setID(rs.getInt("id"));
@@ -268,7 +267,6 @@ public class Ciudades extends EntidadesUtils{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			conec.closeStatement(myStmt);
 			conec.closeConnect(myConect);
 		}
 		return lista;

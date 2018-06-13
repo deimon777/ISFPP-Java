@@ -5,18 +5,18 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import gui.panels.*;
-import gui.panels.crear.JFX_Crear_Alojamiento;
-import gui.panels.crear.JFX_Crear_Camino;
-import gui.panels.crear.JFX_Crear_Ciudad;
-import gui.panels.crear.JFX_Crear_EstadoCamino;
-import gui.panels.crear.JFX_Crear_Grafo;
-import gui.panels.crear.JFX_Crear_SitiosTuristicos;
-import gui.panels.crear.JFX_Crear_TipoCamino;
-import gui.panels.crear.JFX_Crear_Trafico;
-import gui.panels.ver.JFX_Ver_Camino;
-import gui.panels.ver.JFX_Ver_Ciudad;
-import gui.panels.ver.JFX_Ver_Publico;
-import gui.panels.ver.JFX_Ver_Recurso;
+import gui.panels.crear.JFX_CrearAlojamiento;
+import gui.panels.crear.JFX_CrearCamino;
+import gui.panels.crear.JFX_CrearCiudad;
+import gui.panels.crear.JFX_CrearEstadoCamino;
+import gui.panels.crear.JFX_CrearSitiosTuristicos;
+import gui.panels.crear.JFX_CrearTipoCamino;
+import gui.panels.crear.JFX_CrearTrafico;
+import gui.panels.ver.JFX_VerCamino;
+import gui.panels.ver.JFX_VerCiudad;
+import gui.panels.ver.JFX_VerPublico;
+import gui.panels.ver.JFX_VerRecurso;
+import gui.utiles.CrearGrafo;
 import gui.utiles.TextoGUI;
 import javafx.application.Platform;
 
@@ -52,63 +52,63 @@ public class MenuAction {
 					//VER
 				case TextoGUI.MENU_PUBLICO:
 					System.out.println("Publico"); //LOG
-					vista = (T)new JFX_Ver_Publico().getPanel();			
+					vista = (T)new JFX_VerPublico().getPanel();			
 					break;
 				case TextoGUI.MENU_VER_CIUDAD:
 					System.out.println("Ciudad ver"); //LOG
-					vista = (T)new JFX_Ver_Ciudad().getPanel();
+					vista = (T)new JFX_VerCiudad().getPanel();
 					break;
 				case TextoGUI.MENU_VER_CAMINO:
 					System.out.println("Camino ver"); //LOG
-					vista = (T)new JFX_Ver_Camino().getPanel();
+					vista = (T)new JFX_VerCamino().getPanel();
 					break;
 				case TextoGUI.MENU_VER_RECURSO:
 					System.out.println("Recurso ver"); //LOG
-					vista = (T)new JFX_Ver_Recurso().getPanel();
+					vista = (T)new JFX_VerRecurso().getPanel();
 					break;
 					
 					//CREAR
 				case TextoGUI.MENU_CREAR_CIUDAD:
 					System.out.println("Ciudad crear"); //LOG
-					vista = (T)new JFX_Crear_Ciudad().getPanel();
+					vista = (T)new JFX_CrearCiudad().getPanel();
 					break;
 				case TextoGUI.MENU_CREAR_CAMINO:
 					System.out.println("Camino crear"); //LOG
-					vista = (T)new JFX_Crear_Camino().getPanel();
+					vista = (T)new JFX_CrearCamino().getPanel();
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_ALOJAMIENTO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
-					vista = (T)new JFX_Crear_Alojamiento().getPanel();
+					vista = (T)new JFX_CrearAlojamiento().getPanel();
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_TRAFICO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
-					vista = (T)new JFX_Crear_Trafico().getPanel();
+					vista = (T)new JFX_CrearTrafico().getPanel();
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_SITIO_TURISTICO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
-					vista = (T)new JFX_Crear_SitiosTuristicos().getPanel();
+					vista = (T)new JFX_CrearSitiosTuristicos().getPanel();
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_TIPO_CAMINO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
-					vista = (T)new JFX_Crear_TipoCamino().getPanel(); //cambiar
+					vista = (T)new JFX_CrearTipoCamino().getPanel(); //cambiar
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_ESTADO_CAMINO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
-					vista = (T)new JFX_Crear_EstadoCamino().getPanel(); //cambiar
+					vista = (T)new JFX_CrearEstadoCamino().getPanel(); //cambiar
 					break;
 
 					//SISTEMA
 				case TextoGUI.MENU_SISTEMA_BASE_DE_DATOS:
 					System.out.println("Base de datos"); //LOG
-					vista = (T)new JFX_Sistema_DB().getPanel();
+					vista = (T)new JFX_SistemaDB().getPanel();
 					break;
 				case TextoGUI.MENU_SISTEMA_AUTO_AUTO:
 					System.out.println("Automatizar"); //LOG
-					vista = (T)new JFX_Sistema_Auto().getPanel();
+					vista = (T)new JFX_SistemaAutomatico().getPanel();
 					break;
 				case TextoGUI.MENU_SISTEMA_AUTO_CSV:
 					System.out.println("Automatizar CSV"); //LOG
-					vista = (T)new JFX_Sistema_CSV().getPanel();
+					vista = (T)new JFX_SistemaCSV().getPanel();
 					break;
 
 					//AYUDA
@@ -123,7 +123,7 @@ public class MenuAction {
 
 				default:
 					System.out.println("Default | Publico"); //LOG
-					vista = (T)new JFX_Ver_Publico().getPanel();
+					vista = (T)new JFX_VerPublico().getPanel();
 					break;
 				}
 
