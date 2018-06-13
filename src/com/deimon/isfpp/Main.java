@@ -32,7 +32,7 @@ public class Main<T> extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("Mi primer app");
+		primaryStage.setTitle("Buscador de Rutas");
 		primaryStage.setResizable(false);
 
 		JFX_Menu_admin jfx_m = new JFX_Menu_admin();
