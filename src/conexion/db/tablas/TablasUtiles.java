@@ -27,7 +27,7 @@ public class TablasUtiles {
 					ConstantesPropierties.DB_NAME_PASS);
 			if(myConect!=null) {
 				myStmt = c.getStatement(myConect);
-				myStmt.execute("CREATE TABLE IF NOT EXISTS " + table + "(" + param + ")ENGINE=INNODB");
+				myStmt.execute("CREATE TABLE IF NOT EXISTS " + table + "(" + param + ") ENGINE=INNODB");
 				System.out.println("Tabla "+table+" creada");
 			}
 		} catch (SQLException e) {
@@ -53,7 +53,7 @@ public class TablasUtiles {
 					ConstantesPropierties.DB_NAME_PASS);
 			if(myConect!=null) {
 				myStmt = c.getStatement(myConect);
-				myStmt.execute("DROP TABLE " + table);
+				myStmt.execute("DROP TABLE IF EXISTS " + table);
 				System.out.println("Tabla "+table+" borrada");
 			}
 		} catch (SQLException e) {
@@ -69,7 +69,8 @@ public class TablasUtiles {
 	 * @param table
 	 */
 	public static void emptyTable(String table) {
-		String sql = "TRUNCATE TABLE "+table;
+//		checkForeign(0);
+		String sql = "TRUNCATE table "+table;
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -88,7 +89,30 @@ public class TablasUtiles {
 			e.printStackTrace();
 		}finally {
 			c.closeConnect(myConect);
+			checkForeign(1);
 		}		
 	}
+	
+	private static void checkForeign(int n) {
+		String sql = "SET FOREIGN_KEY_CHECKS=?;";
 
+		DB_Connection c = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.setInt(1, n);
+				myPrepStmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			c.closeConnect(myConect);
+		}		
+	}
 }
