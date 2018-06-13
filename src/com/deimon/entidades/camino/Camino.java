@@ -89,4 +89,22 @@ public class Camino {
 	public void setCiudadFin(Ciudad nombre) {
 		this.ciudad_fin = nombre;
 	}
+	
+	
+	/**************/
+	public String getTipoCaminoNombre() {
+		return tipo.getNombre();
+	}
+	public String getEstadoCaminoNombre() {
+		return estado.getNombre();
+	}
+	public String getTraficoNombre() {
+		return trafico.getNombre();
+	}
+	public String getCiudadInicioNombre() {
+		return ciudad_inicio.getNombre();
+	}
+	public String getCiudadFinNombre() {
+		return ciudad_fin.getNombre();
+	}
 }
