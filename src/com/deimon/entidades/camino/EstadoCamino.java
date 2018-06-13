@@ -3,7 +3,6 @@ package com.deimon.entidades.camino;
 public class EstadoCamino {
 	private int id;
 	private String nombre;
-	private boolean activo;
 	
 	public EstadoCamino() {
 	}
@@ -14,7 +13,6 @@ public class EstadoCamino {
 	
 	public EstadoCamino(String nombre, boolean activo) {
 		this.nombre = nombre;
-		this.activo = activo;
 	}
 	
 	/*
@@ -31,11 +29,5 @@ public class EstadoCamino {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	public boolean isActivo() {
-		return activo;
-	}
-	public void setActivo(boolean activo) {
-		this.activo = activo;
 	}
 }

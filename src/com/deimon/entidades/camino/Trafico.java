@@ -3,7 +3,6 @@ package com.deimon.entidades.camino;
 public class Trafico {
 	private int id;
 	private String nombre;
-	private boolean activo;
 	
 	public Trafico() {
 	}
@@ -14,7 +13,6 @@ public class Trafico {
 	
 	public Trafico(String nombre, boolean activo) {
 		this.nombre = nombre;
-		this.activo = activo;
 	}
 	
 	/*
@@ -31,11 +29,5 @@ public class Trafico {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	public boolean isActivo() {
-		return activo;
-	}
-	public void setActivo(boolean activo) {
-		this.activo = activo;
 	}
 }
