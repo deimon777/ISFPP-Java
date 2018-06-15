@@ -80,8 +80,8 @@ public class CrearGrafo{
 	}
 
 	public void buscarCamino(String ciudad1, String ciudad2) {
-		Vertex<Ciudad> c1 = listaVertices.get(0);
-		Vertex<Ciudad> c2 = listaVertices.get(1);
+//		Vertex<Ciudad> c1 = listaVertices.get(0);
+//		Vertex<Ciudad> c2 = listaVertices.get(1);
 		
 //		Map<Vertex<Ciudad>, Ciudad> res = GraphAlgorithms.shortestPathLengths(g, c1);
 
