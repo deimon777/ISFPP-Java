@@ -102,8 +102,7 @@ public class JFX_VerPublico{
 		
 		
 		CrearGrafo graf = new CrearGrafo();
-		graf.cargarVertices();
-		graf.cargarAristas();
+		graf.cargarGrafo();
 	}
 
 	public VBox getPanel() {

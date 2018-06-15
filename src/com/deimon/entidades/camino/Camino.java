@@ -79,15 +79,15 @@ public class Camino {
 	public Ciudad getCiudadInicio() {
 		return ciudad_inicio;
 	}
-	public void setCiudadInicio(Ciudad nombre) {
-		this.ciudad_inicio = nombre;
+	public void setCiudadInicio(Ciudad ciudad) {
+		this.ciudad_inicio = ciudad;
 	}
 
 	public Ciudad getCiudadFin() {
 		return ciudad_fin;
 	}
-	public void setCiudadFin(Ciudad nombre) {
-		this.ciudad_fin = nombre;
+	public void setCiudadFin(Ciudad ciudad) {
+		this.ciudad_fin = ciudad;
 	}
 	
 	

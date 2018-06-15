@@ -12,6 +12,8 @@ import grafo.utiles.ProbeHashMap;
 
 import com.deimon.entidades.ciudad.Ciudad;
 
+import java.util.ArrayList;
+
 import com.deimon.entidades.camino.Camino;
 
 import conexion.db.entidades.Ciudades;
@@ -22,66 +24,85 @@ public class CrearGrafo{
 
 	ObservableList<Ciudad> listaCiudad;
 	ObservableList<Camino> listaCamino;
-	
-	public void cargarVertices() {
-		System.out.println("---------- V");
-		System.out.println("Vertice");
+	ArrayList<Vertex<Ciudad>> listaVertices = new ArrayList<>();
+
+	private void listaCiudades() {
 		Ciudades ciudades = new Ciudades();
 		listaCiudad = ciudades.getListaCiudades();
-//		System.out.println(listaCiudad.toString());
-		listaCiudad.forEach(node ->{			
-//			System.out.println(node.getNombre());
-			g.insertVertex(node);
-		});
-			
-//		Vertex<Ciudad> vPM = grafo.insertVertex(madryn);	
-		System.out.println(listaCiudad.get(0).getNombre());	
-		System.out.println("La cantidad de ciudades son: "+g.numVertices());	
-		System.out.println("---------- V");
 	}
-	
-	public void cargarAristas() {		
-		System.out.println("----------- A");
-		System.out.println("Arista");
-		Caminos caminos = new Caminos();
-		listaCamino = caminos.getListaCaminos();	
-//		System.out.println(listaCamino.toString());
-		listaCamino.forEach(node ->{			
-//			System.out.println(node.getNombre());
-//			g.insertEdge(g.insertVertex(node.getCiudadInicio()), g.insertVertex(node.getCiudadFin()), node);
-//			grafo.insertEdge(node.getCiudadInicioNombre(), node.getCiudadFinNombre(), node);
 
-			System.out.print(node.getCiudadInicio()+"     ");
-			System.out.print(listaCiudad.get(0)+"     ");
-			System.out.println(listaCiudad.contains(node.getCiudadInicio()));
-		});
-		System.out.println("La cantidad de caminos son: "+g.numEdges());
-		System.out.println("----------- A");
+	private void listaCamino() {		
+		Caminos caminos = new Caminos();
+		listaCamino = caminos.getListaCaminos();
 	}
-	
-	public void mostrarCamino() {
-//		Map<Vertex<Ciudad>, Integer> res = GraphAlgorithms.shortestPathLengths(
-//				g, listaCiudad.get(1));
-//
-//		for (Vertex<String> result : res.keySet())
-//			System.out.println(result.getElement() + "  -->  "
-//					+ res.get(result));
-//
+
+
+	private void cargarListaVertices() {
+		for(int i=0; i<listaCiudad.size(); i++){
+			listaVertices.add(i,g.insertVertex(listaCiudad.get(i)));
+		};
+
+	}
+
+	private void cargarAristas() {
+		int cInicial = 0;
+		int cFinal = 0;
+		int j, i;
+		for(i=0; i<listaCamino.size(); i++){
+			for(j=0; j<listaCiudad.size(); j++){
+				if(listaCiudad.get(j).getNombre().equals(listaCamino.get(i).getCiudadInicio().getNombre())) {
+					//					System.out.println("inicial: "+listaCiudad.get(j).getNombre()+" => "+j);
+					cInicial = j;
+				}
+				if(listaCiudad.get(j).getNombre().equals(listaCamino.get(i).getCiudadFin().getNombre())) {
+					//					System.out.println("final  : "+listaCiudad.get(j).getNombre()+" => "+j);
+					cFinal = j;
+				}
+			}
+
+			//			System.out.println("Cargando el arco");
+			//			System.out.println("inicial " + cInicial + " final "+ cFinal);
+			//			System.out.println("c inicial " + listaVertices.get(cInicial));
+			//			System.out.println("c final   " + listaVertices.get(cFinal));
+			//			System.out.println("j "+j);
+			//			System.out.println("size "+listaCamino.size());
+			//			System.out.println("i "+i);
+			//			System.out.println("camino    " + listaCamino.get(i).getNombre());
+			g.insertEdge(listaVertices.get(cInicial), listaVertices.get(cFinal), listaCamino.get(i));
+		}  
+	}
+
+	public void cargarGrafo() {
+		listaCiudades();
+		listaCamino();
+		cargarListaVertices();
+		cargarAristas();
+	}
+
+	public void buscarCamino(String ciudad1, String ciudad2) {
+		Vertex<Ciudad> c1 = listaVertices.get(0);
+		Vertex<Ciudad> c2 = listaVertices.get(1);
+		
+//		Map<Vertex<Ciudad>, Ciudad> res = GraphAlgorithms.shortestPathLengths(g, c1);
+
+//		for (Vertex<Ciudad> result : res.keySet())
+//			System.out.println(result.getElement() + "  -->  " + result.getElement().getNombre());
+
 //		Map<Vertex<String>, Edge<Integer>> tree;
 //
-//		tree = GraphAlgorithms.spTree(g, v1, res);
+//		tree = GraphAlgorithms.spTree(g, c2, res);
 //
 //		for (Vertex<String> ver : tree.keySet())
-//			System.out.println(ver.getElement() + "  ----->  "
-//					+ tree.get(ver).getElement());
+//			System.out.println(ver.getElement() + "  ----->  " + tree.get(ver).getElement());
 //
 //		Edge<Integer> arc;
-//		Vertex<String> ver = v4;
-//		
-//		while (ver != v1) {
+//		Vertex<String> ver = c2.getElement().getNombre();
+
+//		while (ver != c1) {
 //			System.out.println(ver.getElement());
 //			arc = tree.get(ver);
 //			ver = g.opposite(ver, arc);
 //		}
+
 	}
 }
