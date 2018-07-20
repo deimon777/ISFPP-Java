@@ -81,13 +81,13 @@ public class JFX_VerCiudad extends Pane{
                 deleteButton.setOnAction(event -> {
                     Ciudad select = getTableView().getItems().get(getIndex());
                     Alert alert = new Alert(AlertType.CONFIRMATION);
-        			alert.setTitle("Eliminar Ciudad");
+        			alert.setTitle("Eliminar Item");
         			alert.setHeaderText(null);
         			alert.setContentText("¿Segudo que desea eliminar la ciudad "+select.getNombre()+"?");
-//        			alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+        			// alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
                     alert.showAndWait();
                     if (alert.getResult() == ButtonType.OK) {
-                        Ciudades.deleteItemByID("ciudades", select.getID());
+                        new Ciudades().deleteItemByID(select.getID());
         				table.setItems(null);
         				table.setItems(new Ciudades().getListaCiudades());
                     }

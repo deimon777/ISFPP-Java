@@ -9,6 +9,7 @@ import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_TipoCamino;
 import conexion.db.entidades.Rec_Trafico;
 import gui.utiles.NumberTextField;
+import gui.utiles.TextoUtiles;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -98,7 +99,7 @@ public class JFX_CrearCamino {
 		TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre());
 		TextFields.bindAutoCompletion(ciudad1TextField,new Ciudades().getCiudadesActivas());
 		TextFields.bindAutoCompletion(ciudad2TextField,new Ciudades().getCiudadesActivas());
-		
+
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(distancia, HPos.RIGHT);
 		GridPane.setHalignment(peso_camino, HPos.RIGHT);
@@ -116,7 +117,7 @@ public class JFX_CrearCamino {
 		GridPane.setHalignment(ciudad2TextField, HPos.LEFT);
 		GridPane.setHalignment(ciudad2, HPos.RIGHT);
 		GridPane.setHalignment(ciudad2TextField, HPos.LEFT);		
-		
+
 		int fila = 0;
 		gp.add(nombre, 0, fila);
 		gp.add(nombreTextField, 1, fila++);
@@ -154,25 +155,56 @@ public class JFX_CrearCamino {
 		Label output = new Label("");
 		output.setOpacity(0);
 		gp.add(output, 1, fila);
-		
+
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				boolean valido = true;
 				String nombre = nombreTextField.getText();
-				int distancia = distanciaTextField.getValue();
-				int peso = lista_peso.getValue();
+				Integer distancia = null;
+				Integer peso = null;
 				Boolean activo = cb.selectedProperty().getValue();
-				String tipo = lista_tipo_camino.getValue();
-				String estado = lista_estado_camino.getValue();
-				String trafico = lista_trafico.getValue();
+				String tipo = null;
+				String estado = null;
+				String trafico = null;
 				String ciudad1 = ciudad1TextField.getText();
 				String ciudad2 = ciudad2TextField.getText();
+
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
 					outputNombre.setOpacity(1);
 					valido = false;	
 				}
-				//validad Todo
+				if (!(distanciaTextField.getText() == null || !distanciaTextField.getText().trim().isEmpty())) {
+					distancia = distanciaTextField.getValue();
+				}
+				if (!(lista_peso.getValue() == null)) {
+					peso = lista_peso.getValue();
+				}
+				if (!(lista_tipo_camino.getValue() == null || !lista_tipo_camino.getValue().trim().isEmpty())) {
+					tipo = lista_tipo_camino.getValue();
+				}else {
+					valido = false;						
+				}
+				if (!(lista_estado_camino.getValue() == null || !lista_estado_camino.getValue().trim().isEmpty())) {
+					estado = lista_estado_camino.getValue();
+				}else {
+					valido = false;						
+				}
+				if (!(lista_trafico.getValue() == null || !lista_trafico.getValue().trim().isEmpty())) {
+					trafico = lista_trafico.getValue();
+				}else {
+					valido = false;						
+				}
+
+				if (ciudad1TextField.getText() == null || ciudad1TextField.getText().trim().isEmpty()) {
+					valido = false;	
+				}
+				if (ciudad2TextField.getText() == null || ciudad2TextField.getText().trim().isEmpty()) {
+					valido = false;	
+				}
+
+				TextoUtiles tu = new TextoUtiles();		
+				nombre = tu.Capitalizar(nombre);
 
 				if(valido){
 					int tipo_id = new Rec_TipoCamino().getTipoCaminoID(tipo);
@@ -181,15 +213,15 @@ public class JFX_CrearCamino {
 					Ciudades ciudad = new Ciudades();
 					int ciudad_id1 = ciudad.getCiudadesID(ciudad1);
 					int ciudad_id2 = ciudad.getCiudadesID(ciudad2);
-					
+
 					Caminos record = new Caminos();
-					record.insertar(nombre,distancia,peso,activo,tipo_id,estado_id,trafico_id,ciudad_id1,ciudad_id2);
+					//					record.insertar(nombre,distancia,peso,activo,tipo_id,estado_id,trafico_id,ciudad_id1,ciudad_id2);
 					nombreTextField.setText("");
 					distanciaTextField.setText("");
 					cb.setSelected(true);
 					output.setText("Camino Creado");
 					TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre()); //controlar aca
-					
+
 				}else {
 					output.setText("Controlar los errores");					
 				}
@@ -197,7 +229,7 @@ public class JFX_CrearCamino {
 			}
 		});
 
-//		panel.getStyleClass().add("spacing-medio");
+		//		panel.getStyleClass().add("spacing-medio");
 		scroll.setContent(gp);
 		panel.getChildren().addAll(hbox_titulo,scroll);
 	}

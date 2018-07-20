@@ -8,15 +8,13 @@ import gui.panels.*;
 import gui.panels.crear.JFX_CrearAlojamiento;
 import gui.panels.crear.JFX_CrearCamino;
 import gui.panels.crear.JFX_CrearCiudad;
-import gui.panels.crear.JFX_CrearEstadoCamino;
+import gui.panels.crear.JFX_EstadoCamino;
 import gui.panels.crear.JFX_CrearSitiosTuristicos;
-import gui.panels.crear.JFX_CrearTipoCamino;
-import gui.panels.crear.JFX_CrearTrafico;
+import gui.panels.crear.JFX_TipoCamino;
+import gui.panels.crear.JFX_Trafico;
 import gui.panels.ver.JFX_VerCamino;
 import gui.panels.ver.JFX_VerCiudad;
 import gui.panels.ver.JFX_VerPublico;
-import gui.panels.ver.JFX_VerRecurso;
-import gui.utiles.CrearGrafo;
 import gui.utiles.TextoGUI;
 import javafx.application.Platform;
 
@@ -62,10 +60,6 @@ public class MenuAction {
 					System.out.println("Camino ver"); //LOG
 					vista = (T)new JFX_VerCamino().getPanel();
 					break;
-				case TextoGUI.MENU_VER_RECURSO:
-					System.out.println("Recurso ver"); //LOG
-					vista = (T)new JFX_VerRecurso().getPanel();
-					break;
 					
 					//CREAR
 				case TextoGUI.MENU_CREAR_CIUDAD:
@@ -82,7 +76,7 @@ public class MenuAction {
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_TRAFICO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
-					vista = (T)new JFX_CrearTrafico().getPanel();
+					vista = (T)new JFX_Trafico().getPanel();
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_SITIO_TURISTICO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
@@ -90,11 +84,11 @@ public class MenuAction {
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_TIPO_CAMINO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
-					vista = (T)new JFX_CrearTipoCamino().getPanel(); //cambiar
+					vista = (T)new JFX_TipoCamino().getPanel(); //cambiar
 					break;
 				case TextoGUI.MENU_CREAR_RECURSO_ESTADO_CAMINO:
 					System.out.println("Recurso crear"); //LOGnew JFX_Recurso_Crear()
-					vista = (T)new JFX_CrearEstadoCamino().getPanel(); //cambiar
+					vista = (T)new JFX_EstadoCamino().getPanel(); //cambiar
 					break;
 
 					//SISTEMA

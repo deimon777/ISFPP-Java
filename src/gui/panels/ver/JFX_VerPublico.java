@@ -63,14 +63,17 @@ public class JFX_VerPublico{
 		TextFields.bindAutoCompletion(ruta_inicio,new Ciudades().getCiudadesActivas());
 		TextFields.bindAutoCompletion(ruta_fin,new Ciudades().getCiudadesActivas());
 
+		CrearGrafo graf = new CrearGrafo();
+		graf.cargarGrafo();
 		Button btn_ruta_buscar = new Button("Buscar Camino");
 		btn_ruta_buscar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("La ruta va de'"+ruta_inicio.getText()+"' a '"+ruta_fin.getText()+"'");
+				System.out.println("La ruta va de '"+ruta_inicio.getText()+"' a '"+ruta_fin.getText()+"'");
+
+				graf.buscarCamino(ruta_inicio.getText(), ruta_fin.getText());
 			}
 		});
-
 		busqueda.getChildren().addAll(ruta_inicio, ruta_fin, btn_ruta_buscar);
 
 		// Derecha
@@ -90,19 +93,11 @@ public class JFX_VerPublico{
 		funciones_extras.add(camino_corto, 1, 0);
 		funciones_extras.add(camino_mejor, 2, 0);
 		funciones_extras.add(camino_rapido, 3, 0);
-
+		
 		buscar_ruta.getChildren().addAll(busqueda, funciones_extras);
 
 		panel.getStyleClass().add("spacing-medio");
 		panel.getChildren().addAll(josm,buscar_ruta);
-		
-		
-		
-		
-		
-		
-		CrearGrafo graf = new CrearGrafo();
-		graf.cargarGrafo();
 	}
 
 	public VBox getPanel() {

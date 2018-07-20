@@ -28,7 +28,6 @@ public class JFX_MenuAdmin {
 		MenuItem verPublico = new MenuItem(TextoGUI.MENU_PUBLICO);
 		MenuItem verCiudades = new MenuItem(TextoGUI.MENU_VER_CIUDAD);
 		MenuItem verCaminos = new MenuItem(TextoGUI.MENU_VER_CAMINO);
-		MenuItem verRecursos = new MenuItem(TextoGUI.MENU_VER_RECURSO);
 		
 		Menu crear = new Menu(TextoGUI.MENU_CREAR);
 		MenuItem crearCiudad = new MenuItem(TextoGUI.MENU_CREAR_CIUDAD);
@@ -56,7 +55,7 @@ public class JFX_MenuAdmin {
 		 * Creando los Submenus
 		 */
 		archivo.getItems().addAll(archivoSesion,archivoSalir);
-		ver.getItems().addAll(verPublico, verCiudades, verCaminos, verRecursos);
+		ver.getItems().addAll(verPublico, verCiudades, verCaminos);
 		crearRecursos.getItems().addAll(crearRecursoAlojamiento, crearRecursoTrafico, crearRecursoSitioTuristico, crearRecursoEstadoCamino, crearRecursoTipoCamino);
 		crear.getItems().addAll(crearCiudad, crearCamino, crearRecursos);
 		sistemaAutomatizar.getItems().addAll(sistemaAutoAuto,sistemaAutoCSV);
@@ -87,7 +86,6 @@ public class JFX_MenuAdmin {
 		verPublico.setOnAction(action);
 		verCiudades.setOnAction(action);
 		verCaminos.setOnAction(action);
-		verRecursos.setOnAction(action);
 
 		crearCiudad.setOnAction(action);
 		crearCamino.setOnAction(action);

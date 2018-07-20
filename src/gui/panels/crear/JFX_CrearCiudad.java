@@ -3,6 +3,7 @@ package gui.panels.crear;
 import conexion.db.entidades.Ciudades;
 import gui.utiles.DoubleTextField;
 import gui.utiles.NumberTextField;
+import gui.utiles.TextoUtiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -48,8 +49,14 @@ public class JFX_CrearCiudad extends Pane{
 		historiasTextField.setPrefWidth(nombreTextField.getWidth()); //acomoda el ancho
 		Label latitud = new Label("Latitud: (*)");
 		DoubleTextField latitudTextField = new DoubleTextField();
+		Label outputLatitud = new Label("Latitud Vacia");
+		outputLatitud.setTextFill(Color.RED);
+		outputLatitud.setOpacity(0);
 		Label longitud = new Label("Longitud: (*)");
 		DoubleTextField longitudTextField = new DoubleTextField();
+		Label outputLongitud = new Label("Longitud Vacia");
+		outputLongitud.setTextFill(Color.RED);
+		outputLongitud.setOpacity(0);
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
@@ -77,8 +84,10 @@ public class JFX_CrearCiudad extends Pane{
 		gp.add(historiasTextField, 1, fila++);
 		gp.add(latitud, 0, fila);
 		gp.add(latitudTextField, 1, fila++);
+		gp.add(outputLatitud, 1, fila++);
 		gp.add(longitud, 0, fila);
 		gp.add(longitudTextField, 1, fila++);
+		gp.add(outputLongitud, 1, fila++);
 		gp.add(activo, 0, fila);
 		gp.add(cb, 1, fila++);
 		
@@ -95,30 +104,40 @@ public class JFX_CrearCiudad extends Pane{
 		btn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
+				output.setOpacity(0);
 				boolean valido = true;
 				String nombre = nombreTextField.getText();
 				Integer habitantes = null;
-				String historia = null;
+				String historia = historiasTextField.getText();
 				Double latitud = null;
 				Double longitud = null;
 				Boolean activo = cb.selectedProperty().getValue();
 
+				TextoUtiles tu = new TextoUtiles();
+
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
+					valido = false;
 					outputNombre.setOpacity(1);
-					output.setText("Controlar los errores");	
-					valido = false;					
+				}else {
+					nombre = tu.Capitalizar(nombre);
+					outputNombre.setOpacity(0);
 				}
-				if (!(habitantesTextField.getText() == null || habitantesTextField.getText().trim().isEmpty())) {
-					habitantes = Integer.parseInt(habitantesTextField.getText());					
+				if (latitudTextField.getText() == null || latitudTextField.getText().trim().isEmpty()) {
+					outputLatitud.setOpacity(1);
+					valido = false;
+				}else {
+					latitud = Double.parseDouble(latitudTextField.getText());
+					outputLatitud.setOpacity(0);
+				}	
+				if (longitudTextField.getText() == null || longitudTextField.getText().trim().isEmpty()) {
+					outputLongitud.setOpacity(1);
+					valido = false;
+				}else {
+					longitud = Double.parseDouble(longitudTextField.getText());
+					outputLongitud.setOpacity(0);
 				}
-				if (!(historiasTextField.getText() == null || historiasTextField.getText().trim().isEmpty())) {
-					historia = historiasTextField.getText();				
-				}
-				if (!(latitudTextField.getText() == null || latitudTextField.getText().trim().isEmpty())) {
-					latitud = Double.parseDouble(latitudTextField.getText());				
-				}
-				if (!(longitudTextField.getText() == null || longitudTextField.getText().trim().isEmpty())) {
-					longitud = Double.parseDouble(longitudTextField.getText());			
+				if (!habitantesTextField.getText().trim().isEmpty()) {
+					habitantes = Integer.parseInt(habitantesTextField.getText());
 				}
 				
 				if(valido){
@@ -131,6 +150,8 @@ public class JFX_CrearCiudad extends Pane{
 					longitudTextField.setText("");
 					cb.setSelected(true);
 					output.setText("Ciudad Creada");
+				}else {
+					output.setText("Controlar los errores");	
 				}
 				output.setOpacity(1);
 			}
