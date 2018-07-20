@@ -18,7 +18,7 @@ public class EstadoCamino {
 	/*
 	 * Getter y Setter
 	 */
-	public int getIDd() {
+	public int getID() {
 		return id;
 	}
 	public void setID(int id) {

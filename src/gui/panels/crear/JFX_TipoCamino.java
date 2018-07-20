@@ -1,7 +1,10 @@
 package gui.panels.crear;
 
 import com.deimon.entidades.camino.TipoCamino;
+import com.deimon.isfpp.Main;
+
 import conexion.db.entidades.Rec_TipoCamino;
+import gui.panels.modificar.JFX_ModificarTipoCamino;
 import gui.utiles.TextoUtiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -84,11 +87,7 @@ public class JFX_TipoCamino extends Pane{
 				editButton.setPrefWidth(accionesCol.getWidth()/2);
 				editButton.setOnAction(event -> {
 					TipoCamino select = getTableView().getItems().get(getIndex());			
-					//					new Main<VBox>().cambiarVista(
-					//							new JFX_ModificarCiudad(
-					//									select.getID(),
-					//									select.getNombre()
-					//									).getPanel());
+					new Main<VBox>().cambiarVista(new JFX_ModificarTipoCamino(select.getID(),select.getNombre()).getPanel());
 				});
 			}
 		});

@@ -3,6 +3,7 @@ package conexion.db.entidades;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+//import com.mysql.jdbc.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.deimon.entidades.camino.Trafico;
@@ -18,7 +19,7 @@ public class Rec_Trafico extends EntidadesUtils{
 	private String tableName = TablesName.TRAFICO;
 
 	/**
-	 * Tiene el codigo SQL para crear la tabla trafico, y llama a la funcion para crear la misma
+	 * Tiene el codigo SQL para crear la tabla tipo_camino, y llama a la funcion para crear la misma
 	 */
 	public void crearTablaTrafico() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
@@ -36,7 +37,7 @@ public class Rec_Trafico extends EntidadesUtils{
 	 * Vacia (DROP) la tabla.
 	 */
 	public void vaciarTablaTrafico() {
-		TablasUtiles.emptyTable(tableName);		
+		TablasUtiles.emptyTable(tableName);
 	}
 
 	/*******************************************************************/
@@ -45,7 +46,7 @@ public class Rec_Trafico extends EntidadesUtils{
 	 * INSERTAR
 	 */
 	public void insertar(String nombre) {
-		String sql = "INSERT INTO " + tableName + "(`id`, `nombre`) VALUES (NULL, ?)";
+		String sql = "INSERT INTO " + tableName + "(`id`, `nombre` ) VALUES (NULL, ?)";
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -59,7 +60,7 @@ public class Rec_Trafico extends EntidadesUtils{
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
 				myPrepStmt.executeUpdate();
-				System.out.println("Trafico creado");
+				System.out.println("Tipo Camino creado");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -84,7 +85,7 @@ public class Rec_Trafico extends EntidadesUtils{
 			if(myConect!=null) {
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.executeUpdate();
-				System.out.println("Trafico Cargado!");
+				System.out.println("Tipo Camino Cargado!");
 			}
 		} catch (SQLException e) {
 			//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Out of range value for column 'latitud' at row 1
@@ -98,25 +99,39 @@ public class Rec_Trafico extends EntidadesUtils{
 	/*
 	 * BORRAR
 	 */
-	/**
-	 * Borra un elemento de la tabla segun el ID
-	 * @param Recive el id del item a ser borrado
-	 */	
-	public void deleteItemByID(int id) {
-		EntidadesUtils.deleteItemByID(tableName, id);
-	}
-
-	/**
-	 * Borra un elemento de la tabla segun el nombre
-	 * @param Recive el nombre del item a ser borrado
-	 */	
-	public void deleteItemByNAME(String nombre) {
-		EntidadesUtils.deleteItemByNAME(tableName, nombre);
-	}
 
 	/*
 	 * ACTUALIZAR
 	 */
+	public void actualizar(int id, String nombre) {
+		String sql = "UPDATE "+tableName+" "
+				+ "SET nombre = ? "
+				+ "WHERE "+tableName+".id = ?";
+		
+		DB_Connection c = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.setString(1, nombre);
+				myPrepStmt.setInt(2, id);
+
+				myPrepStmt.executeUpdate();
+				System.out.println("Tipo Camino Modificado!");
+			}
+		} catch (SQLException e) {
+			//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Out of range value for column 'latitud' at row 1
+			e.printStackTrace();
+		}finally {
+			c.closeStatement(myPrepStmt);
+			c.closeConnect(myConect);
+		}
+	}
 
 	/*
 	 * BUSCAR
@@ -155,9 +170,9 @@ public class Rec_Trafico extends EntidadesUtils{
 		return lista;
 	}
 	/**
-	 * Trae el ID de un Trafico segun su nombre
+	 * Trae el ID de una Trafico segun su nombre
 	 * @param nombre
-	 * @return El ID del trafico.
+	 * @return El ID del tipo camino.
 	 */
 	public int getTraficoID(String nombre) {
 		int id = EntidadesUtils.getItemFromNombre(tableName, "id", nombre);

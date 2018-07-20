@@ -104,8 +104,36 @@ public class Rec_EstadoCamino extends EntidadesUtils{
 	/*
 	 * ACTUALIZAR
 	 */
-	
-	
+	public void actualizar(int id, String nombre) {
+		String sql = "UPDATE "+tableName+" "
+				+ "SET nombre = ? "
+				+ "WHERE "+tableName+".id = ?";
+		
+		DB_Connection c = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		try {
+			c = new DB_Connection();
+			myConect = c.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect!=null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				myPrepStmt.setString(1, nombre);
+				myPrepStmt.setInt(2, id);
+
+				myPrepStmt.executeUpdate();
+				System.out.println("Estado Camino Modificado!");
+			}
+		} catch (SQLException e) {
+			//com.mysql.jdbc.MysqlDataTruncation: Data truncation: Out of range value for column 'latitud' at row 1
+			e.printStackTrace();
+		}finally {
+			c.closeStatement(myPrepStmt);
+			c.closeConnect(myConect);
+		}
+	}
+		
 	
 	/*
 	 * BUSCAR

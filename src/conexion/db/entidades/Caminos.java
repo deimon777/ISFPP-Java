@@ -181,17 +181,6 @@ public class Caminos extends EntidadesUtils{
 					ConstantesPropierties.DB_NAME_USER,
 					ConstantesPropierties.DB_NAME_PASS);
 			if(myConect!=null) {
-
-				System.out.println(id);
-				System.out.println(nombre);
-				System.out.println(distancia);
-				System.out.println(peso);
-				System.out.println(activo);
-				System.out.println(tipo_id);
-				System.out.println(estado_id);
-				System.out.println(trafico_id);
-				System.out.println(ciudad_inicio_id);
-				System.out.println(ciudad_fin_id);
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
 				myPrepStmt.setInt(2, distancia);

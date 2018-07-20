@@ -1,7 +1,10 @@
 package gui.panels.crear;
 
 import com.deimon.entidades.camino.EstadoCamino;
+import com.deimon.isfpp.Main;
+
 import conexion.db.entidades.Rec_EstadoCamino;
+import gui.panels.modificar.JFX_ModificarEstadoCamino;
 import gui.utiles.TextoUtiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,9 +36,9 @@ public class JFX_EstadoCamino extends Pane{
 		Text titulo = new Text("Estado Camino");
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
-		
 
-		
+
+
 		table.setEditable(true);
 		table.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
 
@@ -75,7 +78,7 @@ public class JFX_EstadoCamino extends Pane{
 					// alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
 					alert.showAndWait();
 					if (alert.getResult() == ButtonType.OK) {
-//						new Rec_EstadoCamino().deleteItemByID(select.getID());
+						//						new Rec_EstadoCamino().deleteItemByID(select.getID());
 						System.out.println("Revisar al borrar quien tiene este recurso asignado ");
 						recargarTabla();
 					}
@@ -86,11 +89,7 @@ public class JFX_EstadoCamino extends Pane{
 				editButton.setPrefWidth(accionesCol.getWidth()/2);
 				editButton.setOnAction(event -> {
 					EstadoCamino select = getTableView().getItems().get(getIndex());			
-					//					new Main<VBox>().cambiarVista(
-					//							new JFX_ModificarCiudad(
-					//									select.getID(),
-					//									select.getNombre()
-					//									).getPanel());
+					new Main<VBox>().cambiarVista(new JFX_ModificarEstadoCamino(select.getID(),select.getNombre()).getPanel());
 				});
 			}
 		});

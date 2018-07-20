@@ -1,8 +1,10 @@
 package gui.panels.crear;
 
 import com.deimon.entidades.camino.Trafico;
+import com.deimon.isfpp.Main;
 
 import conexion.db.entidades.Rec_Trafico;
+import gui.panels.modificar.JFX_ModificarTrafico;
 import gui.utiles.TextoUtiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -34,7 +36,7 @@ public class JFX_Trafico extends Pane{
 		Text titulo = new Text("Trafico");
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
-		
+
 		table.setEditable(true);
 		table.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
 
@@ -74,7 +76,7 @@ public class JFX_Trafico extends Pane{
 					// alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
 					alert.showAndWait();
 					if (alert.getResult() == ButtonType.OK) {
-//						new Rec_Trafico().deleteItemByID(select.getID());
+						//						new Rec_Trafico().deleteItemByID(select.getID());
 						System.out.println("Revisar al borrar quien tiene este recurso asignado ");
 						recargarTabla();
 					}
@@ -85,11 +87,8 @@ public class JFX_Trafico extends Pane{
 				editButton.setPrefWidth(accionesCol.getWidth()/2);
 				editButton.setOnAction(event -> {
 					Trafico select = getTableView().getItems().get(getIndex());			
-					//					new Main<VBox>().cambiarVista(
-					//							new JFX_ModificarCiudad(
-					//									select.getID(),
-					//									select.getNombre()
-					//									).getPanel());
+					new Main<VBox>().cambiarVista(
+							new JFX_ModificarTrafico(select.getID(),select.getNombre()).getPanel());
 				});
 			}
 		});
