@@ -18,7 +18,6 @@ public class TextoGUI {
 	public final static String MENU_VER = "_Ver";	
 	public final static String MENU_VER_CIUDAD = "Ciudades";
 	public final static String MENU_VER_CAMINO = "Caminos";
-	public final static String MENU_VER_RECURSO = "Recursos";
 	
 	/*
 	 * Crear
