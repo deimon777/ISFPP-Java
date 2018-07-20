@@ -3,12 +3,15 @@ package conexion.db.entidades;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
+import com.deimon.entidades.camino.Trafico;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
 import conexion.db.tablas.TablasUtiles;
 import conexion.db.tablas.TablesName;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Rec_Trafico extends EntidadesUtils{
@@ -37,7 +40,7 @@ public class Rec_Trafico extends EntidadesUtils{
 	}
 
 	/*******************************************************************/
-	
+
 	/*
 	 * INSERTAR
 	 */
@@ -65,7 +68,7 @@ public class Rec_Trafico extends EntidadesUtils{
 			c.closeConnect(myConect);
 		}
 	}
-	
+
 	public void cargarValores(String valorSql) {
 		String sql = "INSERT INTO "+tableName+" (id, nombre) "
 				+ "VALUES "+valorSql;
@@ -95,6 +98,21 @@ public class Rec_Trafico extends EntidadesUtils{
 	/*
 	 * BORRAR
 	 */
+	/**
+	 * Borra un elemento de la tabla segun el ID
+	 * @param Recive el id del item a ser borrado
+	 */	
+	public void deleteItemByID(int id) {
+		EntidadesUtils.deleteItemByID(tableName, id);
+	}
+
+	/**
+	 * Borra un elemento de la tabla segun el nombre
+	 * @param Recive el nombre del item a ser borrado
+	 */	
+	public void deleteItemByNAME(String nombre) {
+		EntidadesUtils.deleteItemByNAME(tableName, nombre);
+	}
 
 	/*
 	 * ACTUALIZAR
@@ -106,7 +124,36 @@ public class Rec_Trafico extends EntidadesUtils{
 	public ObservableList<String> getTraficoNombre() {
 		return EntidadesUtils.getLista("SELECT nombre from "+tableName);
 	}
-	
+	public ObservableList<Trafico> getListaTrafico() {
+		String sql = "SELECT * from "+tableName;
+
+		DB_Connection conec = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		ResultSet rs = null;
+		ObservableList<Trafico> lista = FXCollections.observableArrayList();
+		try {
+			conec = new DB_Connection();
+			myConect = conec.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect != null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				rs = myPrepStmt.executeQuery();	
+				while (rs.next()) {
+					Trafico selec = new Trafico();
+					selec.setID(rs.getInt("id"));
+					selec.setNombre(rs.getString("nombre"));
+					lista.add(selec);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conec.closeConnect(myConect);
+		}
+		return lista;
+	}
 	/**
 	 * Trae el ID de un Trafico segun su nombre
 	 * @param nombre

@@ -17,10 +17,10 @@ public class TipoCamino {
 	/*
 	 * Getter y Setter
 	 */
-	public int getId() {
+	public int getIDd() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setID(int id) {
 		this.id = id;
 	}
 	public String getNombre() {

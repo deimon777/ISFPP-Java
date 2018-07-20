@@ -3,12 +3,15 @@ package conexion.db.entidades;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
+import com.deimon.entidades.camino.EstadoCamino;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
 import conexion.db.tablas.TablasUtiles;
 import conexion.db.tablas.TablesName;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Rec_EstadoCamino extends EntidadesUtils{
@@ -109,6 +112,36 @@ public class Rec_EstadoCamino extends EntidadesUtils{
 	 */
 	public ObservableList<String> getEstadoCaminoNombre() {
 		return EntidadesUtils.getLista("SELECT nombre from "+tableName);
+	}
+	public ObservableList<EstadoCamino> getListaEstadoCamino() {
+		String sql = "SELECT * from "+tableName;
+
+		DB_Connection conec = null;
+		Connection myConect = null;
+		PreparedStatement myPrepStmt = null;
+		ResultSet rs = null;
+		ObservableList<EstadoCamino> lista = FXCollections.observableArrayList();
+		try {
+			conec = new DB_Connection();
+			myConect = conec.getConection(ConstantesPropierties.DB_NAME_URL,
+					ConstantesPropierties.DB_NAME_USER,
+					ConstantesPropierties.DB_NAME_PASS);
+			if(myConect != null) {
+				myPrepStmt = myConect.prepareStatement(sql);
+				rs = myPrepStmt.executeQuery();	
+				while (rs.next()) {
+					EstadoCamino selec = new EstadoCamino();
+					selec.setID(rs.getInt("id"));
+					selec.setNombre(rs.getString("nombre"));
+					lista.add(selec);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			conec.closeConnect(myConect);
+		}
+		return lista;
 	}
 	
 	/**
