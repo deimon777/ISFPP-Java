@@ -24,6 +24,7 @@ public class Rec_Trafico extends EntidadesUtils{
 	public void crearTablaTrafico() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL UNIQUE,"
+				+ "peso INT(5),"		
 				+ "PRIMARY KEY (id)";
 		TablasUtiles.creatTable(tableName, sql);
 	}
@@ -45,8 +46,8 @@ public class Rec_Trafico extends EntidadesUtils{
 	/*
 	 * INSERTAR
 	 */
-	public void insertar(String nombre) {
-		String sql = "INSERT INTO " + tableName + "(`id`, `nombre` ) VALUES (NULL, ?)";
+	public void insertar(String nombre, int peso) {
+		String sql = "INSERT INTO " + tableName + "(`id`, `nombre`, `peso` ) VALUES (NULL, ?, ?)";
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -59,6 +60,7 @@ public class Rec_Trafico extends EntidadesUtils{
 			if(myConect!=null) {
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
+				myPrepStmt.setInt(2, peso);
 				myPrepStmt.executeUpdate();
 				System.out.println("Tipo Camino creado");
 			}
@@ -71,7 +73,7 @@ public class Rec_Trafico extends EntidadesUtils{
 	}
 
 	public void cargarValores(String valorSql) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre) "
+		String sql = "INSERT INTO "+tableName+" (id, nombre, peso) "
 				+ "VALUES "+valorSql;
 
 		DB_Connection c = null;

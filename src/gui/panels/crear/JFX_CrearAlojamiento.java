@@ -1,6 +1,6 @@
 package gui.panels.crear;
 
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import conexion.db.entidades.Rec_Alojamientos;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,7 +46,7 @@ public class JFX_CrearAlojamiento extends Pane{
 		cb.setSelected(true);
 		Label ciudad = new Label("Ciudad:");
 		ComboBox<String> lista_ciudad = new ComboBox<String>();
-		lista_ciudad.setItems((ObservableList<String>) new Ciudades().getCiudadesActivas());
+		lista_ciudad.setItems((ObservableList<String>) new Vertices().getVerticesActivas());
 		Label outputCiudad = new Label("Ciudad Vacia");
 		outputCiudad.setTextFill(Color.RED);
 		outputCiudad.setOpacity(0);
@@ -91,7 +91,7 @@ public class JFX_CrearAlojamiento extends Pane{
 				//Agregar la validacion de la ciudad
 				
 				if(valido){
-					int id = new Ciudades().getCiudadesID(lista_ciudad.getValue());
+					int id = new Vertices().getVerticesID(lista_ciudad.getValue());
 					
 					Rec_Alojamientos record = new Rec_Alojamientos();
 					record.insertar(nombre,activo, id);

@@ -6,7 +6,7 @@ import com.deimon.isfpp.configuracion.Constantes;
 
 import gui.menu.JFX_MenuAdmin;
 import gui.menu.JFX_MenuPublico;
-import gui.panels.ver.JFX_VerPublico;
+import gui.panels.ver.JFX_Buscar;
 import javafx.application.Application;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -39,7 +39,7 @@ public class Main<T> extends Application{
 //		JFX_Menu_public jfx_m = new JFX_Menu_public();
 		MenuBar menu = jfx_m.getMenu();
 		
-		JFX_VerPublico jfx_p= new JFX_VerPublico();
+		JFX_Buscar jfx_p= new JFX_Buscar();
 		T publico = (T)jfx_p.getPanel();
 
 		root.setTop(menu);

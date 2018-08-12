@@ -2,10 +2,10 @@ package gui.panels.modificar;
 
 import com.deimon.isfpp.Main;
 
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import gui.panels.ver.JFX_VerCiudad;
-import gui.utiles.DoubleTextField;
-import gui.utiles.NumberTextField;
+import gui.utiles.DoubleField;
+import gui.utiles.NumberField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -45,14 +45,14 @@ public class JFX_ModificarCiudad extends Pane{
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0);
 		Label habitantes = new Label("Habitantes:");
-		NumberTextField habitantesTextField = new NumberTextField(nHabitantes);
+		NumberField habitantesTextField = new NumberField(nHabitantes);
 		Label historia = new Label("Historia:");
 		TextArea historiasTextField = new TextArea(nHistoria);
 		historiasTextField.setPrefWidth(nombreTextField.getWidth()); //acomoda el ancho
 		Label latitud = new Label("Latitud: (*)");
-		DoubleTextField latitudTextField = new DoubleTextField(nLatitud);
+		DoubleField latitudTextField = new DoubleField(nLatitud);
 		Label longitud = new Label("Longitud: (*)");
-		DoubleTextField longitudTextField = new DoubleTextField(nLongitud);
+		DoubleField longitudTextField = new DoubleField(nLongitud);
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(nActivo);
@@ -125,7 +125,7 @@ public class JFX_ModificarCiudad extends Pane{
 				}
 				
 				if(valido){
-					Ciudades ciudad = new Ciudades();
+					Vertices ciudad = new Vertices();
 					ciudad.actualizar(nId,nombre,habitantes,historia,latitud,longitud,activo);
 					nombreTextField.setText("");
 					habitantesTextField.setText("");

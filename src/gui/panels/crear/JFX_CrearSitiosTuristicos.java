@@ -1,6 +1,6 @@
 package gui.panels.crear;
 
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import conexion.db.entidades.Rec_SitiosTuristicos;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -45,7 +45,7 @@ public class JFX_CrearSitiosTuristicos extends Pane{
 		cb.setSelected(true);
 		Label ciudad = new Label("Ciudad:");
 		ComboBox<String> lista_ciudad = new ComboBox<String>();
-		lista_ciudad.setItems(new Ciudades().getCiudadesActivas());
+		lista_ciudad.setItems(new Vertices().getVerticesActivas());
 		Label outputCiudad = new Label("Ciudad Vacia");
 		outputCiudad.setTextFill(Color.RED);
 		outputCiudad.setOpacity(0);
@@ -90,7 +90,7 @@ public class JFX_CrearSitiosTuristicos extends Pane{
 
 
 				if(valido){
-					int id = new Ciudades().getCiudadesID(lista_ciudad.getValue());
+					int id = new Vertices().getVerticesID(lista_ciudad.getValue());
 					
 					Rec_SitiosTuristicos record = new Rec_SitiosTuristicos();
 					record.insertar(nombre,activo, id);

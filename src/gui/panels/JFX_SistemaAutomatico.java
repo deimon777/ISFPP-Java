@@ -6,12 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import conexion.db.entidades.Caminos;
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import conexion.db.entidades.Rec_Alojamientos;
 import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_SitiosTuristicos;
 import conexion.db.entidades.Rec_TipoCamino;
 import conexion.db.entidades.Rec_Trafico;
+import conexion.db.entidades.TipoVertice;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -37,28 +38,34 @@ public class JFX_SistemaAutomatico {
 		gpAuto.setHgap(10);		
 		gpAuto.setVgap(10);
 
-		Button btnCiudades = new Button("Cargar Ciudades");
+		Button btnTipoVertices = new Button("Cargar Tipo de Vertices");
+		Button btnVertices = new Button("Cargar Vertices");
 		Button btnAlojamientos = new Button("Cargar Alojamientos");
-		Button btnSitios = new Button("Cargar Sitios Turisticos");		
-		Button btnCaminos = new Button("Cargar Caminos");
+		Button btnSitios = new Button("Cargar Sitios Turisticos");
 		Button btnTipo = new Button("Cargar Tipo Camino");
 		Button btnEstados = new Button("Cargar Estados Camino");
-		Button btnTrafico = new Button("Cargar Trafico");		
+		Button btnTrafico = new Button("Cargar Trafico");
+		Button btnCaminos = new Button("Cargar Caminos");
 		Button btnTodo = new Button("Cargar Todo");
 
-		gpAuto.add(btnCiudades, 0, 0);
-		gpAuto.add(btnCaminos, 1, 0);
+		gpAuto.add(btnTipoVertices, 0, 0);
+		gpAuto.add(btnVertices, 1, 0);		
+		
 		gpAuto.add(btnAlojamientos, 0, 1);
 		gpAuto.add(btnSitios, 1, 1);
+		
 		gpAuto.add(btnTipo, 0, 2);
 		gpAuto.add(btnEstados, 1, 2);
 		gpAuto.add(btnTrafico, 2, 2);
-		gpAuto.add(btnTodo, 0, 3);
 
-		btnCiudades.setOnAction(new EventHandler<ActionEvent>() {
+		gpAuto.add(btnCaminos, 0, 3);
+		
+		gpAuto.add(btnTodo, 0, 4);
+
+		btnTipoVertices.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				String csvFile = "/home/deimon/Programacion/Java/ISFPP-Java/src/gui/resource/CSV/Ciudades.csv"; //poner relativo
+				String csvFile = "/home/deimon/Programacion/Java/ISFPP-Java/src/gui/resource/CSV/TipoVertices.csv"; //poner relativo
 
 				if (csvFile != null) {					
 					BufferedReader br = null;
@@ -70,12 +77,49 @@ public class JFX_SistemaAutomatico {
 						br = new BufferedReader(new FileReader(csvFile));
 						br.readLine(); //quito la primer linea ya que se usa para referenciar en el SCV
 						while ((line = br.readLine()) != null) {
-							String[] ciudad = line.split(cvsSplitBy);
-							valoresSQL += "(NULL, '"+ciudad[0]+"', '"+ciudad[1]+"', '"+ciudad[2]+"', '"+ciudad[3]+"', '"+ciudad[4]+"', b'"+ciudad[5]+"'),";
+							String[] tipoVertice = line.split(cvsSplitBy);
+							valoresSQL += "(NULL, '"+tipoVertice[0]+"', "+tipoVertice[1]+"),";
 						}
 						valoresSQL = valoresSQL.substring(0, valoresSQL.length() - 1);//quita la ultima coma
-						Ciudades record = new Ciudades();
-						// // record.vaciarTablaCiudad();
+						TipoVertice record = new TipoVertice();
+						record.cargarValores(valoresSQL);
+					} catch (FileNotFoundException e11) {
+						e11.printStackTrace();
+					} catch (IOException e2) {
+						e2.printStackTrace();
+					} finally {
+						if (br != null) {
+							try {
+								br.close();
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					}
+				}
+			};
+		});
+		
+		btnVertices.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				String csvFile = "/home/deimon/Programacion/Java/ISFPP-Java/src/gui/resource/CSV/Vertices.csv"; //poner relativo
+
+				if (csvFile != null) {					
+					BufferedReader br = null;
+					String line = "";
+					String cvsSplitBy = ",";					
+					String valoresSQL = "";
+					try {
+
+						br = new BufferedReader(new FileReader(csvFile));
+						br.readLine(); //quito la primer linea ya que se usa para referenciar en el SCV
+						while ((line = br.readLine()) != null) {
+							String[] vertice = line.split(cvsSplitBy);
+							valoresSQL += "(NULL, '"+vertice[0]+"', '"+vertice[1]+"', '"+vertice[2]+"', '"+vertice[3]+"', '"+vertice[4]+"', b'"+vertice[5]+"', "+vertice[6]+"),";
+						}
+						valoresSQL = valoresSQL.substring(0, valoresSQL.length() - 1);//quita la ultima coma
+						Vertices record = new Vertices();
 						record.cargarValores(valoresSQL);
 					} catch (FileNotFoundException e11) {
 						e11.printStackTrace();
@@ -110,11 +154,10 @@ public class JFX_SistemaAutomatico {
 						br.readLine(); //quito la primer linea ya que se usa para referenciar en el SCV
 						while ((line = br.readLine()) != null) {
 							String[] camino = line.split(cvsSplitBy);
-							valoresSQL += "(NULL, '"+camino[0]+"', '"+camino[1]+"', '"+camino[2]+"', b'"+camino[3]+"', '"+camino[4]+"', '"+camino[5]+"', '"+camino[6]+"', '"+camino[7]+"', '"+camino[8]+"'),";
+							valoresSQL += "(NULL, '"+camino[0]+"', '"+camino[1]+"', b'"+camino[2]+"', '"+camino[3]+"', '"+camino[4]+"', '"+camino[5]+"', '"+camino[6]+"', '"+camino[7]+"'),";
 						}
 						valoresSQL = valoresSQL.substring(0, valoresSQL.length() - 1);//quita la ultima coma
 						Caminos record = new Caminos();
-						// record.vaciarTablaCaminos();
 						record.cargarValores(valoresSQL);
 					} catch (FileNotFoundException e11) {
 						e11.printStackTrace();
@@ -153,7 +196,6 @@ public class JFX_SistemaAutomatico {
 						}
 						valoresSQL = valoresSQL.substring(0, valoresSQL.length() - 1);//quita la ultima coma	
 						Rec_Alojamientos record = new Rec_Alojamientos();
-						// record.vaciarTablaAlojamientos();
 						record.cargarValores(valoresSQL);
 					} catch (FileNotFoundException e11) {
 						e11.printStackTrace();
@@ -192,7 +234,6 @@ public class JFX_SistemaAutomatico {
 						}
 						valoresSQL = valoresSQL.substring(0, valoresSQL.length() - 1);//quita la ultima coma	
 						Rec_SitiosTuristicos record = new Rec_SitiosTuristicos();
-						// record.vaciarTablaSitiosTuristicos();
 						record.cargarValores(valoresSQL);
 					} catch (FileNotFoundException e11) {
 						e11.printStackTrace();
@@ -227,11 +268,10 @@ public class JFX_SistemaAutomatico {
 						//						br.readLine(); //quito la primer linea ya que se usa para referenciar en el SCV
 						while ((line = br.readLine()) != null) {
 							String[] tipo = line.split(cvsSplitBy);
-							valoresSQL += "(NULL, '"+tipo[0]+"'),";
+							valoresSQL += "(NULL, '"+tipo[0]+"','"+tipo[1]+"'),";
 						}
 						valoresSQL = valoresSQL.substring(0, valoresSQL.length() - 1);//quita la ultima coma	
 						Rec_TipoCamino record = new Rec_TipoCamino();
-						// record.vaciarTablaTipoCamino();
 						record.cargarValores(valoresSQL);
 					} catch (FileNotFoundException e11) {
 						e11.printStackTrace();
@@ -266,11 +306,10 @@ public class JFX_SistemaAutomatico {
 						//						br.readLine(); //quito la primer linea ya que se usa para referenciar en el SCV
 						while ((line = br.readLine()) != null) {
 							String[] estado = line.split(cvsSplitBy);
-							valoresSQL += "(NULL, '"+estado[0]+"'),";
+							valoresSQL += "(NULL, '"+estado[0]+"','"+estado[1]+"'),";
 						}
 						valoresSQL = valoresSQL.substring(0, valoresSQL.length() - 1);//quita la ultima coma	
 						Rec_EstadoCamino record = new Rec_EstadoCamino();
-						// record.vaciarTablaEstadoCamino();
 						record.cargarValores(valoresSQL);
 					} catch (FileNotFoundException e11) {
 						e11.printStackTrace();
@@ -305,11 +344,10 @@ public class JFX_SistemaAutomatico {
 						//						br.readLine(); //quito la primer linea ya que se usa para referenciar en el SCV
 						while ((line = br.readLine()) != null) {
 							String[] trafico = line.split(cvsSplitBy);
-							valoresSQL += "(NULL, '"+trafico[0]+"'),";
+							valoresSQL += "(NULL, '"+trafico[0]+"','"+trafico[1]+"'),";
 						}
 						valoresSQL = valoresSQL.substring(0, valoresSQL.length() - 1);//quita la ultima coma	
 						Rec_Trafico record = new Rec_Trafico();
-						// record.vaciarTablaTrafico();
 						record.cargarValores(valoresSQL);
 					} catch (FileNotFoundException e11) {
 						e11.printStackTrace();
@@ -335,7 +373,8 @@ public class JFX_SistemaAutomatico {
 				btnTipo.fire();
 				btnEstados.fire();
 				btnTrafico.fire();
-				btnCiudades.fire();
+				btnTipoVertices.fire();
+				btnVertices.fire();
 				btnAlojamientos.fire();
 				btnSitios.fire();
 				btnCaminos.fire();

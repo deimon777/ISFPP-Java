@@ -10,6 +10,11 @@ public class TextoGUI {
 	public final static String MENU_ARCHIVO_SALIR = "Salir";
 
 
+	public final static String MENU_BUSCAR = "_Buscar";
+	public final static String MENU_BUSCAR_RUTAS = "Rutas";
+	public final static String MENU_BUSCAR_MOSTRAR_CIUDAD = "Mostrar ciudad";
+	
+	
 	public final static String MENU_PUBLICO = "Publico";
 	
 	/*

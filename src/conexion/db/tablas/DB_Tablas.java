@@ -1,63 +1,68 @@
 package conexion.db.tablas;
 
 import conexion.db.entidades.Caminos;
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import conexion.db.entidades.Rec_Alojamientos;
 import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_SitiosTuristicos;
 import conexion.db.entidades.Rec_TipoCamino;
 import conexion.db.entidades.Rec_Trafico;
-import conexion.db.entidades.TipoUsuarios;
+import conexion.db.entidades.Roles;
+import conexion.db.entidades.TipoVertice;
 import conexion.db.entidades.Usuarios;
 
 public class DB_Tablas {
 
-	private TipoUsuarios tipo_usuario = new TipoUsuarios();
+	private Roles roles = new Roles();
 	private Usuarios usuario = new Usuarios();
 	
-	private Rec_TipoCamino tipo_camino = new Rec_TipoCamino();
-	private Rec_EstadoCamino estado_camino = new Rec_EstadoCamino();
+	private Rec_TipoCamino tipoCamino = new Rec_TipoCamino();
+	private Rec_EstadoCamino estadoCamino = new Rec_EstadoCamino();
 	private Rec_Trafico trafico = new Rec_Trafico();
 	private Caminos caminos = new Caminos();
 	
-	private Ciudades ciudades = new Ciudades();
+	private Vertices vertices = new Vertices();
+	private TipoVertice tipoVertices = new TipoVertice();
 	private Rec_Alojamientos alojamientos = new Rec_Alojamientos();
-	private Rec_SitiosTuristicos sitios_turisticos = new Rec_SitiosTuristicos();
+	private Rec_SitiosTuristicos sitiosTuristicos = new Rec_SitiosTuristicos();
 	
 //	private Ciudades_Caminos ciudades_caminos = new Ciudades_Caminos();
 	
 	public void crearTodasLasTablas() {
-		tipo_usuario.crearTablaTipoUsuario();
+		roles.crearTablaRoles();
 		usuario.crearTablaUsuario();		
-		tipo_camino.crearTablaTipoCamino();
-		estado_camino.crearTablaEstadoCamino();
+		tipoCamino.crearTablaTipoCamino();
+		estadoCamino.crearTablaEstadoCamino();
 		trafico.crearTablaTrafico();
-		ciudades.crearTablaCiudad();
+		tipoVertices.crearTablaTipoVertice();
+		vertices.crearTablaVertice();
 		caminos.crearTablaCaminos();		
 		alojamientos.crearTablaAlojamientos();
-		sitios_turisticos.crearTablaSitiosTuristicos();		
+		sitiosTuristicos.crearTablaSitiosTuristicos();		
 	}
 		
 	public void borrarTodasLasTablas() {
-		sitios_turisticos.borrarTablaSitiosTuristicos();
+		sitiosTuristicos.borrarTablaSitiosTuristicos();
 		alojamientos.borrarTablaAlojamientos();
 		caminos.borrarTablaCaminos();
-		ciudades.borrarTablaCiudad();
+		vertices.borrarTablaVertice();
+		tipoVertices.borrarTablaTipoVertice();
 		trafico.borrarTablaTrafico();
-		estado_camino.borrarTablaEstadoCamino();
-		tipo_camino.borrarTablaTipoCamino();
+		estadoCamino.borrarTablaEstadoCamino();
+		tipoCamino.borrarTablaTipoCamino();
 		usuario.borrarTablaUsuario();
-		tipo_usuario.borrarTablaTipoUsuario();
+		roles.borrarTablaRoles();
 	}	
 	
 	public void vaciarTodasLasTablas() {
 		alojamientos.vaciarTablaAlojamientos();
 		caminos.vaciarTablaCaminos();
-		ciudades.vaciarTablaCiudad();
-		estado_camino.vaciarTablaEstadoCamino();
-		sitios_turisticos.vaciarTablaSitiosTuristicos();
-		tipo_camino.vaciarTablaTipoCamino();
-		tipo_usuario.vaciarTablaTipoUsuario();
+		tipoVertices.vaciarTablaTipoVertice();
+		vertices.vaciarTablaVertice();
+		estadoCamino.vaciarTablaEstadoCamino();
+		sitiosTuristicos.vaciarTablaSitiosTuristicos();
+		tipoCamino.vaciarTablaTipoCamino();
+		roles.vaciarTablaRoles();
 		trafico.vaciarTablaTrafico();
 		usuario.vaciarTablaUsuario();
 	}	

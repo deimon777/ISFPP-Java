@@ -3,7 +3,7 @@ package gui.panels.ver;
 import com.deimon.entidades.ciudad.Ciudad;
 import com.deimon.isfpp.Main;
 
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import gui.panels.modificar.JFX_ModificarCiudad;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -49,7 +49,7 @@ public class JFX_VerCiudad extends Pane{
 		activoCol.setMinWidth(70);
 		activoCol.setMaxWidth(100);		
 				
-		table.setItems(new Ciudades().getListaCiudades());
+		table.setItems(new Vertices().getListaVertices());
 
 		nombreCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("nombre"));
 		habitantesCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("habitantes"));
@@ -87,9 +87,9 @@ public class JFX_VerCiudad extends Pane{
         			// alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
                     alert.showAndWait();
                     if (alert.getResult() == ButtonType.OK) {
-                        new Ciudades().deleteItemByID(select.getID());
+                        new Vertices().deleteItemByID(select.getID());
         				table.setItems(null);
-        				table.setItems(new Ciudades().getListaCiudades());
+        				table.setItems(new Vertices().getListaVertices());
                     }
                 });
 
@@ -125,7 +125,7 @@ public class JFX_VerCiudad extends Pane{
 			@Override
 			public void handle(ActionEvent e) {
 				table.setItems(null);
-				table.setItems(new Ciudades().getListaCiudades());
+				table.setItems(new Vertices().getListaVertices());
 			}
 		});
 

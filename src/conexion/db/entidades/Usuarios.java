@@ -19,9 +19,9 @@ public class Usuarios extends EntidadesUtils{
 				+ "clave VARCHAR(20)," 
 				+ "activo BIT(1) DEFAULT FALSE," 
 				+ "PRIMARY KEY (id)," 
-				+ "tipo_usuario_id INT NOT NULL," 
-				+ "CONSTRAINT fk_usuarios FOREIGN KEY (tipo_usuario_id) "
-				+ " REFERENCES tipo_usuario (id)";
+				+ "rol_id INT NOT NULL," 
+				+ "CONSTRAINT fk_roles FOREIGN KEY (rol_id) "
+				+ "		REFERENCES roles (id)";
 		TablasUtiles.creatTable(table_name, sql);
 	}
 	/**

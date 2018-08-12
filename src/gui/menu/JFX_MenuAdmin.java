@@ -24,8 +24,11 @@ public class JFX_MenuAdmin {
 		MenuItem archivoSesion = new MenuItem(TextoGUI.MENU_ARCHIVO_SESION);
 		MenuItem archivoSalir = new MenuItem(TextoGUI.MENU_ARCHIVO_SALIR);
 		
+		Menu buscar = new Menu(TextoGUI.MENU_BUSCAR);
+		MenuItem buscarRutas = new MenuItem(TextoGUI.MENU_BUSCAR_RUTAS);
+		
 		Menu ver = new Menu(TextoGUI.MENU_VER);
-		MenuItem verPublico = new MenuItem(TextoGUI.MENU_PUBLICO);
+//		MenuItem verPublico = new MenuItem(TextoGUI.MENU_PUBLICO);
 		MenuItem verCiudades = new MenuItem(TextoGUI.MENU_VER_CIUDAD);
 		MenuItem verCaminos = new MenuItem(TextoGUI.MENU_VER_CAMINO);
 		
@@ -55,7 +58,8 @@ public class JFX_MenuAdmin {
 		 * Creando los Submenus
 		 */
 		archivo.getItems().addAll(archivoSesion,archivoSalir);
-		ver.getItems().addAll(verPublico, verCiudades, verCaminos);
+		buscar.getItems().addAll(buscarRutas);
+		ver.getItems().addAll(verCiudades, verCaminos);
 		crearRecursos.getItems().addAll(crearRecursoAlojamiento, crearRecursoTrafico, crearRecursoSitioTuristico, crearRecursoEstadoCamino, crearRecursoTipoCamino);
 		crear.getItems().addAll(crearCiudad, crearCamino, crearRecursos);
 		sistemaAutomatizar.getItems().addAll(sistemaAutoAuto,sistemaAutoCSV);
@@ -68,14 +72,14 @@ public class JFX_MenuAdmin {
 		archivoSalir.setAccelerator(new KeyCodeCombination(KeyCode.Q,KeyCombination.SHORTCUT_DOWN));
 		archivoSesion.setAccelerator(new KeyCodeCombination(KeyCode.N,KeyCombination.SHORTCUT_DOWN));
 		
-		verPublico.setAccelerator(new KeyCodeCombination(KeyCode.P,KeyCombination.SHORTCUT_DOWN));
+		buscar.setAccelerator(new KeyCodeCombination(KeyCode.B,KeyCombination.SHORTCUT_DOWN));
 
 		ayudaAyuda.setAccelerator(new KeyCodeCombination(KeyCode.F1));
 		
 		/*
 		 * Agregando los menus
 		 */
-		 menu.getMenus().addAll(archivo,ver,crear,sistema,ayuda);
+		 menu.getMenus().addAll(archivo,buscar,ver,crear,sistema,ayuda);
 
 		/*
 		 * Agregando las acciones
@@ -83,7 +87,8 @@ public class JFX_MenuAdmin {
 		archivoSesion.setOnAction(action);
 		archivoSalir.setOnAction(action);
 
-		verPublico.setOnAction(action);
+		buscarRutas.setOnAction(action);
+		
 		verCiudades.setOnAction(action);
 		verCaminos.setOnAction(action);
 

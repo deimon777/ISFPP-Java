@@ -7,7 +7,6 @@ public class Camino {
 	private int id;
 	private String nombre;
 	private int distancia;
-	private int peso_camino;
 	private TipoCamino tipo = null;
 	private EstadoCamino estado = null;
 	private Trafico trafico = null;
@@ -42,13 +41,6 @@ public class Camino {
 	}
 	public void setDistancia(int distancia) {
 		this.distancia = distancia;
-	}
-	public int getPesoCamino() {
-		return peso_camino;
-	}
-
-	public void setPesoCamino(int peso_camino) {
-		this.peso_camino = peso_camino;
 	}
 	public TipoCamino getTipoCamino() {
 		return tipo;

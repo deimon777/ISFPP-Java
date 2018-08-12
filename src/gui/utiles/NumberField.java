@@ -2,12 +2,12 @@ package gui.utiles;
 
 import javafx.scene.control.TextField;
 
-public class NumberTextField extends TextField{
+public class NumberField extends TextField{
 	
-	public NumberTextField() {		
+	public NumberField() {		
 	}
 	
-	public NumberTextField(int n) {
+	public NumberField(int n) {
 		super.setText(""+n);
 	}
 

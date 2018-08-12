@@ -44,10 +44,6 @@ public class JFX_VerCamino {
 		distanciaCol.setMinWidth(60);
 		distanciaCol.setMaxWidth(75);
 		distanciaCol.setStyle("-fx-alignment: CENTER;");
-		TableColumn<Camino,Integer> pesoCaminoCol = new TableColumn<Camino, Integer>("Peso");
-		pesoCaminoCol.setMinWidth(50);
-		pesoCaminoCol.setMaxWidth(50);
-		pesoCaminoCol.setStyle("-fx-alignment: CENTER;");
 		TableColumn<Camino,TipoCamino> tipoCol = new TableColumn<Camino, TipoCamino>("Tipo");
 		TableColumn<Camino,EstadoCamino> estadoCol = new TableColumn<Camino, EstadoCamino>("Estado");
 		TableColumn<Camino,Trafico> traficoCol = new TableColumn<Camino, Trafico>("Trafico");
@@ -65,7 +61,6 @@ public class JFX_VerCamino {
 
 		nombreCol.setCellValueFactory(new PropertyValueFactory<Camino,String>("nombre"));
 		distanciaCol.setCellValueFactory(new PropertyValueFactory<Camino,Integer>("distancia"));
-		pesoCaminoCol.setCellValueFactory(new PropertyValueFactory<Camino,Integer>("pesoCamino"));
 		tipoCol.setCellValueFactory(new PropertyValueFactory<Camino,TipoCamino>("tipoCaminoNombre"));
 		estadoCol.setCellValueFactory(new PropertyValueFactory<Camino,EstadoCamino>("estadoCaminoNombre"));
 		traficoCol.setCellValueFactory(new PropertyValueFactory<Camino,Trafico>("traficoNombre"));
@@ -117,7 +112,6 @@ public class JFX_VerCamino {
 					System.out.println(select.getID());
 					System.out.println(select.getNombre());
 					System.out.println(select.getDistancia());
-					System.out.println(select.getPesoCamino());
 					System.out.println(select.getTipoCamino().getNombre());
 					System.out.println(select.getEstadoCamino().getNombre());
 					System.out.println(select.isActivo());
@@ -129,7 +123,6 @@ public class JFX_VerCamino {
 									select.getID(),
 									select.getNombre(),
 									select.getDistancia(),
-									select.getPesoCamino(),
 									select.getTipoCamino().getNombre(),
 									select.getEstadoCamino().getNombre(),
 									select.getTrafico().getNombre(),
@@ -141,7 +134,7 @@ public class JFX_VerCamino {
 			}
 		});
 
-		table.getColumns().addAll(nombreCol, distanciaCol, pesoCaminoCol, tipoCol, estadoCol, traficoCol, ciudad1Col, ciudad2Col,activoCol, accionesCol);
+		table.getColumns().addAll(nombreCol, distanciaCol, tipoCol, estadoCol, traficoCol, ciudad1Col, ciudad2Col,activoCol, accionesCol);
 
 		Button btn = new Button("Recargar Caminos");
 		HBox hbBtn = new HBox();

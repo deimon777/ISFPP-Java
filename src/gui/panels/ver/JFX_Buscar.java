@@ -6,7 +6,7 @@ import com.sothawo.mapjfx.MapView;
 import com.sothawo.mapjfx.WMSParam;
 import com.sothawo.mapjfx.offline.OfflineCache;
 
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import gui.mapa.Mapa;
 import gui.utiles.CrearGrafo;
 
@@ -24,10 +24,10 @@ import javafx.scene.layout.VBox;
 
 
 
-public class JFX_VerPublico{
+public class JFX_Buscar{
 	VBox panel = new VBox();
 
-	public JFX_VerPublico() {
+	public JFX_Buscar() {
 		/*
 		 * Mapa de los caminos
 		 */
@@ -60,8 +60,8 @@ public class JFX_VerPublico{
 		TextField ruta_fin = new TextField();
 		ruta_fin.setPromptText("Ruta final");
 
-		TextFields.bindAutoCompletion(ruta_inicio,new Ciudades().getCiudadesActivas());
-		TextFields.bindAutoCompletion(ruta_fin,new Ciudades().getCiudadesActivas());
+		TextFields.bindAutoCompletion(ruta_inicio,new Vertices().getVerticesActivas());
+		TextFields.bindAutoCompletion(ruta_fin,new Vertices().getVerticesActivas());
 
 		CrearGrafo graf = new CrearGrafo();
 		graf.cargarGrafo();

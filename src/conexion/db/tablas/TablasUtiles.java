@@ -28,7 +28,7 @@ public class TablasUtiles {
 			if(myConect!=null) {
 				myStmt = c.getStatement(myConect);
 				myStmt.execute("CREATE TABLE IF NOT EXISTS " + table + "(" + param + ") ENGINE=INNODB");
-				System.out.println("Tabla "+table+" creada");
+				System.out.println("--> Tabla "+table+" creada");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

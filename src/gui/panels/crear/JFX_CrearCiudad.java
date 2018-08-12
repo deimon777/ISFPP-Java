@@ -1,8 +1,9 @@
 package gui.panels.crear;
 
-import conexion.db.entidades.Ciudades;
-import gui.utiles.DoubleTextField;
-import gui.utiles.NumberTextField;
+import conexion.db.entidades.TipoVertice;
+import conexion.db.entidades.Vertices;
+import gui.utiles.DoubleField;
+import gui.utiles.NumberField;
 import gui.utiles.TextoUtiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +11,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -43,23 +45,27 @@ public class JFX_CrearCiudad extends Pane{
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0);
 		Label habitantes = new Label("Habitantes:");
-		NumberTextField habitantesTextField = new NumberTextField();
+		NumberField habitantesTextField = new NumberField();
 		Label historia = new Label("Historia:");
 		TextArea historiasTextField = new TextArea();
 		historiasTextField.setPrefWidth(nombreTextField.getWidth()); //acomoda el ancho
 		Label latitud = new Label("Latitud: (*)");
-		DoubleTextField latitudTextField = new DoubleTextField();
+		DoubleField latitudTextField = new DoubleField();
 		Label outputLatitud = new Label("Latitud Vacia");
 		outputLatitud.setTextFill(Color.RED);
 		outputLatitud.setOpacity(0);
 		Label longitud = new Label("Longitud: (*)");
-		DoubleTextField longitudTextField = new DoubleTextField();
+		DoubleField longitudTextField = new DoubleField();
 		Label outputLongitud = new Label("Longitud Vacia");
 		outputLongitud.setTextFill(Color.RED);
 		outputLongitud.setOpacity(0);
 		Label activo = new Label("Activo:");
 		CheckBox cb = new CheckBox();	
 		cb.setSelected(true);
+		ComboBox<String> listaTipoVertice = new ComboBox<String>();
+		listaTipoVertice.setItems(new TipoVertice().getTipoVertice());
+		
+		
 		
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(nombreTextField, HPos.LEFT);
@@ -112,6 +118,8 @@ public class JFX_CrearCiudad extends Pane{
 				Double latitud = null;
 				Double longitud = null;
 				Boolean activo = cb.selectedProperty().getValue();
+				String tipo = null;
+				
 
 				TextoUtiles tu = new TextoUtiles();
 
@@ -139,10 +147,18 @@ public class JFX_CrearCiudad extends Pane{
 				if (!habitantesTextField.getText().trim().isEmpty()) {
 					habitantes = Integer.parseInt(habitantesTextField.getText());
 				}
+				if (!(listaTipoVertice.getValue() == null || !listaTipoVertice.getValue().trim().isEmpty())) {
+					tipo = listaTipoVertice.getValue();
+				}else {
+					valido = false;						
+				}
 				
 				if(valido){
-					Ciudades record = new Ciudades();
-					record.insertar(nombre,habitantes,historia,latitud,longitud,activo);
+					Vertices record = new Vertices();
+					//ver todos!!
+					
+					
+//					record.insertar(nombre,habitantes,historia,latitud,longitud,activo,tipo);
 					nombreTextField.setText("");
 					habitantesTextField.setText("");
 					historiasTextField.setText("");

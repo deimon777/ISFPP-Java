@@ -120,7 +120,7 @@ public class JFX_Trafico extends Pane{
 				}else {
 					Rec_Trafico record = new Rec_Trafico();
 					nombre = new TextoUtiles().Capitalizar(nombre);
-					record.insertar(nombre);
+//					record.insertar(nombre);
 					nombreTextField.setText("");
 					outputNombre.setText("Recurso Creado");
 					recargarTabla();

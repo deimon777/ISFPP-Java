@@ -14,13 +14,13 @@ import conexion.db.tablas.TablesName;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Ciudades extends EntidadesUtils{
-	private static String tableName = TablesName.CUIDADES;
+public class Vertices extends EntidadesUtils{
+	private static String tableName = TablesName.VERTICES;
 
 	/**
 	 * Tiene el codigo SQL para crear la tabla ciudades, y llama a la funcion para crear la misma
 	 */
-	public void crearTablaCiudad() {
+	public void crearTablaVertice() {
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL UNIQUE,"
 				+ "habitantes INT(10),"
@@ -28,19 +28,22 @@ public class Ciudades extends EntidadesUtils{
 				+ "latitud DOUBLE(10,6),"
 				+ "longitud DOUBLE(10,6),"
 				+ "activo BIT(1) DEFAULT TRUE,"
-				+ "PRIMARY KEY (id)";
+				+ "PRIMARY KEY (id),"
+				+ "tipo_vertice_id INT NOT NULL,"
+				+ "CONSTRAINT fk_tipo_vertice FOREIGN KEY (tipo_vertice_id)"
+				+ "		REFERENCES tipo_vertice (id)";
 		TablasUtiles.creatTable(tableName, sql);
 	}
 	/**
 	 * Borra (DELETE) la tabla.
 	 */
-	public void borrarTablaCiudad() {
+	public void borrarTablaVertice() {
 		TablasUtiles.deleteTable(tableName);		
 	}
 	/**
 	 * Vacia (DROP) la tabla.
 	 */
-	public void vaciarTablaCiudad() {
+	public void vaciarTablaVertice() {
 		TablasUtiles.emptyTable(tableName);
 	}
 
@@ -58,9 +61,9 @@ public class Ciudades extends EntidadesUtils{
 	 * @param longitud
 	 * @param activo
 	 */
-	public void insertar( String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
-				+ "VALUES (NULL,?,?,?,?,?,?)";
+	public void insertar( String nombre, Integer habitantes, String historia, Double latitud, Double longitud, Boolean activo, Integer tipo_vertice) {
+		String sql = "INSERT INTO "+tableName+" (id, nombre, habitantes, historia, latitud, longitud, activo, tipo_vertice_id) "
+				+ "VALUES (NULL,?,?,?,?,?,?,?)";
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -94,7 +97,15 @@ public class Ciudades extends EntidadesUtils{
 				else {
 					myPrepStmt.setDouble(5, longitud);
 				}
+				
 				myPrepStmt.setBoolean(6, activo);
+				
+				if (tipo_vertice == null) {
+					myPrepStmt.setNull(7, java.sql.Types.INTEGER);				
+				}
+				else {
+					myPrepStmt.setInt(7, tipo_vertice);
+				}
 
 				myPrepStmt.executeUpdate();
 				System.out.println("Ciudad Creada!");
@@ -113,7 +124,7 @@ public class Ciudades extends EntidadesUtils{
 	 * @param valorSql
 	 */
 	public void cargarValores(String valorSql) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre, habitantes, historia, latitud, longitud, activo) "
+		String sql = "INSERT INTO "+tableName+" (id, nombre, habitantes, historia, latitud, longitud, activo, tipo_vertice_id) "
 				+ "VALUES "+valorSql;
 
 		DB_Connection c = null;
@@ -235,7 +246,7 @@ public class Ciudades extends EntidadesUtils{
 	 * Trae todos las ciudades (Objetos), con toda la informacion que esta en la base de datos.
 	 * @return Una lista de objetos tipo Ciudad
 	 */
-	public ObservableList<Ciudad> getListaCiudades() {
+	public ObservableList<Ciudad> getListaVertices() {
 		String sql = "SELECT * from "+tableName;
 
 		DB_Connection conec = null;
@@ -275,7 +286,7 @@ public class Ciudades extends EntidadesUtils{
 	 * Crea una lista con los nombres de las ciudades
 	 * @return Una lista con nombres de ciudades
 	 */
-	public ObservableList<String> getCiudadesNombre() {
+	public ObservableList<String> getVerticesNombre() {
 		return EntidadesUtils.getLista("SELECT nombre from "+tableName);
 	}
 
@@ -283,7 +294,7 @@ public class Ciudades extends EntidadesUtils{
 	 * Crea una lista con los nombres de las ciudades activas
 	 * @return Una lista con nombres de ciudades
 	 */
-	public ObservableList<String> getCiudadesActivas() {
+	public ObservableList<String> getVerticesActivas() {
 		return EntidadesUtils.getLista("SELECT nombre from "+tableName+" WHERE activo = 1");
 	}
 
@@ -292,7 +303,7 @@ public class Ciudades extends EntidadesUtils{
 	 * @param nombre
 	 * @return El ID de la ciudad.
 	 */
-	public int getCiudadesID(String nombre) {
+	public int getVerticesID(String nombre) {
 		int id = EntidadesUtils.getItemFromNombre(tableName, "id", nombre);
 		return id;
 	}

@@ -6,6 +6,7 @@ import grafo.grafo.Graph;
 import grafo.grafo.Vertex;
 import grafo.grafo.Edge;
 import grafo.utiles.AdjacencyMapGraph;
+import grafo.utiles.PositionalList;
 import grafo.utiles.GraphAlgorithms;
 import grafo.utiles.Map;
 import grafo.utiles.ProbeHashMap;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 
 import com.deimon.entidades.camino.Camino;
 
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import conexion.db.entidades.Caminos;
 
 public class CrearGrafo{
@@ -27,8 +28,8 @@ public class CrearGrafo{
 	ArrayList<Vertex<Ciudad>> listaVertices = new ArrayList<>();
 
 	private void listaCiudades() {
-		Ciudades ciudades = new Ciudades();
-		listaCiudad = ciudades.getListaCiudades();
+		Vertices ciudades = new Vertices();
+		listaCiudad = ciudades.getListaVertices();
 	}
 
 	private void listaCamino() {		
@@ -81,43 +82,13 @@ public class CrearGrafo{
 	public void buscarCamino(String ciudad1, String ciudad2) {
 		Vertex<Ciudad> c1 = buscarCiudadEnLista(ciudad1);
 		Vertex<Ciudad> c2 = buscarCiudadEnLista(ciudad2);
-		Map<Vertex<Ciudad>, Integer> res = GraphAlgorithms.shortestPathLengths(g, c1);
-		
-		todasLasDistancias(res);
+		PositionalList<Vertex<Ciudad>> pl = GraphAlgorithms.shortestPathList(g, c1, c2);
 
-
-//		Map<Vertex<Ciudad>, Edge<Integer>> tree;
-//		tree = GraphAlgorithms.spTree(g, c1, res);
-//		System.out.println("Muestra los caminos hacia una ciudad cada");
-//		System.out.println("Ciudad: "+c1.getElement().getNombre());
-//		for (Vertex<Ciudad> ver : tree.keySet())
-//			System.out.println(ver.getElement() + "  ----->  " + tree.get(ver).getElement()+"km");
-//		System.out.println("-----------------------");
-//		System.out.println("-----------------------");
-//		System.out.println("-----------------------");
-//		System.out.println("-----------------------");
-//		
-//		tree = GraphAlgorithms.spTree(g, c2, res);
-//		System.out.println("Ciudad: "+c2.getElement().getNombre());
-//		for (Vertex<Ciudad> ver : tree.keySet())
-//			System.out.println(ver.getElement() + "  ----->  " + tree.get(ver).getElement()+"km");
-//		System.out.println("-----------------------");
-
-		//		System.out.println("Partiendo de \""+c1.getElement().getNombre()+"\" la distancia maxima es:");
-		//		Map<String, Vertex<Ciudad>> res2 = new ProbeHashMap<>();
-		//		for (Vertex<Ciudad> result : g.vertices())
-		//			res2.put(result.getElement().getNombre(), g.insertVertex(result.getElement()));
-
-//		Edge<Integer> arc;
-//		Vertex<Ciudad> ver = c2;
-//
-//		while (ver != c1) {
-//			System.out.println(ver.getElement());
-//			arc = tree.get(ver);
-//			ver = g.opposite(ver, arc);
-//		}
-
+		for (Vertex<Ciudad> v: pl)
+			System.out.println(v.getElement().getNombre());	
 	}
+	
+	
 	
 	private void todasLasDistancias(Map<Vertex<Ciudad>, Integer> res) {
 		System.out.println("-----------------------");

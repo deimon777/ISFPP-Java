@@ -4,7 +4,8 @@ public class TablesName {
 
 	public final static String RECURSO_SUFIJO = "";
 	
-	public final static String CUIDADES = "ciudades";
+	public final static String VERTICES = "vertices";
+	public final static String TIPO_VERTICE = "tipo_vertice";
 	public final static String CAMINOS = "caminos";
 	
 	public final static String ALOJAMIENTOS = RECURSO_SUFIJO+"alojamientos";
@@ -14,5 +15,5 @@ public class TablesName {
 	public final static String ESTADO_CAMINO = RECURSO_SUFIJO+"estado_camino";
 	
 	public final static String USUARIOS = "usuarios";
-	public final static String TIPO_USUARIO = "tipo_usuario";
+	public final static String ROLES = "roles";
 }

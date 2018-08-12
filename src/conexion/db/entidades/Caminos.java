@@ -25,24 +25,26 @@ public class Caminos extends EntidadesUtils{
 		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE,"
 				+ "nombre VARCHAR(50) NOT NULL,"
 				+ "distancia INT(20),"
-				+ "peso_camino INT(5),"
 				+ "activo BIT(1) DEFAULT TRUE,"
 				+ "PRIMARY KEY (id),"
 				+ "tipo_camino_id INT NOT NULL,"
 				+ "CONSTRAINT fk_tipo_camino FOREIGN KEY (tipo_camino_id)"
-				+ " REFERENCES tipo_camino (id),"
+				+ "		REFERENCES tipo_camino (id)"
+				+ "		ON DELETE CASCADE ON UPDATE CASCADE,"
 				+ "estado_camino_id INT NOT NULL,"
 				+ "CONSTRAINT fk_estado_camino FOREIGN KEY (estado_camino_id)"
-				+ " REFERENCES estado_camino (id),"
+				+ "		REFERENCES estado_camino (id)"
+				+ "		ON DELETE CASCADE ON UPDATE CASCADE,"
 				+ "trafico_id INT NOT NULL,"
 				+ "CONSTRAINT fk_trafico FOREIGN KEY (trafico_id)"
-				+ " REFERENCES trafico (id),"
-				+ "ciudad_inicial_id INT NOT NULL," 
-				+ "CONSTRAINT fk_ciudad_inicial FOREIGN KEY (ciudad_inicial_id)" 
-				+ " REFERENCES ciudades (id),"
-				+ "ciudad_final_id INT NOT NULL," 
-				+ "CONSTRAINT fk_ciudad_final FOREIGN KEY (ciudad_final_id)" 
-				+ " REFERENCES ciudades (id)";
+				+ "		REFERENCES trafico (id)"
+				+ "		ON DELETE CASCADE ON UPDATE CASCADE,"
+				+ "ciudad_inicial_id INT NOT NULL,"
+				+ "CONSTRAINT fk_ciudad_inicial FOREIGN KEY (ciudad_inicial_id)"
+				+ "		REFERENCES vertices (id),"
+				+ "ciudad_final_id INT NOT NULL,"
+				+ "CONSTRAINT fk_ciudad_final FOREIGN KEY (ciudad_final_id)"
+				+ "		REFERENCES vertices (id)";
 		TablasUtiles.creatTable(tableName, sql);
 	}
 	/**
@@ -67,7 +69,6 @@ public class Caminos extends EntidadesUtils{
 	 * Crea un item en la base de datos.
 	 * @param nombre
 	 * @param distancia
-	 * @param peso
 	 * @param activo
 	 * @param tipo_id
 	 * @param estado_id
@@ -75,9 +76,9 @@ public class Caminos extends EntidadesUtils{
 	 * @param ciudad_inicio_id
 	 * @param ciudad_fin_id
 	 */
-	public void insertar(String nombre, int distancia, int peso, boolean activo, int tipo_id, int estado_id, int trafico_id, int ciudad_inicio_id, int ciudad_fin_id) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre, distancia, peso_camino, activo, tipo_camino_id, estado_camino_id, trafico_id, ciudad_inicial_id, ciudad_final_id) "
-				+ "VALUES (NULL, ?,?,?,?,?,?,?,?,?)";
+	public void insertar(String nombre, int distancia, boolean activo, int tipo_id, int estado_id, int trafico_id, int ciudad_inicio_id, int ciudad_fin_id) {
+		String sql = "INSERT INTO "+tableName+" (id, nombre, distancia, activo, tipo_camino_id, estado_camino_id, trafico_id, ciudad_inicial_id, ciudad_final_id) "
+				+ "VALUES (NULL, ?,?,?,?,?,?,?,?)";
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -91,13 +92,12 @@ public class Caminos extends EntidadesUtils{
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
 				myPrepStmt.setInt(2, distancia);
-				myPrepStmt.setInt(3, peso);
-				myPrepStmt.setBoolean(4, activo);
-				myPrepStmt.setInt(5, tipo_id);
-				myPrepStmt.setInt(6, estado_id);
-				myPrepStmt.setInt(7, trafico_id);
-				myPrepStmt.setInt(8, ciudad_inicio_id);
-				myPrepStmt.setInt(9, ciudad_fin_id);
+				myPrepStmt.setBoolean(3, activo);
+				myPrepStmt.setInt(4, tipo_id);
+				myPrepStmt.setInt(5, estado_id);
+				myPrepStmt.setInt(6, trafico_id);
+				myPrepStmt.setInt(7, ciudad_inicio_id);
+				myPrepStmt.setInt(8, ciudad_fin_id);
 
 				myPrepStmt.executeUpdate();
 				System.out.println("Camino Creado!");
@@ -112,7 +112,7 @@ public class Caminos extends EntidadesUtils{
 	}
 	
 	public void cargarValores(String valorSql) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre, distancia, peso_camino, activo, tipo_camino_id, estado_camino_id, trafico_id, ciudad_inicial_id, ciudad_final_id) "
+		String sql = "INSERT INTO "+tableName+" (id, nombre, distancia, activo, tipo_camino_id, estado_camino_id, trafico_id, ciudad_inicial_id, ciudad_final_id) "
 				+ "VALUES "+valorSql;
 
 		DB_Connection c = null;
@@ -251,9 +251,9 @@ public class Caminos extends EntidadesUtils{
 				+ "ON "+tableName+".estado_camino_id=estado_camino.id "
 				+ "JOIN trafico "
 				+ "ON "+tableName+".trafico_id=trafico.id "
-				+ "JOIN ciudades ciudad_inicial "
+				+ "JOIN vertices ciudad_inicial "
 				+ "ON "+tableName+".ciudad_inicial_id=ciudad_inicial.id "
-				+ "JOIN ciudades ciudad_final "
+				+ "JOIN vertices ciudad_final "
 				+ "ON "+tableName+".ciudad_final_id=ciudad_final.id";
 
 		DB_Connection conec = null;
@@ -274,7 +274,6 @@ public class Caminos extends EntidadesUtils{
 					camino.setID(rs.getInt("id"));
 					camino.setNombre(rs.getString("nombre"));
 					camino.setDistancia(rs.getInt("distancia"));
-					camino.setPesoCamino(rs.getInt("peso_camino"));
 					camino.setActivo(rs.getBoolean("activo"));
 					TipoCamino tc = new TipoCamino();
 					tc.setNombre(rs.getString("tipo_camino_nombre"));
@@ -364,7 +363,6 @@ public class Caminos extends EntidadesUtils{
 					camino = new Camino();
 					camino.setNombre(rs.getString("nombre"));
 					camino.setDistancia(rs.getInt("distancia"));
-					camino.setPesoCamino(rs.getInt("peso_camino"));
 					camino.setActivo(rs.getBoolean("activo"));
 					TipoCamino tc = new TipoCamino();
 					tc.setNombre(rs.getString("tipo_camino_nombre"));

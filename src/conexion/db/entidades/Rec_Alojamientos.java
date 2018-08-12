@@ -26,9 +26,9 @@ public class Rec_Alojamientos extends EntidadesUtils{
 				+ "nombre VARCHAR(50) NOT NULL," 
 				+ "activo BIT(1) DEFAULT TRUE," 
 				+ "PRIMARY KEY (id)," 
-				+ "ciudades_id INT NOT NULL," 
-				+ "CONSTRAINT fk_alojamientos FOREIGN KEY (ciudades_id)" 
-				+ " REFERENCES ciudades (id)";
+				+ "vertice_id INT NOT NULL," 
+				+ "CONSTRAINT fk_alojamientos FOREIGN KEY (vertice_id)" 
+				+ " 	REFERENCES vertices (id)";
 		TablasUtiles.creatTable(tableName, sql);
 	}
 	/**
@@ -49,8 +49,8 @@ public class Rec_Alojamientos extends EntidadesUtils{
 	/*
 	 * INSERTAR
 	 */
-	public void insertar(String nombre, Boolean activo, int ciudad_id) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, ciudades_id) VALUES (NULL, ?,?,?)";
+	public void insertar(String nombre, Boolean activo, int vertice_id) {
+		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, vertice_id) VALUES (NULL, ?,?,?)";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPrepStmt = null;
@@ -63,7 +63,7 @@ public class Rec_Alojamientos extends EntidadesUtils{
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
 				myPrepStmt.setBoolean(2, activo);
-				myPrepStmt.setInt(3, ciudad_id);
+				myPrepStmt.setInt(3, vertice_id);
 				myPrepStmt.executeUpdate();			
 				System.out.println("ALojamiento Creada!");
 			}
@@ -75,7 +75,7 @@ public class Rec_Alojamientos extends EntidadesUtils{
 	}
 	
 	public void cargarValores(String valorSql) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, ciudades_id) "
+		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, vertice_id) "
 				+ "VALUES "+valorSql;
 
 		DB_Connection c = null;

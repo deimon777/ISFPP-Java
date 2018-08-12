@@ -4,11 +4,11 @@ package gui.panels.crear;
 import org.controlsfx.control.textfield.TextFields;
 
 import conexion.db.entidades.Caminos;
-import conexion.db.entidades.Ciudades;
+import conexion.db.entidades.Vertices;
 import conexion.db.entidades.Rec_EstadoCamino;
 import conexion.db.entidades.Rec_TipoCamino;
 import conexion.db.entidades.Rec_Trafico;
-import gui.utiles.NumberTextField;
+import gui.utiles.NumberField;
 import gui.utiles.TextoUtiles;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -54,7 +54,7 @@ public class JFX_CrearCamino {
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0); //ver como no ocupan espacio 
 		Label distancia = new Label("Distancia:");
-		NumberTextField distanciaTextField = new NumberTextField();
+		NumberField distanciaTextField = new NumberField();
 		Label outputDistancia = new Label("Este campo no puede estar vacio");
 		outputDistancia.setTextFill(Color.RED);
 		outputDistancia.setOpacity(0);
@@ -97,8 +97,8 @@ public class JFX_CrearCamino {
 		outputCiudad2.setOpacity(0);
 
 		TextFields.bindAutoCompletion(nombreTextField,new Caminos().getCaminosNombre());
-		TextFields.bindAutoCompletion(ciudad1TextField,new Ciudades().getCiudadesActivas());
-		TextFields.bindAutoCompletion(ciudad2TextField,new Ciudades().getCiudadesActivas());
+		TextFields.bindAutoCompletion(ciudad1TextField,new Vertices().getVerticesActivas());
+		TextFields.bindAutoCompletion(ciudad2TextField,new Vertices().getVerticesActivas());
 
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 		GridPane.setHalignment(distancia, HPos.RIGHT);
@@ -210,9 +210,9 @@ public class JFX_CrearCamino {
 					int tipo_id = new Rec_TipoCamino().getTipoCaminoID(tipo);
 					int estado_id = new Rec_EstadoCamino().getEstadoCaminoID(estado);
 					int trafico_id = new Rec_Trafico().getTraficoID(trafico);					
-					Ciudades ciudad = new Ciudades();
-					int ciudad_id1 = ciudad.getCiudadesID(ciudad1);
-					int ciudad_id2 = ciudad.getCiudadesID(ciudad2);
+					Vertices ciudad = new Vertices();
+					int ciudad_id1 = ciudad.getVerticesID(ciudad1);
+					int ciudad_id2 = ciudad.getVerticesID(ciudad2);
 
 					Caminos record = new Caminos();
 					//					record.insertar(nombre,distancia,peso,activo,tipo_id,estado_id,trafico_id,ciudad_id1,ciudad_id2);

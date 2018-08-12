@@ -20,13 +20,13 @@ public class Rec_SitiosTuristicos extends EntidadesUtils{
 	 * Tiene el codigo SQL para crear la tabla sitios_turisticos, y llama a la funcion para crear la misma
 	 */
 	public void crearTablaSitiosTuristicos() {
-		String sql = "id INT NOT NULL AUTO_INCREMENT," 
+		String sql = "id INT NOT NULL AUTO_INCREMENT UNIQUE," 
 				+ "nombre VARCHAR(50) NOT NULL," 
 				+ "activo BIT(1) DEFAULT TRUE," 
 				+ "PRIMARY KEY (id)," 
-				+ "ciudades_id INT NOT NULL," 
-				+ "CONSTRAINT fk_sitios_turisticos FOREIGN KEY (ciudades_id)" 
-				+ " REFERENCES ciudades (id)";
+				+ "vertice_id INT NOT NULL," 
+				+ "CONSTRAINT fk_sitios_turisticos FOREIGN KEY (vertice_id)" 
+				+ "		REFERENCES vertices (id)";
 		TablasUtiles.creatTable(tableName, sql);
 	}
 	/**
@@ -73,7 +73,7 @@ public class Rec_SitiosTuristicos extends EntidadesUtils{
 	}
 
 	public void cargarValores(String valorSql) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, ciudades_id) "
+		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, vertice_id) "
 				+ "VALUES "+valorSql;
 
 		DB_Connection c = null;

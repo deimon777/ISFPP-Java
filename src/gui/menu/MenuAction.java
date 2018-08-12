@@ -14,7 +14,7 @@ import gui.panels.crear.JFX_TipoCamino;
 import gui.panels.crear.JFX_Trafico;
 import gui.panels.ver.JFX_VerCamino;
 import gui.panels.ver.JFX_VerCiudad;
-import gui.panels.ver.JFX_VerPublico;
+import gui.panels.ver.JFX_Buscar;
 import gui.utiles.TextoGUI;
 import javafx.application.Platform;
 
@@ -46,12 +46,14 @@ public class MenuAction {
 					System.out.println("Salir"); //LOG
 					Platform.exit();
 					break;
-
-					//VER
-				case TextoGUI.MENU_PUBLICO:
-					System.out.println("Publico"); //LOG
-					vista = (T)new JFX_VerPublico().getPanel();			
+					
+					//BUSCAR
+				case TextoGUI.MENU_BUSCAR_RUTAS:
+					System.out.println("Buscar"); //LOG
+					vista = (T)new JFX_Buscar().getPanel();			
 					break;
+					
+					//VER
 				case TextoGUI.MENU_VER_CIUDAD:
 					System.out.println("Ciudad ver"); //LOG
 					vista = (T)new JFX_VerCiudad().getPanel();
@@ -117,7 +119,7 @@ public class MenuAction {
 
 				default:
 					System.out.println("Default | Publico"); //LOG
-					vista = (T)new JFX_VerPublico().getPanel();
+					vista = (T)new JFX_Buscar().getPanel();
 					break;
 				}
 
