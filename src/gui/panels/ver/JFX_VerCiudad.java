@@ -1,6 +1,6 @@
 package gui.panels.ver;
 
-import com.deimon.entidades.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Vertice;
 import com.deimon.isfpp.Main;
 
 import conexion.db.entidades.Vertices;
@@ -32,38 +32,38 @@ public class JFX_VerCiudad extends Pane{
 		titulo.getStyleClass().add("texto-grande");
 		hbox_titulo.getChildren().add(titulo);
 
-		TableView<Ciudad> table = new TableView<Ciudad>();
+		TableView<Vertice> table = new TableView<Vertice>();
 		table.setEditable(true);
 		table.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
 
-		TableColumn<Ciudad,Object> nombreCol = new TableColumn<Ciudad, Object>("Nombre");
-		TableColumn<Ciudad,Object> habitantesCol = new TableColumn<Ciudad, Object>("Habitantes");
-		TableColumn<Ciudad,Object> historiaCol = new TableColumn<Ciudad, Object>("Historia");
+		TableColumn<Vertice,Object> nombreCol = new TableColumn<Vertice, Object>("Nombre");
+		TableColumn<Vertice,Object> habitantesCol = new TableColumn<Vertice, Object>("Habitantes");
+		TableColumn<Vertice,Object> historiaCol = new TableColumn<Vertice, Object>("Historia");
 		historiaCol.setSortable(false);
-		TableColumn<Ciudad,Object> latitudCol = new TableColumn<Ciudad, Object>("Latitud");
-		TableColumn<Ciudad,Object> longitudCol = new TableColumn<Ciudad, Object>("Longitud");
-		TableColumn<Ciudad,Object> activoCol = new TableColumn<Ciudad, Object>("Activo");
+		TableColumn<Vertice,Object> latitudCol = new TableColumn<Vertice, Object>("Latitud");
+		TableColumn<Vertice,Object> longitudCol = new TableColumn<Vertice, Object>("Longitud");
+		TableColumn<Vertice,Object> activoCol = new TableColumn<Vertice, Object>("Activo");
 		activoCol.setSortable(false);        
-		TableColumn<Ciudad,Ciudad> accionesCol = new TableColumn<Ciudad, Ciudad>("Acciones");
+		TableColumn<Vertice,Vertice> accionesCol = new TableColumn<Vertice, Vertice>("Acciones");
 		accionesCol.setSortable(false);        
 		activoCol.setMinWidth(70);
 		activoCol.setMaxWidth(100);		
 				
 		table.setItems(new Vertices().getListaVertices());
 
-		nombreCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("nombre"));
-		habitantesCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("habitantes"));
-		historiaCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("historia"));
-		latitudCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("latitud"));
-		longitudCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("longitud"));
-		activoCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Object>("activo"));
-		accionesCol.setCellValueFactory(new PropertyValueFactory<Ciudad,Ciudad>("acciones"));        
+		nombreCol.setCellValueFactory(new PropertyValueFactory<Vertice,Object>("nombre"));
+		habitantesCol.setCellValueFactory(new PropertyValueFactory<Vertice,Object>("habitantes"));
+		historiaCol.setCellValueFactory(new PropertyValueFactory<Vertice,Object>("historia"));
+		latitudCol.setCellValueFactory(new PropertyValueFactory<Vertice,Object>("latitud"));
+		longitudCol.setCellValueFactory(new PropertyValueFactory<Vertice,Object>("longitud"));
+		activoCol.setCellValueFactory(new PropertyValueFactory<Vertice,Object>("activo"));
+		accionesCol.setCellValueFactory(new PropertyValueFactory<Vertice,Vertice>("acciones"));        
         
-        accionesCol.setCellFactory(param -> new TableCell<Ciudad,Ciudad>() {
+        accionesCol.setCellFactory(param -> new TableCell<Vertice,Vertice>() {
             private final Button editButton = new Button("");
             private final Button deleteButton = new Button("");
             @Override
-            protected void updateItem(Ciudad item, boolean empty) {
+            protected void updateItem(Vertice item, boolean empty) {
                 super.updateItem(item, empty);
 
                 if (empty) {
@@ -79,7 +79,7 @@ public class JFX_VerCiudad extends Pane{
 				deleteButton.getStyleClass().add("delete-button");
 				deleteButton.setPrefWidth(accionesCol.getWidth()/2);
                 deleteButton.setOnAction(event -> {
-                    Ciudad select = getTableView().getItems().get(getIndex());
+                    Vertice select = getTableView().getItems().get(getIndex());
                     Alert alert = new Alert(AlertType.CONFIRMATION);
         			alert.setTitle("Eliminar Item");
         			alert.setHeaderText(null);
@@ -97,7 +97,7 @@ public class JFX_VerCiudad extends Pane{
 				editButton.getStyleClass().add("edit-button");
 				editButton.setPrefWidth(accionesCol.getWidth()/2);
                 editButton.setOnAction(event -> {
-                    Ciudad select = getTableView().getItems().get(getIndex());			
+                    Vertice select = getTableView().getItems().get(getIndex());			
                 	new Main<VBox>().cambiarVista(
                 			new JFX_ModificarCiudad(
                 					select.getID(),

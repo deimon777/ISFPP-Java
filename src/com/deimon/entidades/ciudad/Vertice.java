@@ -9,7 +9,7 @@ import java.util.List;
  * @author deimon
  *
  */
-public class Ciudad {
+public class Vertice {
 	private int id;
 	private String nombre;
 	private int habitantes;
@@ -17,14 +17,16 @@ public class Ciudad {
     private double latitud;
     private double longitud;
     private boolean activo;
+    private TipoVertice tipoVertice;
 
 	private List<Alojamiento> alojamientos;
 	private List<SitioTuristico> sitios_turisticos;
+	
 
-	public Ciudad() {		
+	public Vertice() {		
 	}
 	
-	public Ciudad(String nombre) {
+	public Vertice(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -80,6 +82,12 @@ public class Ciudad {
 	}
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+	public TipoVertice getTipoVertice() {
+		return tipoVertice;
+	}
+	public void setTipoVertice(TipoVertice tipoVertice) {
+		this.tipoVertice = tipoVertice;
 	}
 	
 	

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.deimon.entidades.ciudad.Alojamiento;
-import com.deimon.entidades.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Vertice;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
@@ -180,7 +180,7 @@ public class Rec_Alojamientos extends EntidadesUtils{
 					alojamiento.setID(rs.getInt("id"));
 					alojamiento.setNombre(rs.getString("nombre"));
 					alojamiento.setActivo(rs.getBoolean("activo"));
-					Ciudad c = new Ciudad();
+					Vertice c = new Vertice();
 					c.setID(rs.getInt("ciudades_id"));
 					c.setNombre(rs.getString("ciudad_nombre"));
 					c.setHabitantes(rs.getInt("habitantes"));

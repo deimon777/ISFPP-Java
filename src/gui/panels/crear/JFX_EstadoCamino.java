@@ -42,7 +42,8 @@ public class JFX_EstadoCamino extends Pane{
 		table.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
 
 		TableColumn<EstadoCamino,Object> nombreCol = new TableColumn<EstadoCamino, Object>("Nombre");
-		TableColumn<EstadoCamino,Object> pesoCol = new TableColumn<EstadoCamino, Object>("Peso");
+		TableColumn<EstadoCamino,Object> pesoCol = new TableColumn<EstadoCamino, Object>("Peso");		
+		pesoCol.setStyle( "-fx-alignment: CENTER;");
 		TableColumn<EstadoCamino,EstadoCamino> accionesCol = new TableColumn<EstadoCamino, EstadoCamino>("Acciones");
 
 		table.setItems(new Rec_EstadoCamino().getListaEstadoCamino());
@@ -90,7 +91,7 @@ public class JFX_EstadoCamino extends Pane{
 				editButton.setPrefWidth(accionesCol.getWidth()/2);
 				editButton.setOnAction(event -> {
 					EstadoCamino select = getTableView().getItems().get(getIndex());			
-					new Main<VBox>().cambiarVista(new JFX_ModificarEstadoCamino(select.getID(),select.getNombre()).getPanel());
+					new Main<VBox>().cambiarVista(new JFX_ModificarEstadoCamino(select.getID(),select.getNombre(),select.getPeso()).getPanel());
 				});
 			}
 		});
@@ -105,7 +106,7 @@ public class JFX_EstadoCamino extends Pane{
 		hbCrear.setAlignment(Pos.CENTER_LEFT);
 		Label nombre = new Label("Nombre:");
 		TextField nombreTextField = new TextField();	
-		Label pero = new Label("Peso:");
+		Label peso = new Label("Peso:");
 		NumberField pesoNumberField = new NumberField();
 		Button btnCrear = new Button("Crear");
 
@@ -113,7 +114,7 @@ public class JFX_EstadoCamino extends Pane{
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0);
 
-		hbCrear.getChildren().addAll(nombre,nombreTextField,btnCrear,outputNombre);
+		hbCrear.getChildren().addAll(nombre,nombreTextField,peso,pesoNumberField,btnCrear,outputNombre);
 		btnCrear.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {

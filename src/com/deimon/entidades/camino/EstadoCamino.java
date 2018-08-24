@@ -2,7 +2,8 @@ package com.deimon.entidades.camino;
 
 public class EstadoCamino {
 	private int id;
-	private String nombre;
+	private String nombre;;
+	private int peso;
 	
 	public EstadoCamino() {
 	}
@@ -10,11 +11,6 @@ public class EstadoCamino {
 	public EstadoCamino(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	public EstadoCamino(String nombre, boolean activo) {
-		this.nombre = nombre;
-	}
-	
 	/*
 	 * Getter y Setter
 	 */
@@ -29,5 +25,11 @@ public class EstadoCamino {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public int getPeso() {
+		return peso;
+	}
+	public void setPeso(int peso) {
+		this.peso = peso;
 	}
 }

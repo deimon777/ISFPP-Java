@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.deimon.entidades.ciudad.SitioTuristico;
-import com.deimon.entidades.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Vertice;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
@@ -48,7 +48,7 @@ public class Rec_SitiosTuristicos extends EntidadesUtils{
 	 * INSERTAR
 	 */
 	public void insertar(String nombre, Boolean activo, int ciudad_id) {
-		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, ciudades_id) VALUES (NULL, ?,?,?)";
+		String sql = "INSERT INTO "+tableName+" (id, nombre, activo, vertice_id) VALUES (NULL, ?,?,?)";
 		DB_Connection c = null;
 		Connection myConect = null;
 		PreparedStatement myPrepStmt = null;
@@ -142,7 +142,7 @@ public class Rec_SitiosTuristicos extends EntidadesUtils{
 					sitio_turistico.setID(rs.getInt("id"));
 					sitio_turistico.setNombre(rs.getString("nombre"));
 					sitio_turistico.setActivo(rs.getBoolean("activo"));
-					Ciudad c = new Ciudad();
+					Vertice c = new Vertice();
 					c.setID(rs.getInt("ciudades_id"));
 					c.setNombre(rs.getString("ciudad_nombre"));
 					c.setHabitantes(rs.getInt("habitantes"));

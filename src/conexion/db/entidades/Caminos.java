@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.deimon.entidades.camino.*;
-import com.deimon.entidades.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Vertice;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
@@ -284,7 +284,7 @@ public class Caminos extends EntidadesUtils{
 					Trafico t = new Trafico();
 					t.setNombre(rs.getString("trafico_nombre"));
 					camino.setTrafico(t);
-					Ciudad c1 = new Ciudad();
+					Vertice c1 = new Vertice();
 					c1.setNombre(rs.getString("ciudad_inicial_nombre"));
 					c1.setHabitantes(rs.getInt("ciudad_inicial_habitante"));
 					c1.setHistoria(rs.getString("ciudad_inicial_historia"));
@@ -292,7 +292,7 @@ public class Caminos extends EntidadesUtils{
 					c1.setLongitud(rs.getDouble("ciudad_inicial_long"));
 					c1.setActivo(rs.getBoolean("ciudad_inicial_activa"));
 					camino.setCiudadInicio(c1);
-					Ciudad c2 = new Ciudad();
+					Vertice c2 = new Vertice();
 					c2.setNombre(rs.getString("ciudad_final_nombre"));
 					c2.setHabitantes(rs.getInt("ciudad_final_habitante"));
 					c2.setHistoria(rs.getString("ciudad_final_historia"));
@@ -373,7 +373,7 @@ public class Caminos extends EntidadesUtils{
 					Trafico t = new Trafico();
 					t.setNombre(rs.getString("trafico_nombre"));
 					camino.setTrafico(t);
-					Ciudad c1 = new Ciudad();
+					Vertice c1 = new Vertice();
 					c1.setNombre(rs.getString("ciudad_inicial_nombre"));
 					c1.setHabitantes(rs.getInt("ciudad_inicial_habitante"));
 					c1.setHistoria(rs.getString("ciudad_inicial_historia"));
@@ -381,7 +381,7 @@ public class Caminos extends EntidadesUtils{
 					c1.setLongitud(rs.getDouble("ciudad_inicial_long"));
 					c1.setActivo(rs.getBoolean("ciudad_inicial_activa"));
 					camino.setCiudadInicio(c1);
-					Ciudad c2 = new Ciudad();
+					Vertice c2 = new Vertice();
 					c2.setNombre(rs.getString("ciudad_final_nombre"));
 					c2.setHabitantes(rs.getInt("ciudad_final_habitante"));
 					c2.setHistoria(rs.getString("ciudad_final_historia"));

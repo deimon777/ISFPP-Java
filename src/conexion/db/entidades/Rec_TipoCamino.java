@@ -46,8 +46,8 @@ public class Rec_TipoCamino extends EntidadesUtils{
 	/*
 	 * INSERTAR
 	 */
-	public void insertar(String nombre) {
-		String sql = "INSERT INTO " + tableName + "(`id`, `nombre`, peso ) VALUES (NULL, ?)";
+	public void insertar(String nombre, int peso) {
+		String sql = "INSERT INTO " + tableName + "(id, nombre, peso ) VALUES (NULL, ?,?)";
 
 		DB_Connection c = null;
 		Connection myConect = null;
@@ -60,6 +60,7 @@ public class Rec_TipoCamino extends EntidadesUtils{
 			if(myConect!=null) {
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
+				myPrepStmt.setInt(2, peso);
 				myPrepStmt.executeUpdate();
 				System.out.println("Tipo Camino creado");
 			}
@@ -160,6 +161,7 @@ public class Rec_TipoCamino extends EntidadesUtils{
 					TipoCamino selec = new TipoCamino();
 					selec.setID(rs.getInt("id"));
 					selec.setNombre(rs.getString("nombre"));
+					selec.setPeso(rs.getInt("peso"));
 					lista.add(selec);
 				}
 			}

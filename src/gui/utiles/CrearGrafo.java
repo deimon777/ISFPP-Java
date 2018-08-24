@@ -11,7 +11,7 @@ import grafo.utiles.GraphAlgorithms;
 import grafo.utiles.Map;
 import grafo.utiles.ProbeHashMap;
 
-import com.deimon.entidades.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Vertice;
 
 import java.util.ArrayList;
 
@@ -21,11 +21,11 @@ import conexion.db.entidades.Vertices;
 import conexion.db.entidades.Caminos;
 
 public class CrearGrafo{
-	private Graph<Ciudad, Integer> g = new AdjacencyMapGraph<>(false);
+	private Graph<Vertice, Integer> g = new AdjacencyMapGraph<>(false);
 
-	ObservableList<Ciudad> listaCiudad;
+	ObservableList<Vertice> listaCiudad;
 	ObservableList<Camino> listaCamino;
-	ArrayList<Vertex<Ciudad>> listaVertices = new ArrayList<>();
+	ArrayList<Vertex<Vertice>> listaVertices = new ArrayList<>();
 
 	private void listaCiudades() {
 		Vertices ciudades = new Vertices();
@@ -69,8 +69,8 @@ public class CrearGrafo{
 		cargarAristas();
 	}
 
-	Vertex<Ciudad> vert = null;
-	private Vertex<Ciudad> buscarCiudadEnLista(String nCiudad) {
+	Vertex<Vertice> vert = null;
+	private Vertex<Vertice> buscarCiudadEnLista(String nCiudad) {
 		listaVertices.forEach( ciudad -> {
 			if(ciudad.getElement().getNombre().equals(nCiudad)){
 				vert = ciudad;
@@ -80,20 +80,20 @@ public class CrearGrafo{
 	}
 
 	public void buscarCamino(String ciudad1, String ciudad2) {
-		Vertex<Ciudad> c1 = buscarCiudadEnLista(ciudad1);
-		Vertex<Ciudad> c2 = buscarCiudadEnLista(ciudad2);
-		PositionalList<Vertex<Ciudad>> pl = GraphAlgorithms.shortestPathList(g, c1, c2);
+		Vertex<Vertice> c1 = buscarCiudadEnLista(ciudad1);
+		Vertex<Vertice> c2 = buscarCiudadEnLista(ciudad2);
+		PositionalList<Vertex<Vertice>> pl = GraphAlgorithms.shortestPathList(g, c1, c2);
 
-		for (Vertex<Ciudad> v: pl)
+		for (Vertex<Vertice> v: pl)
 			System.out.println(v.getElement().getNombre());	
 	}
 	
 	
 	
-	private void todasLasDistancias(Map<Vertex<Ciudad>, Integer> res) {
+	private void todasLasDistancias(Map<Vertex<Vertice>, Integer> res) {
 		System.out.println("-----------------------");
 		System.out.println("Muestra todas las ciudades y distancia desde "+vert.getElement().getNombre());
-		for (Vertex<Ciudad> result : res.keySet())
+		for (Vertex<Vertice> result : res.keySet())
 			System.out.println(result.getElement()+"  -->  "+ res.get(result)+"km");
 		System.out.println("-----------------------");
 		

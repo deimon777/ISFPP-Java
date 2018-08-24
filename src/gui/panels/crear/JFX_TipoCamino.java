@@ -5,6 +5,7 @@ import com.deimon.isfpp.Main;
 
 import conexion.db.entidades.Rec_TipoCamino;
 import gui.panels.modificar.JFX_ModificarTipoCamino;
+import gui.utiles.NumberField;
 import gui.utiles.TextoUtiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,11 +42,14 @@ public class JFX_TipoCamino extends Pane{
 		table.setColumnResizePolicy( TableView.CONSTRAINED_RESIZE_POLICY );
 
 		TableColumn<TipoCamino,Object> nombreCol = new TableColumn<TipoCamino, Object>("Nombre");
+		TableColumn<TipoCamino,Object> pesoCol = new TableColumn<TipoCamino, Object>("Peso");		
+		pesoCol.setStyle( "-fx-alignment: CENTER;");
 		TableColumn<TipoCamino,TipoCamino> accionesCol = new TableColumn<TipoCamino, TipoCamino>("Acciones");
 
 		table.setItems(new Rec_TipoCamino().getListaTipoCamino());
 
 		nombreCol.setCellValueFactory(new PropertyValueFactory<TipoCamino,Object>("nombre"));
+		pesoCol.setCellValueFactory(new PropertyValueFactory<TipoCamino,Object>("peso"));
 		accionesCol.setCellValueFactory(new PropertyValueFactory<TipoCamino,TipoCamino>("acciones"));        
 
 		accionesCol.setCellFactory(param -> new TableCell<TipoCamino,TipoCamino>() {
@@ -92,7 +96,7 @@ public class JFX_TipoCamino extends Pane{
 			}
 		});
 
-		table.getColumns().addAll(nombreCol, accionesCol);
+		table.getColumns().addAll(nombreCol,pesoCol,accionesCol);
 
 		VBox vb = new VBox();
 
@@ -101,25 +105,28 @@ public class JFX_TipoCamino extends Pane{
 		hbCrear.setSpacing(10);
 		hbCrear.setAlignment(Pos.CENTER_LEFT);
 		Label nombre = new Label("Nombre:");
-		TextField nombreTextField = new TextField();		
+		TextField nombreTextField = new TextField();
+		Label peso = new Label("Peso:");
+		NumberField pesoNumberField = new NumberField();
 		Button btnCrear = new Button("Crear");
 
 		Label outputNombre = new Label("Nombre Vacio");
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0);
 
-		hbCrear.getChildren().addAll(nombre,nombreTextField,btnCrear,outputNombre);
+		hbCrear.getChildren().addAll(nombre,nombreTextField,peso,pesoNumberField,btnCrear,outputNombre);
 		btnCrear.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				outputNombre.setOpacity(0);
 				String nombre = nombreTextField.getText();
+				int peso = pesoNumberField.getValue();
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
 					outputNombre.setText("Nombre Vacio");
 				}else {
 					Rec_TipoCamino record = new Rec_TipoCamino();
 					nombre = new TextoUtiles().Capitalizar(nombre);
-					record.insertar(nombre);
+					record.insertar(nombre, peso);
 					nombreTextField.setText("");
 					outputNombre.setText("Recurso Creado");
 					recargarTabla();

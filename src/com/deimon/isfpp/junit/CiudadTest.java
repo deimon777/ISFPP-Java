@@ -9,24 +9,24 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.deimon.entidades.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Vertice;
 
 @DisplayName("Ciudad Test")
 class CiudadTest {
 
-	static Ciudad madryn;
-	static Ciudad trelew;
-	static Ciudad comodoro;
-	static Ciudad rawson;
-	static Ciudad piramides;
+	static Vertice madryn;
+	static Vertice trelew;
+	static Vertice comodoro;
+	static Vertice rawson;
+	static Vertice piramides;
 	
 	@BeforeAll
     static void initAll() {
-		madryn = new Ciudad("Puerto Madryn");
-		trelew = new Ciudad("Trelew");
-		comodoro = new Ciudad("Comodoro Rivadavia");
-		rawson = new Ciudad("Rawson");
-		piramides = new Ciudad("Pto. Piramides");
+		madryn = new Vertice("Puerto Madryn");
+		trelew = new Vertice("Trelew");
+		comodoro = new Vertice("Comodoro Rivadavia");
+		rawson = new Vertice("Rawson");
+		piramides = new Vertice("Pto. Piramides");
     }
 
     @BeforeEach

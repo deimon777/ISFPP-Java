@@ -161,6 +161,7 @@ public class Rec_Trafico extends EntidadesUtils{
 					Trafico selec = new Trafico();
 					selec.setID(rs.getInt("id"));
 					selec.setNombre(rs.getString("nombre"));
+					selec.setPeso(rs.getInt("peso"));
 					lista.add(selec);
 				}
 			}

@@ -1,14 +1,20 @@
-package com.deimon.entidades.camino;
+/**
+ * 
+ */
+package com.deimon.entidades.ciudad;
 
-public class TipoCamino {
+/**
+ * @author deimon
+ *
+ */
+public class TipoVertice {
 	private int id;
 	private String nombre;
-	private int peso;
+    private boolean activo;
 	
-	public TipoCamino() {
-	}
-	
-	public TipoCamino(String nombre) {
+	public TipoVertice() {
+	}	
+	public TipoVertice(String nombre) {
 		this.nombre = nombre;
 	}
 	/*
@@ -26,10 +32,10 @@ public class TipoCamino {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getPeso() {
-		return peso;
+	public boolean isActivo() {
+		return activo;
 	}
-	public void setPeso(int peso) {
-		this.peso = peso;
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 }

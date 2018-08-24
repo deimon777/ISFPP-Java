@@ -107,9 +107,10 @@ public class Rec_EstadoCamino extends EntidadesUtils{
 	/*
 	 * ACTUALIZAR
 	 */
-	public void actualizar(int id, String nombre) {
+	public void actualizar(int id, String nombre, int peso) {
 		String sql = "UPDATE "+tableName+" "
-				+ "SET nombre = ? "
+				+ "SET nombre = ?, "
+				+ "peso = ? "
 				+ "WHERE "+tableName+".id = ?";
 		
 		DB_Connection c = null;
@@ -123,8 +124,8 @@ public class Rec_EstadoCamino extends EntidadesUtils{
 			if(myConect!=null) {
 				myPrepStmt = myConect.prepareStatement(sql);
 				myPrepStmt.setString(1, nombre);
-				myPrepStmt.setInt(2, id);
-
+				myPrepStmt.setInt(2, peso);
+				myPrepStmt.setInt(3, id);
 				myPrepStmt.executeUpdate();
 				System.out.println("Estado Camino Modificado!");
 			}
@@ -164,6 +165,7 @@ public class Rec_EstadoCamino extends EntidadesUtils{
 					EstadoCamino selec = new EstadoCamino();
 					selec.setID(rs.getInt("id"));
 					selec.setNombre(rs.getString("nombre"));
+					selec.setPeso(rs.getInt("peso"));
 					lista.add(selec);
 				}
 			}

@@ -4,7 +4,7 @@ import com.deimon.entidades.camino.Camino;
 import com.deimon.entidades.camino.EstadoCamino;
 import com.deimon.entidades.camino.TipoCamino;
 import com.deimon.entidades.camino.Trafico;
-import com.deimon.entidades.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Vertice;
 import com.deimon.isfpp.Main;
 
 import conexion.db.entidades.Caminos;
@@ -47,8 +47,8 @@ public class JFX_VerCamino {
 		TableColumn<Camino,TipoCamino> tipoCol = new TableColumn<Camino, TipoCamino>("Tipo");
 		TableColumn<Camino,EstadoCamino> estadoCol = new TableColumn<Camino, EstadoCamino>("Estado");
 		TableColumn<Camino,Trafico> traficoCol = new TableColumn<Camino, Trafico>("Trafico");
-		TableColumn<Camino,Ciudad> ciudad1Col = new TableColumn<Camino, Ciudad>("Ciudad");
-		TableColumn<Camino,Ciudad> ciudad2Col = new TableColumn<Camino, Ciudad>("Ciudad");		
+		TableColumn<Camino,Vertice> ciudad1Col = new TableColumn<Camino, Vertice>("Ciudad");
+		TableColumn<Camino,Vertice> ciudad2Col = new TableColumn<Camino, Vertice>("Ciudad");		
 		TableColumn<Camino,Camino> activoCol = new TableColumn<Camino, Camino>("Activo");
 		activoCol.setSortable(false);        
 		TableColumn<Camino,Camino> accionesCol = new TableColumn<Camino, Camino>("Acciones");
@@ -64,8 +64,8 @@ public class JFX_VerCamino {
 		tipoCol.setCellValueFactory(new PropertyValueFactory<Camino,TipoCamino>("tipoCaminoNombre"));
 		estadoCol.setCellValueFactory(new PropertyValueFactory<Camino,EstadoCamino>("estadoCaminoNombre"));
 		traficoCol.setCellValueFactory(new PropertyValueFactory<Camino,Trafico>("traficoNombre"));
-		ciudad1Col.setCellValueFactory(new PropertyValueFactory<Camino,Ciudad>("CiudadInicioNombre"));
-		ciudad2Col.setCellValueFactory(new PropertyValueFactory<Camino,Ciudad>("CiudadFinNombre"));
+		ciudad1Col.setCellValueFactory(new PropertyValueFactory<Camino,Vertice>("CiudadInicioNombre"));
+		ciudad2Col.setCellValueFactory(new PropertyValueFactory<Camino,Vertice>("CiudadFinNombre"));
 		activoCol.setCellValueFactory(new PropertyValueFactory<Camino,Camino>("activo"));
 		accionesCol.setCellValueFactory(new PropertyValueFactory<Camino,Camino>("acciones"));  
 

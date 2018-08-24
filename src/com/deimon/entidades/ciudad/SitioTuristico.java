@@ -11,7 +11,7 @@ public class SitioTuristico {
 	private int id;
 	private String nombre;
     private boolean activo;
-	private Ciudad ciudad;
+	private Vertice ciudad;
 	
 	public SitioTuristico() {		
 	}
@@ -41,10 +41,10 @@ public class SitioTuristico {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Ciudad getCiudad() {
+	public Vertice getCiudad() {
 		return ciudad;
 	}
-	public void setCiudad(Ciudad ciudad) {
+	public void setCiudad(Vertice ciudad) {
 		this.ciudad = ciudad;
 	}	
 }

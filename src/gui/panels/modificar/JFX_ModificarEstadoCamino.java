@@ -4,6 +4,7 @@ import com.deimon.isfpp.Main;
 
 import conexion.db.entidades.Rec_EstadoCamino;
 import gui.panels.crear.JFX_EstadoCamino;
+import gui.utiles.NumberField;
 import gui.utiles.TextoUtiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,7 +23,7 @@ import javafx.scene.text.Text;
 public class JFX_ModificarEstadoCamino {
 	VBox panel = new VBox();
 
-	public JFX_ModificarEstadoCamino(int nId, String nNombre) {
+	public JFX_ModificarEstadoCamino(int nId, String nNombre, int nPeso) {
 		HBox hbox_titulo = new HBox();
 		hbox_titulo.setId("contenedor-titulo");
 		hbox_titulo.setAlignment(Pos.CENTER);
@@ -45,13 +46,17 @@ public class JFX_ModificarEstadoCamino {
 		Label outputNombre = new Label("Nombre Vacio");
 		outputNombre.setTextFill(Color.RED);
 		outputNombre.setOpacity(0); //ver como no ocupan espacio 
-
+		Label peso = new Label("Peso:");
+		NumberField pesoNumberField = new NumberField(nPeso);		
+		
 		GridPane.setHalignment(nombre, HPos.RIGHT);
 
 		int fila = 0;
 		gp.add(nombre, 0, fila);
 		gp.add(nombreTextField, 1, fila++);
 		gp.add(outputNombre, 1, fila++);
+		gp.add(peso, 0, fila);
+		gp.add(pesoNumberField, 1, fila++);
 
 		Button btn = new Button("Modificar");
 		HBox hbBtn = new HBox();
@@ -68,6 +73,8 @@ public class JFX_ModificarEstadoCamino {
 			public void handle(ActionEvent e) {
 				boolean valido = true;
 				String nombre = nombreTextField.getText();
+				int peso = pesoNumberField.getValue();
+				
 				if (nombreTextField.getText() == null || nombreTextField.getText().trim().isEmpty()) {
 					outputNombre.setOpacity(1);
 					valido = false;	
@@ -77,7 +84,7 @@ public class JFX_ModificarEstadoCamino {
 					output.setText("Camino Modificado!");
 					Rec_EstadoCamino record = new Rec_EstadoCamino();
 					nombre = new TextoUtiles().Capitalizar(nombre);
-					record.actualizar(nId,nombre);
+					record.actualizar(nId,nombre, peso);
 					new Main<VBox>().cambiarVista(new JFX_EstadoCamino().getPanel());
 				}else {
 					output.setText("Controlar los errores");					

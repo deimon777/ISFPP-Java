@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.deimon.entidades.ciudad.Ciudad;
+import com.deimon.entidades.ciudad.Vertice;
 import com.deimon.isfpp.configuracion.ConstantesPropierties;
 
 import conexion.db.DB_Connection;
@@ -246,14 +246,14 @@ public class Vertices extends EntidadesUtils{
 	 * Trae todos las ciudades (Objetos), con toda la informacion que esta en la base de datos.
 	 * @return Una lista de objetos tipo Ciudad
 	 */
-	public ObservableList<Ciudad> getListaVertices() {
+	public ObservableList<Vertice> getListaVertices() {
 		String sql = "SELECT * from "+tableName;
 
 		DB_Connection conec = null;
 		Connection myConect = null;
 		PreparedStatement myPrepStmt = null;
 		ResultSet rs = null;
-		ObservableList<Ciudad> lista = FXCollections.observableArrayList();
+		ObservableList<Vertice> lista = FXCollections.observableArrayList();
 		try {
 			conec = new DB_Connection();
 			myConect = conec.getConection(ConstantesPropierties.DB_NAME_URL,
@@ -263,7 +263,7 @@ public class Vertices extends EntidadesUtils{
 				myPrepStmt = myConect.prepareStatement(sql);
 				rs = myPrepStmt.executeQuery();	
 				while (rs.next()) {
-					Ciudad ciudad = new Ciudad();
+					Vertice ciudad = new Vertice();
 					ciudad.setID(rs.getInt("id"));
 					ciudad.setNombre(rs.getString("nombre"));
 					ciudad.setHabitantes(rs.getInt("habitantes"));
